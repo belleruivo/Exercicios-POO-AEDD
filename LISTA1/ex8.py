@@ -9,3 +9,11 @@ número de créditos da disciplina, as notas dos créditos, e se necessário cal
 nota que o aluno precisa tirar no exame final para ser aprovado. Se antes de terminar
 todos os créditos o aluno já estiver aprovado, avise isso a ele e encerre a leitura de
 notas (utilize aqui um comando break).'''
+
+"""
+mp >= 7 passar direto
+mf = 0.6mp + 0.4ne
+mf>= 5 aprovado
+
+"""
+
