@@ -3,8 +3,8 @@ quando for digitado um número negativo. Ao final, imprima o maior e o menor nú
 
 conjunto = []
 print("-="*40)
-print("Digite números positivos ou um negativo somente caso queira finalizar o programa.")
-print()
+print("Digite números positivos ou um negativo somente caso queira finalizar o programa.\n")
+
 
 while True:
     entrada = input("Insira um número: ")

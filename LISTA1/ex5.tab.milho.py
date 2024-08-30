@@ -20,8 +20,7 @@ def calcular_graos():
 
 def main():
     print("-="*40)
-    print("Quntos grãos de milho cabem no tabuleiro?")
-    print()
+    print("Quntos grãos de milho cabem no tabuleiro?\n")
     try:
         resultado = calcular_graos()
         print(f"\nO total de grãos de milho no tabuleiro é: {resultado}")
