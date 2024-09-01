@@ -17,18 +17,53 @@ c. O total da folha de pagamentos atual
 d. O total da folha de pagamentos futura nos dois casos estudados, indicando
 qual o caminho mais econômico para a empresa.
 '''
+def aum_uniforme(salarios):
+    sala_uniforme = []
+
+    for c in salarios:
+        nov_sal = c*1.1 
+        sala_uniforme.append(nov_sal)
+
+    return sum(sala_uniforme)
+
+def aum_progressivo(salarios):
+    sala_progressivo = []
+
+    for c in salarios:
+        if c <= 1000:
+            nov_sal = c*1.15
+        elif c <= 2000 and c > 1000:
+            nov_sal = c*1.10
+        else:
+            nov_sal = c*1.05
+        sala_progressivo.append(nov_sal)
+
+    return sum(sala_progressivo)
+
 
 def main():
+    
+    print("-="*20, "CÁLCULO DE AUMENTOS", "-="*20,"\n")
+    print("Digite os salários dos seus funcionários e insira o número (0) caso queira finalizar o programa")
     salarios = []
     while True:
-        valor = input("Digite o seu salário (ENTER para sair do programa): ")
-        if valor == " ":
+        valor = float(input("Digite o salário: "))
+        if valor == 0:
             break
         salarios.append(valor)
-        
-        total_funcio += 1
+    
 
-    total_sala = sum(salarios)
-    quant_sala = len(salarios)
-        
-        
+    print(f"\nTotal de funcionários: {len(salarios)}")
+    print(f"Salário médio dos funcionários: {sum(salarios)/len(salarios):.2f}")
+    print(f"Total da folha de pagamento atual: {sum(salarios):.2f}")
+    print(f"Total da folha de pagamento com um aumento uniforme: {aum_uniforme(salarios):.2f}")
+    print(f"Total da folha de pagamento com um aumento progressivo: {aum_progressivo(salarios):.2f}")
+
+    if aum_uniforme(salarios) > aum_progressivo(salarios):
+        print("\nDesssa forma, o aumento progressivo é mais econômico para a empresa")
+    elif aum_uniforme(salarios) == aum_progressivo(salarios):
+        print("\nDesssa forma, os dois aumentos geram o mesmo gasto para a empresa")
+    else:
+        print("\nDesssa forma, o aumento uniforme é mais econômico para a empresa")
+
+main()  
