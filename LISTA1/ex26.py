@@ -17,6 +17,7 @@ c. O total da folha de pagamentos atual
 d. O total da folha de pagamentos futura nos dois casos estudados, indicando
 qual o caminho mais econômico para a empresa.
 '''
+#Falta adicionar a questão de inserir virgula ao invés de ponto
 def aum_uniforme(salarios):
     sala_uniforme = []
 
@@ -47,11 +48,13 @@ def main():
     print("Digite os salários dos seus funcionários e insira o número (0) caso queira finalizar o programa")
     salarios = []
     while True:
-        valor = float(input("Digite o salário: "))
-        if valor == 0:
-            break
-        salarios.append(valor)
-    
+        try:
+            valor = float(input("Digite o salário: "))
+            if valor == 0:
+                break
+            salarios.append(valor)
+        except ValueError:
+            print("Por favor, insira um caractere numérico.\n")
 
     print(f"\nTotal de funcionários: {len(salarios)}")
     print(f"Salário médio dos funcionários: {sum(salarios)/len(salarios):.2f}")
