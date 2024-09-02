@@ -12,11 +12,17 @@ Dólar americano     3,258
 Euro                4,095
 Libra esterlina     4,529
 Yuan                0,515
-
 '''
 print("-"*65)
 print("Olá, seja bem-vindo(a) ao programa que converte moedas para real!\nPara começar, digite o número equivalente à moeda que deseja converter:")
 print("-"*65)
+
+taxas = { #dicionário global com as taxas
+    1: 3.258,  # Dólar Americano
+    2: 4.095,  # Euro
+    3: 4.529,  # Libra Esterlina
+    4: 0.515   # Yuan
+}
 
 def menu():
     print("\nMenu de Opções:")
@@ -29,9 +35,7 @@ def menu():
     print("="*20)
 
 def process_input(input_str):
-    '''Função que converte a string de entrada para float'''
-    input_str = input_str.replace('.', '')  # remove separador de milhares
-    input_str = input_str.replace(',', '.')  # substitui separador decimal por ponto
+    input_str = input_str.replace('.', '').replace(',', '.')  # Remove separador de milhares e substitui vírgula por ponto
     try:
         return float(input_str)
     except ValueError:
@@ -44,45 +48,28 @@ def main():
         try:
             opcao = int(input("\nDigite a opção desejada: "))
         except ValueError:
-            print("\nOpção inválida. Por favor, digite um número presente no menu!")
-            continue
+            print("\nOpção inválida. Por favor, digite um número presente no menu! ")
+            continue #loop começa de novo, pedindo pro usuário inserir a opção desejada
 
-        if opcao == 1:
-            print("\n--> Conversão de Dólar Americano para Real")
-            custo = input("Digite o valor em Dólares Americanos: ")
-            custo = process_input(custo)
-            if custo is not None:
-                print(f"\nO valor da transação é: R$ {custo * 3.258:.2f} Reais")
-            else:
-                print("\nValor inválido. Por favor, digite um número válido.")
-        elif opcao == 2:
-            print("\n--> Conversão de Euro para Real")
-            custo = input("Digite o valor em Euros: ")
-            custo = process_input(custo)
-            if custo is not None:
-                print(f"\nO valor da transação é: R$ {custo * 4.095:.2f} Reais")
-            else:
-                print("\nValor inválido. Por favor, digite um número válido.")
-        elif opcao == 3:
-            print("\n--> Conversão de Libra Esterlina para Real")
-            custo = input("Digite o valor em Libras Esterlinas: ")
-            custo = process_input(custo)
-            if custo is not None:
-                print(f"\nO valor da transação é: R$ {custo * 4.529:.2f} Reais")
-            else:
-                print("\nValor inválido. Por favor, digite um número válido.")
-        elif opcao == 4:
-            print("\n--> Conversão de Yuan para Real")
-            custo = input("Digite o valor em Yuan: ")
-            custo = process_input(custo)
-            if custo is not None:
-                print(f"\nO valor da transação é: R$ {custo * 0.515:.2f} Reais")
-            else:
-                print("\nValor inválido. Por favor, digite um número válido.")
-        elif opcao == 5:
+        if opcao == 5:
             print("\nPrograma encerrado.")
             break  # fecha o loop e termina o programa
-        else:
-            print("\nOpção inválida. Tente novamente.")
+        
+        taxa = taxas.get(opcao)
+        if taxa is None:
+            print("Opção inválida. Tente novamente.")
+            continue #loop começa de novo, pedindo pro usuário inserir a opção desejada
+         
+        while True:
+            print("\nPor favor, insira o valor no formato '1000.35' ou '1.000,35'.")
+            print("Evite usar múltiplos separadores de milhar como '5,000.00' ou '5.000,00'.")
+            custo = input("\n\nDigite o valor na moeda selecionada: ")
+            custo = process_input(custo)
+            if custo is not None:
+                valor_em_reais = custo * taxa
+                print(f"\nO valor da transação é: R$ {valor_em_reais:.2f} Reais")
+                break  # sai do loop após a conversão bem-sucedida
+            else:
+                print("\nValor inválido. Por favor, digite um número válido.")
 
 main()
