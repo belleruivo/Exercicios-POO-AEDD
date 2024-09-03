@@ -8,4 +8,13 @@ b. Escreva uma função que receba como parâmetro um ângulo em graus, a
 precisão requerida para o cálculo e retorne o seu seno, utilizando a função de conversão graus-radiano feita anteriormente
 c. Faça um programa que teste a sua função para cálculo do seno.
 '''
+import math
+
+def radianos(angulo):
+    return angulo * (math.pi / 180)
+
+def sen(a):
+    for c in range(0, 100):
+        
+    return 
 

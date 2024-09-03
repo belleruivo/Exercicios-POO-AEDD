@@ -16,4 +16,27 @@ mf = 0.6mp + 0.4ne
 mf>= 5 aprovado
 
 """
-
+def main():
+    notas = []
+    print("-="*18, "Cálculo de Média Final", "-="*18)
+    
+    while True:
+        try:
+            creditos = int(input("Qual o número de créditos da disciplina: "))
+            break
+        except ValueError:
+            print("Você inseriu um valor errado. Tente novamente\n")
+    for c in range(0, creditos):
+        nota = float(input(f"Nota {c+1}: "))
+        notas.append(nota)
+        
+    mp = sum(notas)/len(notas)
+    if mp >= 7:
+        print("\nParabéns! Você passou direto pela matéria.")
+    else:
+        ne = (0.6*mp - 5)/-0.4
+        print(f"""\nInfelizmente você não passou direto.
+Para conseguir passar nessa matéria, você terá que tirar no mínimo {ne:.2f} no exame final.""")
+    print("-="*48)
+    
+main()
