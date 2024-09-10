@@ -25,15 +25,15 @@ while True:
         else:
             total_idades += idade
             quantidade_alunos += 1
-            idades_digitadas.append(idade)  # Adiciona a idade à lista de idades digitadas
+            idades_digitadas.append(idade)  # adiciona a idade à lista de idades digitadas
     except ValueError:
         print("Entrada inválida. Por favor, digite um número inteiro válido.")
         
 if quantidade_alunos > 0:
     media_idade = total_idades / quantidade_alunos
     print(f"\nAs idades digitadas foram: {idades_digitadas}")
-    print(f"\nA soma das idades: {total_idades}")
-    print(f"\nQuantidade de idades digitadas no total: {quantidade_alunos}")
-    print(f"\nA média aritmética das idades dos alunos é: {total_idades} \ {quantidade_alunos} = {media_idade:.2f} anos.")
+    print(f"A soma das idades: {total_idades}")
+    print(f"Quantidade de idades digitadas no total: {quantidade_alunos}")
+    print(f"A média aritmética das idades dos alunos é: {total_idades} \ {quantidade_alunos} = {media_idade:.2f} anos.\n")
 else:
     print("\nNenhuma idade válida foi inserida.")

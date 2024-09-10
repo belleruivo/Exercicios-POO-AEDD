@@ -18,10 +18,10 @@ print("Olá, seja bem-vindo(a) ao programa que converte moedas para real!\nPara 
 print("-"*65)
 
 taxas = { #dicionário global com as taxas
-    1: 3.258,  # Dólar Americano
-    2: 4.095,  # Euro
-    3: 4.529,  # Libra Esterlina
-    4: 0.515   # Yuan
+    1: 3.258,  # dólar Americano
+    2: 4.095,  # euro
+    3: 4.529,  # libra esterlina
+    4: 0.515   # yuan
 }
 
 def menu():
@@ -35,9 +35,13 @@ def menu():
     print("="*20)
 
 def process_input(input_str):
-    input_str = input_str.replace('.', '').replace(',', '.')  # Remove separador de milhares e substitui vírgula por ponto
+    # verifica se o valor é válido: apenas números ou números com até duas casas decimais
     try:
-        return float(input_str)
+        # verifica se há no máximo um ponto e se segue o formato correto
+        if input_str.count('.') <= 1:
+            return float(input_str)  # converte a string diretamente para float
+        else:
+            return None
     except ValueError:
         return None
 
@@ -49,7 +53,7 @@ def main():
             opcao = int(input("\nDigite a opção desejada: "))
         except ValueError:
             print("\nOpção inválida. Por favor, digite um número presente no menu! ")
-            continue #loop começa de novo, pedindo pro usuário inserir a opção desejada
+            continue # loop começa de novo, pedindo pro usuário inserir a opção desejada
 
         if opcao == 5:
             print("\nPrograma encerrado.")
@@ -58,12 +62,12 @@ def main():
         taxa = taxas.get(opcao)
         if taxa is None:
             print("Opção inválida. Tente novamente.")
-            continue #loop começa de novo, pedindo pro usuário inserir a opção desejada
+            continue # loop começa de novo, pedindo pro usuário inserir a opção desejada
          
         while True:
-            print("\nPor favor, insira o valor no formato '1000.35' ou '1.000,35'.")
-            print("Evite usar múltiplos separadores de milhar como '5,000.00' ou '5.000,00'.")
-            custo = input("\n\nDigite o valor na moeda selecionada: ")
+            print("\nPor favor, insira o valor no formato '5000' ou '5000.00' para centavos.")
+            print("Não use separadores de milhar como '1.000' ou '1.000,00'.")
+            custo = input("\nDigite o valor na moeda selecionada: ")
             custo = process_input(custo)
             if custo is not None:
                 valor_em_reais = custo * taxa
@@ -71,5 +75,4 @@ def main():
                 break  # sai do loop após a conversão bem-sucedida
             else:
                 print("\nValor inválido. Por favor, digite um número válido.")
-
-main()
+main()      
