@@ -14,6 +14,7 @@ notas (utilize aqui um comando break).'''
 mp >= 7 passar direto
 mf = 0.6mp + 0.4ne
 mf>= 5 aprovado
+ne -> Nota do exame
 
 """
 def main():
@@ -26,11 +27,13 @@ def main():
             break
         except ValueError:
             print("Você inseriu um valor errado. Tente novamente\n")
+
     for c in range(0, creditos):
         nota = float(input(f"Nota {c+1}: "))
         notas.append(nota)
         
     mp = sum(notas)/len(notas)
+
     if mp >= 7:
         print("\nParabéns! Você passou direto pela matéria.")
     else:

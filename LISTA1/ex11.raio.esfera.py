@@ -3,9 +3,10 @@
 esfera. Faça um programa que imprima uma tabela de volumes para esferas que
 tenham raios entre 0 e 15 cm, de 0.5 em 0.5cm.
 '''
+import math
 
 def v_esfera(r):
-    return (4/3)*3.14*r**3
+    return (4/3)*math.pi*r**3
 
 print("-="*6, "TABELA", "-="*5)
 print(f"\n{'RAIO (cm)':<15} {'VOLUME (cm³)':<15}")

@@ -5,7 +5,6 @@ conjunto = []
 print("-="*40)
 print("Digite números positivos ou um negativo somente caso queira finalizar o programa.\n")
 
-
 while True:
     entrada = input("Insira um número: ")
     if entrada == "":
@@ -37,3 +36,39 @@ else:
 
 print("-="*40)
       
+'''
+def main():
+    maior_numero = None
+    menor_numero = None
+    soma = 0
+    quantidade = 0
+
+    while True:
+        try:
+            numero = float(input("Digite um número positivo (ou um número negativo para finalizar): "))
+
+            if numero < 0:
+                break
+
+            if maior_numero is None or numero > maior_numero:
+                maior_numero = numero
+
+            if menor_numero is None or numero < menor_numero:
+                menor_numero = numero
+
+            soma += numero
+            quantidade += 1
+
+        except ValueError:
+            print("Por favor, digite um valor numérico válido.")
+
+    if quantidade > 0:
+        media = soma / quantidade
+        print(f"Maior número: {maior_numero}")
+        print(f"Menor número: {menor_numero}")
+        print(f"Média dos números: {media:.2f}")
+    else:
+        print("Nenhum número positivo foi inserido.")
+
+main()
+'''

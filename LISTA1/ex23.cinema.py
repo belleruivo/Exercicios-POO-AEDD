@@ -11,7 +11,7 @@ d. A idade do mais novo entrevistado.
 '''
 
 def main(capacidade):
-    num = []
+    idades = []
     opiniao = []
     
     print("-="*10, "BEM VINDO AO MENU DE AVALIAÇÕES", "-="*10, "\n")
@@ -26,7 +26,7 @@ def main(capacidade):
         while True:
             try:
                 idade = int(input("\nQuantos anos você tem?: "))
-                num.append(idade)
+                idades.append(idade)
                 break  
             except ValueError:
                 print("Por favor, insira um número inteiro válido para a idade.")
@@ -62,8 +62,8 @@ Regular:    {regular:<5} {porcentagem_3:.1f}%
 Ruim:       {ruim:<5} {porcentagem_4:.1f}%
 Péssimo:    {pessimo:<5} {porcentagem_5:.1f}%""")
     
-    print(f"\nA idade da pessoa mais velha: {max(num)}")
-    print(f"A idade da pessoa mais nova: {min(num)}\n")
+    print(f"\nA idade da pessoa mais velha: {max(idades)}")
+    print(f"A idade da pessoa mais nova: {min(idades)}\n")
     print("-="*37)
 
 main(50)
