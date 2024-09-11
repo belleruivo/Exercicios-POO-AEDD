@@ -30,23 +30,23 @@ class Vehicle:
         self.nome = nome
         
     def imprimir(self):
-        print("\nDetalhes do Veículo:")
-        print(f"Velocidade Atual: {self.velocidade} km/h")
+        print("\n", "-="*15, "Detalhes do Veículo", "-="*14)
+        print(f"\nVelocidade Atual: {self.velocidade}km/h")
         print(f"Direção dos Pneus: {self.direcao}°")
         print(f"Nome do Proprietário: {self.nome}")
         
 
 def main():
+    print("-="*40)
     while True:
         try:
-            velocidade = float(input("Digite a velocidade atual (km/h): "))
+            velocidade = float(input("Digite a velocidade atual do veículo (km/h): "))
             direcao = float(input("Digite a direção dos pneus (graus): "))
             nome = input("Digite o nome do proprietário: ")
             break
             
         except ValueError:
-            print("Entrada inválida. Certifique-se de inserir números válidos para velocidade e direção.\n")
-            return
+            print("Entrada inválida. Certifique-se de inserir números e caracteres válidos.\n")
     
     carro = Vehicle(velocidade, direcao, nome)
         
