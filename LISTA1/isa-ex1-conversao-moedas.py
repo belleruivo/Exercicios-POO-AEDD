@@ -13,15 +13,16 @@ Euro                4,095
 Libra esterlina     4,529
 Yuan                0,515
 '''
+
 print("-"*65)
 print("Olá, seja bem-vindo(a) ao programa que converte moedas para real!\nPara começar, digite o número equivalente à moeda que deseja converter:")
 print("-"*65)
 
 taxas = { #dicionário global com as taxas
-    1: 3.258,  # dólar Americano
-    2: 4.095,  # euro
-    3: 4.529,  # libra esterlina
-    4: 0.515   # yuan
+    1: 3.258,  
+    2: 4.095,  
+    3: 4.529,  
+    4: 0.515   
 }
 
 def menu():
