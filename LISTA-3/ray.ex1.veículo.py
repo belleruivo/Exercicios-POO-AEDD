@@ -9,7 +9,7 @@ class Vehicle:
         self.direcao = direção
         self.nome = nome
         
-    #métodos de acesso
+   
     def getVelocidade(self):
         return self.velocidade
     
@@ -19,7 +19,7 @@ class Vehicle:
     def getNome(self):
         return self.nome
 
-    #métodos de modificação
+    
     def setVelocidade(self, velocidade):
         self.velocidade = velocidade
         

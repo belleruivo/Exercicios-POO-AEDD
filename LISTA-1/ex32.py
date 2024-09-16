@@ -13,8 +13,39 @@ import math
 def radianos(angulo):
     return angulo * (math.pi / 180)
 
-def sen(a):
-    for c in range(0, 100):
+def fatorial(n):
+
+    if n == 0 or n == 1:
+        return 1
+    else:
+        resultado = 1
+        for i in range(2, n + 1):
+            resultado *= i
+        return resultado
+
+def sen(a, precisao):
+    a_rad = radianos(a)
+    
+    seno = 0
+    
+    for n in range(precisao):
+        termo = ((-1) ** n) * (a_rad ** (2 * n + 1)) / fatorial(2 * n + 1)
+        seno += termo
         
-    return 
+    return seno
+
+def main():
+    angulo= float(input("Digite o ângulo em graus: "))
+    precisao = int(input("Digite a precisão (número de termos da série de McLaurin): "))
+    
+
+    seno = sen(angulo, precisao)
+    
+    print(f"\nO seno aproximado de {angulo} graus é: {seno}")
+    
+
+    seno_real = math.sin(radianos(angulo))
+    print(f"O valor real do seno calculado por math.sin é: {seno_real}")
+
+main()
 
