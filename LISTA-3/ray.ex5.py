@@ -26,19 +26,38 @@ class Point:
     def setY(self, y):
         self.y = y
 
-    def mover(self, dx, dy):
-        self.x += dx
-        self.y += dy
-
     def distancia(self, outro_ponto):
-         return math.sqrt((self.x - outro_ponto.x) ** 2 + (self.y - outro_ponto.y) ** 2)
+        dx = self.x - outro_ponto.getX()
+        dy = self.y - outro_ponto.getY()
+        return math.sqrt(dx**2 + dy**2)
+
+def main():
     
+    p1x = int(input("Insira o valor de X do primeiro ponto: "))
+    p1y = int(input("Insira o valor de Y do primeiro ponto: "))
     
-    def __str__(self):
-        return f"Point({self.x}, {self.y})"
+    p2x = int(input("Insira o valor de X do segundo ponto: "))
+    p2y = int(input("Insira o valor de Y do segundo ponto: "))
+    
+    ponto1 = Point(p1x, p1y)
+    ponto2 = Point(p2x, p2y)
+
+    print(f"Ponto 1: {ponto1}")
+    print(f"Ponto 2: {ponto2}")
+
+    deslocamento_x = float(input("Digite o deslocamento em X para o ponto 1: "))
+    deslocamento_y = float(input("Digite o deslocamento em Y para o ponto 1: "))
+    ponto1.mover(deslocamento_x, deslocamento_y)
+    
+    print(f"Ponto 1 após movimentação: {ponto1}")
+
+   
+    distancia = ponto1.distancia(ponto2)
+    print(f"Distância entre o ponto 1 e o ponto 2: {distancia:.2f}")
 
 
-if __name__ == "__main__":
+        
+    
     
     p1 = Point()
     print(f"Ponto 1: {p1}")
