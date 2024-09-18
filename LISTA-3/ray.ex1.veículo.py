@@ -8,7 +8,7 @@ class Vehicle:
         self.velocidade = velocidade
         self.direcao = direção
         self.nome = nome
-        
+                                                                                                                                              
    
     def getVelocidade(self):
         return self.velocidade

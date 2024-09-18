@@ -80,3 +80,10 @@ def main():
     print(f"Ponto 1 após SET: {p1}")
     print(f"Coordenada X de Ponto 1: {p1.getX()}")
     print(f"Coordenada Y de Ponto 1: {p1.getY()}")
+
+class Point:
+    def __init__(self, x=1, y=1):
+        self.x = x
+        self.y = y
+
+    subtrair_ponto()
