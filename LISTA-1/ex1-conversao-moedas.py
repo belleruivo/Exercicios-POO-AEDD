@@ -39,7 +39,7 @@ def process_input(input_str):
     # verifica se o valor é válido: apenas números ou números com até duas casas decimais
     try:
         # verifica se há no máximo um ponto e se segue o formato correto
-        if input_str.count('.') <= 1:
+        if input_str.count('.') <= 1 and ',' not in input_str and '.' not in input_str[:-3]:
             return float(input_str)  # converte a string diretamente para float
         else:
             return None
@@ -68,7 +68,7 @@ def main():
         while True:
             print("\nPor favor, insira o valor no formato '5000' ou '5000.00' para centavos.")
             print("Não use separadores de milhar como '1.000' ou '1.000,00'.")
-            custo = input("\nDigite o valor na moeda selecionada: ")
+            custo = input("Digite o valor na moeda selecionada: ")
             custo = process_input(custo)
             if custo is not None:
                 valor_em_reais = custo * taxa
@@ -76,4 +76,4 @@ def main():
                 break  # sai do loop após a conversão bem-sucedida
             else:
                 print("\nValor inválido. Por favor, digite um número válido.")
-main()      
+main()
