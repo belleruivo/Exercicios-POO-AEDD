@@ -11,7 +11,7 @@ class User:
 def add_friend(self, user):
     if user != self:
         self.friends.add(user)
-        self.friends.add(self)
+    
         
 def publish_post(self, message):
     post = Post(self, message)
@@ -31,7 +31,7 @@ class SocialNetwork:
     def __init__(self):
         self.users = {}
         
-    def ass_user(self, username):
+    def add_user(self, username):
         if username not in self.users:
             self.users[username]= User(username)
             return True
@@ -41,8 +41,11 @@ class SocialNetwork:
         user1 = self.users.get(username1)
         user2 = self.users.get(username2)
         if user1 and user2:
-            user1.add_friend(user2) 
-            
+            user1.add_friend(user2)
+            print (f"{username1} e {username2} agora são amigos.")    
+        else:
+            print("Um ou ambos os usuários não existem.")
+
     def publish_message(self, username, message):
         user = self.users.get(username)
         if user:
