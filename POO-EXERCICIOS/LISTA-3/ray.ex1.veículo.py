@@ -8,8 +8,7 @@ class Vehicle:
         self.velocidade = velocidade
         self.direcao = direção
         self.nome = nome
-                                                                                                                                              
-   
+                                                                                                                                               
     def getVelocidade(self):
         return self.velocidade
     
@@ -19,7 +18,6 @@ class Vehicle:
     def getNome(self):
         return self.nome
 
-    
     def setVelocidade(self, velocidade):
         self.velocidade = velocidade
         
@@ -30,17 +28,19 @@ class Vehicle:
         self.nome = nome
         
     def imprimir(self):
-        print("\n", "-="*15, "Detalhes do Veículo", "-="*14)
+        print("\nDETALHES DO VEÍCULO:")
         print(f"\nVelocidade Atual: {self.velocidade}km/h")
         print(f"Direção dos Pneus: {self.direcao}°")
         print(f"Nome do Proprietário: {self.nome}")
+        print("-="*40)
         
 
 def main():
     print("-="*40)
+    print("INSIRA SUAS INFORMAÇÕES:")
     while True:
         try:
-            velocidade = float(input("Digite a velocidade atual do veículo (km/h): "))
+            velocidade = float(input("\nDigite a velocidade atual do veículo (km/h): "))
             direcao = float(input("Digite a direção dos pneus (graus): "))
             nome = input("Digite o nome do proprietário: ")
             break
