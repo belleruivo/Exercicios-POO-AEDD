@@ -30,11 +30,6 @@ main(vetor, numeroExtra)
 print(vetor) 
 
 
-# MELHOR CASO => Se o numeroExtra for maior que todos os elementos do vetor, será adicionado no fim. Nesse caso, o laço while
-# será percorrido apenas uma vez para comparar com o maior elemento, e o insert() 
-# será executado em tempo constante O(1)O(1) Ele realizou apenas uma operação.
+# MELHOR CASO =>  O(1)
 
-# PIOR CASO: No pior cenário, o numeroExtra será menor que todos os elementos do vetor, 
-# o que significa que o algoritmo terá que percorrer todo o vetor para encontrar a posição e, em seguida, 
-# deslocar todos os elementos para abrir espaço. Isso faz com que a complexidade no pior caso seja O(𝑛)O(n)
-# onde n é o tamanho do vetor, já que é preciso percorrer e deslocar os elementos para a direita.
+# PIOR CASO => O(𝑛)
