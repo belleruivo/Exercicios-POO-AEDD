@@ -1,16 +1,8 @@
 '''
-<<<<<<< HEAD
-Em um sistema de ensino experimental em 10 níveis, o aluno é submetido a exercícios sobre o mesmo assunto
-até que ele alcance a nota máxima (100 pontos), para só então passar ao assunto seguinte. 
-Entretanto, se após 5 tentativas no mesmo nível o aluno obtiver menos de 300 pontos acumulados ele retorna
-ao nível anterior. Caso contrário, ele permanece no mesmo nível, zerando novamente os pontos acumulados. 
-
-=======
 Em um sistema de ensino experimental em 10 níveis, o aluno é submetido a exercícios sobre o 
 mesmo assunto até que ele alcance a nota máxima (100 pontos), para só então passar ao assunto seguinte. 
 Entretanto, se após 5 tentativas no mesmo nível o aluno obtiver menos de 300 pontos acumulados ele retorna ao nível anterior. 
 Caso contrário, ele permanece no mesmo nível, zerando novamente os pontos acumulados. 
->>>>>>> 7c67699d29ff99ff32f278060da4fd92b5d736e0
 Faça um programa que compute o progresso do aluno, através da leitura de suas notas até que ele termine o 10o nível. 
 Utilize o comando break (por exemplo, para passar ao próximo nível e recomeçar quando o aluno tiver tirado a nota máxima).
 '''
@@ -18,7 +10,7 @@ Utilize o comando break (por exemplo, para passar ao próximo nível e recomeça
 def progresso_do_aluno():
     num_niveis = 10
     nivel_atual = 1
-    
+    s
     while nivel_atual <= num_niveis:
         pontos_acumulados = 0
         tentativas = 0
