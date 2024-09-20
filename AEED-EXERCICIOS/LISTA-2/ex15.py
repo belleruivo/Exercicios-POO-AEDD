@@ -9,10 +9,8 @@ def main(vetor, numeroExtra):
     
     for i in range(len(vetor)):
         if vetor[i] >= numeroExtra:
-            vetor.insert(i, numeroExtra)
+            vetor.insert(i, numeroExtra) #Inserir em um indice anterior
             break
-        else:
-            continue
     if numeroExtra > vetor[i]:
         vetor.append(numeroExtra)
             
@@ -30,14 +28,10 @@ print(vetor)
 
 
 # MELHOR CASO => Se o numeroExtra for maior que todos os elementos do vetor, será adicionado no fim. Nesse caso, o laço while
-# será percorrido 
+# será percorrido apenas uma vez para comparar com o maior elemento, e o insert() 
+# será executado em tempo constante O(1)O(1) Ele realizou apenas uma operação.
 
-
-#Melhor Caso: Se o numerExtra for maior que os elementos do vetor, ele será adicionado no final. Nesse caso,
-#o laço while será percorrido apenas uma vez para comparar com o maior elemento, e o insert() 
-# será executado em tempo constante 𝑂(1)O(1). Portanto, a complexidade no melhor caso é 𝑂(1)O(1).
-
-# Pior Caso: No pior cenário, o numeroExtra será menor que todos os elementos do vetor, 
+# PIOR CASO: No pior cenário, o numeroExtra será menor que todos os elementos do vetor, 
 # o que significa que o algoritmo terá que percorrer todo o vetor para encontrar a posição e, em seguida, 
-# deslocar todos os elementos para abrir espaço. Isso faz com que a complexidade no pior caso seja 𝑂(𝑛)O(n)
-# onde n n é o tamanho do vetor, já que será necessário percorrer e deslocar 𝑛 n elementos.
+# deslocar todos os elementos para abrir espaço. Isso faz com que a complexidade no pior caso seja O(𝑛)O(n)
+# onde n é o tamanho do vetor, já que é preciso percorrer e deslocar os elementos para a direita.
