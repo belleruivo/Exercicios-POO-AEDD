@@ -1,9 +1,16 @@
 '''
+<<<<<<< HEAD
 Em um sistema de ensino experimental em 10 níveis, o aluno é submetido a exercícios sobre o mesmo assunto
 até que ele alcance a nota máxima (100 pontos), para só então passar ao assunto seguinte. 
 Entretanto, se após 5 tentativas no mesmo nível o aluno obtiver menos de 300 pontos acumulados ele retorna
 ao nível anterior. Caso contrário, ele permanece no mesmo nível, zerando novamente os pontos acumulados. 
 
+=======
+Em um sistema de ensino experimental em 10 níveis, o aluno é submetido a exercícios sobre o 
+mesmo assunto até que ele alcance a nota máxima (100 pontos), para só então passar ao assunto seguinte. 
+Entretanto, se após 5 tentativas no mesmo nível o aluno obtiver menos de 300 pontos acumulados ele retorna ao nível anterior. 
+Caso contrário, ele permanece no mesmo nível, zerando novamente os pontos acumulados. 
+>>>>>>> 7c67699d29ff99ff32f278060da4fd92b5d736e0
 Faça um programa que compute o progresso do aluno, através da leitura de suas notas até que ele termine o 10o nível. 
 Utilize o comando break (por exemplo, para passar ao próximo nível e recomeçar quando o aluno tiver tirado a nota máxima).
 '''
@@ -24,7 +31,7 @@ def progresso_do_aluno():
                 nota = int(input("Digite a nota obtida (0 a 100): "))
                 
                 if nota < 0 or nota > 100:
-                    print("Nota inválida. Digite uma nota entre 0 e 100.")
+                    print("Nota inválida. Digite uma nota entre 0 e 100.\n")
                     continue
                 
                 pontos_acumulados += nota
@@ -36,9 +43,9 @@ def progresso_do_aluno():
                     break
                 
             except ValueError:
-                print("Entrada inválida. Por favor, digite um número inteiro para a nota.")
+                print("Entrada inválida. Por favor, digite um número inteiro para a nota.\n")
         
-        if pontos_acumulados < 300 and tentativas >= 5:
+        if pontos_acumulados < 300 and tentativas == 5:
             if nivel_atual > 1:
                 print(f"Menos de 300 pontos acumulados. Retornando ao nível {nivel_atual - 1}.")
                 nivel_atual -= 1
