@@ -12,10 +12,6 @@ encontradas. Os valores dessas raízes devem ser retornados em parâmetros.
 import math
 
 def resolve_equacao_segundo_grau(a, b, c):
-    """
-    Resolve a equação do segundo grau ax^2 + bx + c = 0.
-    Retorna o número de raízes encontradas e as raízes.
-    """
     if a == 0:
         raise ValueError("O coeficiente 'a' não pode ser zero em uma equação do segundo grau.")
     
@@ -32,9 +28,6 @@ def resolve_equacao_segundo_grau(a, b, c):
         return 2, raiz1, raiz2
 
 def main():
-    """
-    Função principal que pede ao usuário os coeficientes a, b e c e resolve a equação do segundo grau.
-    """
     while True:
         try:
             a = float(input("Digite o coeficiente a (diferente de zero): "))

@@ -6,7 +6,7 @@ demais são dados pela soma dos dois anteriores. Faça um programa que imprima o
 
 import sys
 
-# Ajuste o limite de dígitos permitidos para conversão de string
+# limite de dígitos permitidos para conversão de string
 sys.set_int_max_str_digits(10000)
 
 print("-"*65)
