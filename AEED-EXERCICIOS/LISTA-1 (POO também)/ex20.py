@@ -11,7 +11,7 @@ def obter_dividendo():
     while True:
         try:
             dividendo = int(input('\nEscolha o número que quer dividir (1 a 100): '))
-            if dividendo > 1 and dividendo <100 100:
+            if dividendo > 1 and dividendo <100:
                 return dividendo
             else:
                 print("Por favor, insira um número entre 0 e 100.")
