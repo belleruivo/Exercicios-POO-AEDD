@@ -7,9 +7,6 @@ tabuada para aquele número (de 1 à 10) utilizando a função construída.
 '''
 
 def multiplica(a, b):
-    """
-    Multiplica dois números inteiros utilizando a repetição da adição.
-    """
     if a == 0 or b == 0:
         return 0
     
@@ -24,16 +21,10 @@ def multiplica(a, b):
     return resultado
 
 def imprime_tabuada(n):
-    """
-    Imprime a tabuada de 1 a 10 para o número inteiro n utilizando a função multiplica.
-    """
     for i in range(1, 11):
         print(f"{n} x {i} = {multiplica(n, i)}")
 
 def main():
-    """
-    Função principal que pede ao usuário um número inteiro e imprime a tabuada.
-    """
     while True:
         try:
             numero = int(input("Digite um número inteiro entre 1 e 10: "))
