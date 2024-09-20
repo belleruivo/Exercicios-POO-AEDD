@@ -2,6 +2,9 @@
 # número na sua posição correta no vetor ordenado, deslocando os outros números, se
 # necessário. Qual é a complexidade no melhor e no pior caso deste algoritmo?
 
+print('-------------------------------------------------')
+print('---------------------VETORES---------------------')
+print('-------------------------------------------------')
 
 def main(vetor, numeroExtra):
     #i = 0
