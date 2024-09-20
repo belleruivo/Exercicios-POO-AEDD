@@ -35,15 +35,23 @@ def sen(a, precisao):
     return seno
 
 def main():
-    angulo= float(input("Digite o ângulo em graus: "))
-    precisao = int(input("Digite a precisão (número de termos da série de McLaurin): "))
+    while True:
+        try:
+            angulo = float(input("Digite o ângulo em graus: "))
+            break
+        except ValueError:
+            print("Digite um número válido para o ângulo!\n")
     
+    while True:
+        try:
+            precisao = int(input("Digite a precisão (número de termos da série de McLaurin): "))
+            break
+        except ValueError:
+            print("Digite um número inteiro válido para a precisão!\n")
 
     seno = sen(angulo, precisao)
-    
     print(f"\nO seno aproximado de {angulo} graus é: {seno}")
-    
-
+            
     seno_real = math.sin(radianos(angulo))
     print(f"O valor real do seno calculado por math.sin é: {seno_real}")
 
