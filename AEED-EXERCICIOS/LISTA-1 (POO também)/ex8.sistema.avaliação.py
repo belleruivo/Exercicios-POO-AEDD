@@ -24,15 +24,28 @@ def main():
     while True:
         try:
             creditos = int(input("Qual o número de créditos da disciplina: "))
+            if creditos <= 0:
+                print("O número de créditos deve ser maior que zero. Tente novamente.\n")
+                continue
             break
         except ValueError:
             print("Você inseriu um valor errado. Tente novamente\n")
 
     for c in range(0, creditos):
-        nota = float(input(f"Nota {c+1}: "))
-        notas.append(nota)
+        while True:
+            try:
+                nota = float(input(f"Nota {c+1}: "))
+                if 0 <= nota <= 10:
+                    notas.append(nota)
+                    break
+                else:
+                    print("A nota deve estar entre 0 e 10. Tente novamente.")
+            except ValueError:
+                print("Você inseriu um valor inválido. Tente novamente.")
         
-    mp = sum(notas)/len(notas)
+    if len(notas) > 0:
+        mp = sum(notas) / len(notas)
+        print(f"\nMédia parcial: {mp:.2f}")
 
     if mp >= 7:
         print("\nParabéns! Você passou direto pela matéria.")
