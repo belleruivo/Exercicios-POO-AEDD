@@ -50,11 +50,17 @@ def main():
     while True:
         try:
             valor = float(input("Digite o salário: "))
-            if valor == 0:
+            if valor < 0:
+                print("Por favor, insira um salário válido!\n")
+            elif valor == 0:
                 break
-            salarios.append(valor)
+            else:
+                salarios.append(valor)
         except ValueError:
             print("Por favor, insira um caractere numérico.\n")
+
+    if len(salarios) == 0:
+        print("Nenhum salário foi inserido. Programa finalizado.")
 
     print(f"\nTotal de funcionários: {len(salarios)}")
     print(f"Salário médio dos funcionários: {sum(salarios)/len(salarios):.2f}")

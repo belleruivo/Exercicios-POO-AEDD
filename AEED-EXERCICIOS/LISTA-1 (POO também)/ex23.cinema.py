@@ -26,8 +26,11 @@ def main(capacidade):
         while True:
             try:
                 idade = int(input("\nQuantos anos você tem?: "))
-                idades.append(idade)
-                break  
+                if idade >100 or idade <0:
+                    print("Insira uma idade válida")
+                else:
+                    idades.append(idade)
+                    break  
             except ValueError:
                 print("Por favor, insira um número inteiro válido para a idade.")
         while True:
@@ -66,4 +69,4 @@ Péssimo:    {pessimo:<5} {porcentagem_5:.1f}%""")
     print(f"A idade da pessoa mais nova: {min(idades)}\n")
     print("-="*37)
 
-main(50)
+main(50) #Podemos colocar um número menor só para fazer o teste
