@@ -9,9 +9,9 @@ simbólicas para indicar o início (50) e o fim (150) do intervalo, além do pas
 '''
 
 def main():
-    print("-" * 65)
+    print("-" * 78)
     print("Olá, seja bem-vindo(a) ao programa que converte graus Fahrenheit para Celsius!")
-    print("-" * 65)
+    print("-" * 78)
 
     INICIO = 50
     FIM = 150
