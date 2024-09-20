@@ -24,9 +24,10 @@ def expo(numero, expoente):
         return metade_potencia * metade_potencia # 
     
 # alguns exemplos de uso da função expo
-print(expo(2, 3))  # 2^3 = 8
-print(expo(5, 4))  # 5^4 = 625
-print(expo(3, 0))  # 3^0 = 1
-print(expo(7, 2))  # 7^2 = 49
+print(expo(2, 3))  # return 2 * expo(2, 2)
+
+# A quarta chamada retornou 1 para expo(2, 0).
+
 
 # a complexidade computacional desta função é O(log n), onde n é o expoente.
+# cada vez que o expoente é par, ele é dividido pela metade (ou seja, expoente // 2), fazendo com que o número de chamadas da função diminua rapidamente.
