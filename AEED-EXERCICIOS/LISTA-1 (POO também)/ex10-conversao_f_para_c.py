@@ -24,6 +24,7 @@ def main():
     print(f"{'Fahrenheit':>12} {'Celsius':>12}")
 
     # o fim+1 garante que o 150 esteja incluso
+    # i -> fahrenheit
     for fahrenheit in range(INICIO, FIM + 1, PASSO):
         # chamamos a função -> fahrenheit_para_celsius
         celsius = fahrenheit_para_celsius(fahrenheit)
