@@ -10,11 +10,7 @@ Menos que 10 R$ 350 por TV vendida
 Menos que 10 R$ 250 por TV vendida
 
 Sabe-se ainda, que ele tem um desconto de 8% do salário total para pagamento do
-INSS e se o seu salário total for superior a R$ 950,00 ele ainda tem um desconto de
-
-12
-
-5% do salário para fins de imposto de renda. Faça um programa que leia os dados de
+INSS e se o seu salário total for superior a R$ 950,00 ele ainda tem um desconto de 5% do salário para fins de imposto de renda. Faça um programa que leia os dados de
 vários funcionários e, para cada funcionário, calcule e imprima o salário líquido (já
 com os descontos). Além disso, no final, o programa deve:
 a. Imprimir o número de funcionários.
