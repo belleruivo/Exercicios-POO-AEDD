@@ -12,10 +12,26 @@ def main():
             if identificacao.lower() == 'sair':
                 break
             
+            # Verifica se a identificação contém apenas números
+            if not identificacao.isdigit():
+                print("A identificação deve conter apenas números. Tente novamente.")
+                continue
+            
+            # Verifica se a identificação já foi registrada
+            if identificacao in bois:
+                print("Essa identificação já foi registrada. Tente novamente.")
+                continue
+            
             peso = float(input("Digite o peso do boi (em kg): "))
+            
+            # Verifica se o peso é positivo
+            if peso <= 0:
+                print("O peso deve ser um valor positivo. Tente novamente.")
+                continue
             
             bois[identificacao] = peso
             total_peso += peso  
+            i += 1  # Incrementa o contador apenas se a entrada for válida
 
         except ValueError:
             print("Por favor, digite um valor numérico válido para o peso.")
