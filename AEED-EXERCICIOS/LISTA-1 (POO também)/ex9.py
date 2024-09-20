@@ -9,7 +9,6 @@ Utilize o comando break (por exemplo, para passar ao próximo nível e recomeça
 
 def progresso_do_aluno():
     num_niveis = 10
-    
     nivel_atual = 1
     
     while nivel_atual <= num_niveis:
