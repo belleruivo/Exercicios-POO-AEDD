@@ -73,7 +73,7 @@ class Bicycle:
     # Método para calcular a velocidade relativa entre duas bicicletas
     def relative_speed(self, other_bike):
         if isinstance(other_bike, Bicycle):
-            return self.get_speed() - other_bike.get_speed()
+            return abs(self.get_speed() - other_bike.get_speed())
         else:
             raise TypeError("O parâmetro deve ser uma instância de Bicycle.")
 
@@ -83,7 +83,9 @@ if __name__ == "__main__":
     bike2 = Bicycle(speed=20, cadence=90, gear=6, serial_number=1500)
 
     # Imprimindo o status das bicicletas
+    print("Bike 1")
     bike1.print_status()
+    print("Bike 2")
     bike2.print_status()
 
     # Calculando e exibindo a velocidade relativa entre as duas bicicletas
