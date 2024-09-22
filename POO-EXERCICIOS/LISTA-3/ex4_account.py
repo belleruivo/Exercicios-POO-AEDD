@@ -6,22 +6,20 @@ método displayAccount, passando a conta como parâmetro.
 '''
 
 class Account:
+    # método init -> constructor, executado automaticamente quando a classe é instanciada
     def __init__(self, name, balance):
         self.name = name
         self.balance = balance
-        
-    def getName(self):
-        return self.name
-    
-    def getBalance(self):
-        return self.balance
-    
-    def setName(self, name):
-        self.name = name
-        
-    def setBalance(self, balance):
-        self.balance = balance
-        
+
     def displayAccount(self):
-        print(f"\nNome do Cliente: {self.name}")
-        print(f"Saldo Disponível: R${self.balance}")
+        print(f"Nome: {self.name}, Saldo: {self.balance}")
+        # poderia ser um return -> return f"Nome: {self.name}, Saldo: {self.balance}" 
+        # print(conta.displayAccount())
+
+def main():
+    # objeto -> conta
+    conta = Account("João Silva", 1000.0)
+    conta.displayAccount()
+
+if __name__ == "__main__":
+    main()
