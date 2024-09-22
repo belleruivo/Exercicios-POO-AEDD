@@ -10,7 +10,7 @@ o seu novo método.
 '''
 
 class Bicycle:
-    # Constantes simbólicas
+    # Constantes simbólicas(limites válidos)
     MIN_SPEED = 0
     MIN_CADENCE = 0
     MIN_GEAR = 1
@@ -72,12 +72,12 @@ class Bicycle:
 
     # Método para calcular a velocidade relativa entre duas bicicletas
     def relative_speed(self, other_bike):
+        # isinstance(object, classinfo)
         if isinstance(other_bike, Bicycle):
             return abs(self.get_speed() - other_bike.get_speed())
         else:
             raise TypeError("O parâmetro deve ser uma instância de Bicycle.")
 
-# Testando a classe Bicycle e seus métodos
 if __name__ == "__main__":
     bike1 = Bicycle(speed=15, cadence=80, gear=5, serial_number=1200)
     bike2 = Bicycle(speed=20, cadence=90, gear=6, serial_number=1500)
@@ -88,5 +88,4 @@ if __name__ == "__main__":
     print("Bike 2")
     bike2.print_status()
 
-    # Calculando e exibindo a velocidade relativa entre as duas bicicletas
     print(f"Velocidade relativa entre bike1 e bike2: {bike1.relative_speed(bike2)} km/h")
