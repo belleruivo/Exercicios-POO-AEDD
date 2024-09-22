@@ -2,6 +2,7 @@
 km/h, a direção em graus dos pneus e o nome do proprietário. Crie métodos de
 acesso e impressão para esta classe e faça um programa de teste.
 '''
+
 class Vehicle:
     def __init__(self, velocidade, direção, nome):
         self.velocidade = velocidade
@@ -65,11 +66,7 @@ def main():
         print("Nome inválido. Certifique-se de inserir somente letras.\n")
     
     carro = Vehicle(velocidade, direção, nome)    
-    carro = Vehicle(velocidade, direção, nome)    
-    print("\nDETALHES DO VEÍCULO:")
-    print(f"\nVelocidade Atual: {carro.getVelocidade()}km/h")
-    print(f"Direção dos Pneus: {carro.getDireção()}°")
-    print(f"Nome do Proprietário: {carro.getNome()}")
-    print("-="*40)
+    carro.imprimir()
+        
         
 main()

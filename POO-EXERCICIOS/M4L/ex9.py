@@ -34,28 +34,24 @@ class Date:
     def imprimir_data(self):
         print(f"\nData: {self.dia:02}/{self.mes:02}/{self.ano}")
 
-def obter_numero_tratado(mensagem):
-    while True:
-        try:
-            return int(input(mensagem))
-        except ValueError:
-            print("Entrada inválida. Por favor, insira um número inteiro.")
-
-def obter_ano():
-    while True:
-        ano = input("Digite o ano (4 dígitos): ").strip()
-        if len(ano) == 4 and ano.isdigit():
-            return int(ano)  
-        else:
-            print("Entrada inválida. O ano deve ter exatamente 4 dígitos.\n")
-
-    
 def main():
-    print("-="*30)
+    print("-=" * 30)
+
     while True:
         try:
-            dia = obter_numero_tratado("Digite o dia: ")
-            mes = obter_numero_tratado("Digite o mês: ")
+            while True:
+                try:
+                    dia = int(input("Digite o dia: "))
+                    break
+                except ValueError:
+                    print("Entrada inválida. Por favor, insira um número inteiro.\n")
+
+            while True:
+                try:
+                    mes = int(input("Digite o mês: "))
+                    break
+                except ValueError:
+                    print("Entrada inválida. Por favor, insira um número inteiro.\n")
 
             while True:
                 ano = input("Digite o ano (4 dígitos): ").strip()
@@ -64,7 +60,7 @@ def main():
                     break
                 else:
                     print("Entrada inválida. O ano deve ter exatamente 4 dígitos.\n")
-        
+
             data = datetime(ano, mes, dia)
             data_obj = Date(dia, mes, ano)
             data_obj.imprimir_data()
@@ -75,4 +71,3 @@ def main():
     print("-=" * 30)
 
 main()
-
