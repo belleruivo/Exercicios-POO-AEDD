@@ -41,6 +41,9 @@ def main():
     while True:
         try:
             velocidade = float(input("\nDigite a velocidade atual do veículo (km/h): "))
+            if velocidade < 0:
+                print("A velocidade não pode ser negativa. Tente novamente.")
+                continue
             break 
         except ValueError:
             print("Entrada inválida. Certifique-se de inserir somente caracteres numéricos.\n")
