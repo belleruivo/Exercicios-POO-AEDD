@@ -97,7 +97,6 @@ if __name__ == "__main__":
     bike1 = Bicycle(speed=15, cadence=80, gear=5, serial_number=1200)
     bike2 = Bicycle(speed=20, cadence=90, gear=6, serial_number=1500)
 
-    # Imprimindo o status das bicicletas
     bike1.print_status()
     bike2.print_status()
 

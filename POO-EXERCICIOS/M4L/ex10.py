@@ -67,7 +67,6 @@ def test_comparisons(student1, student2, comparator):
         print(f"{student1.name} não vem depois de {student2.name}.")
 
 
-# Função principal para testar
 def main():
     # Criando alguns objetos Student
     student1 = Student("Ana", 85)
