@@ -51,18 +51,18 @@ def main():
 
     fatura = Invoice(numFatura, descricao, quantidade, precoItem)
 
-    print("Numero da fatura: {}".format(fatura.get_numFatura()))
-    print("Descrição: {}".format(fatura.get_descricao()))
-    print("Quantidade: {}".format(fatura.get_quantidade()))
-    print("Preço por item: R$ {:.2f}".format(fatura.get_precoItem()))
+    print(f"Numero da fatura: {fatura.get_numFatura()}")
+    print(f"Descrição: {fatura.get_descricao()}")
+    print(f"Quantidade: {fatura.get_quantidade()}")
+    print(f"Preço por item: R$ {fatura.get_precoItem():.2f}")
 
-    print("Valor total da fatura: R$ {}".format(fatura.calcular_fatura()))
+    print(f"Valor total da fatura: R$ {fatura.calcular_fatura()}".format())
 
     fatura.set_quantidade(-10)
     fatura.set_precoItem(-20.0) 
 
-    print("Quantidade ajustada: {}".format(fatura.get_quantidade()))
-    print("Preço ajustado: R$ {:.2f}".format(fatura.get_precoItem()))
-    print("Valor ajustado da fatura: R$ {:.2f}".format(fatura.calcular_fatura()))
+    print(f"Quantidade ajustada: {fatura.get_quantidade()}")
+    print(f"Preço ajustado: R$ {fatura.get_precoItem():.2f}")
+    print(f"Valor ajustado da fatura: R$ {fatura.calcular_fatura():.2f}")
 
 main()
