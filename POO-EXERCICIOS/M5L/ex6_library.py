@@ -11,29 +11,77 @@ class Library:
     def __init__(self):  # inicializa a classe library
         self.books = {}  # dicionário para armazenar os livros e suas quantidades
 
-    def add_book(self, title, quantity=1):  # método para adicionar livros
-        if title in self.books:  # se o livro já estiver no dicionário
-            self.books[title] += quantity  # incrementa a quantidade existente
+    @classmethod
+    def adicionar_livro(cls, biblioteca, titulo, quantidade=1):  # método para adicionar livros
+        if titulo in biblioteca.livros:  # se o livro já estiver no dicionário
+            biblioteca.livros[titulo] += quantidade  # incrementa a quantidade existente
         else:
-            self.books[title] = quantity  # adiciona o livro com a quantidade especificada
+            biblioteca.livros[titulo] = quantidade  # adiciona o livro com a quantidade especificada
 
-    def borrow_book(self, title):  # método para emprestar um livro
-        if title in self.books and self.books[title] > 0:  # verifica se o livro está disponível
-            self.books[title] -= 1  # decrementa a quantidade do livro
+    def emprestar_livro(self, titulo):  # método para emprestar um livro
+        if titulo in self.livros and self.livros[titulo] > 0:  # verifica se o livro está disponível
+            self.livros[titulo] -= 1  # decrementa a quantidade do livro
             return True  # retorna true se o empréstimo for bem-sucedido
         return False  # retorna false se o livro não estiver disponível
 
-    def return_book(self, title):  # método para devolver um livro
-        if title in self.books:  # verifica se o livro está cadastrado
-            self.books[title] += 1  # incrementa a quantidade do livro
+    def devolver_livro(self, titulo):  # método para devolver um livro
+        if titulo in self.livros:  # verifica se o livro está cadastrado
+            self.livros[titulo] += 1  # incrementa a quantidade do livro
         else:
-            print(f"livro '{title}' não está cadastrado na biblioteca.")  # mensagem de erro se o livro não estiver cadastrado
+            print(f"livro '{titulo}' não está cadastrado na biblioteca.")  # mensagem de erro se o livro não estiver cadastrado
 
-    def check_availability(self, title):  # método para verificar a disponibilidade de um livro
-        return self.books.get(title, 0) > 0  # retorna true se o livro estiver disponível, caso contrário, false
+    @staticmethod
+    def verificar_disponibilidade(biblioteca, titulo):  # método para verificar a disponibilidade de um livro
+        return biblioteca.livros.get(titulo, 0) > 0  # retorna true se o livro estiver disponível, caso contrário, false
+
+def cadastrar_livro(biblioteca):
+    titulo = input("digite o título do livro: ").strip()  # solicita o título do livro
+    if not titulo:  # verifica se o título não está vazio
+        print("o título do livro não pode ser vazio.")
+        return
+    try:
+        quantidade = int(input("digite a quantidade: "))  # solicita a quantidade do livro
+        if quantidade <= 0:  # verifica se a quantidade é um número inteiro positivo
+            raise ValueError
+    except ValueError:
+        print("quantidade inválida. deve ser um número inteiro positivo.")
+        return
+    Library.adicionar_livro(biblioteca, titulo, quantidade)  # adiciona o livro à biblioteca
+    print(f"livro '{titulo}' cadastrado com sucesso!")
+
+def fazer_emprestimo(biblioteca):
+    titulo = input("digite o título do livro: ").strip()  # solicita o título do livro
+    if not titulo:  # verifica se o título não está vazio
+        print("o título do livro não pode ser vazio.")
+        return
+    if biblioteca.emprestar_livro(titulo):  # tenta emprestar o livro
+        print(f"empréstimo do livro '{titulo}' realizado com sucesso!")
+    else:
+        print(f"livro '{titulo}' não disponível para empréstimo.")
+
+def devolver_livro(biblioteca):
+    titulo = input("digite o título do livro: ").strip()  # solicita o título do livro
+    if not titulo:  # verifica se o título não está vazio
+        print("o título do livro não pode ser vazio.")
+        return
+    if titulo in biblioteca.livros:  # verifica se o livro está cadastrado
+        biblioteca.devolver_livro(titulo)  # devolve o livro
+        print(f"livro '{titulo}' devolvido com sucesso!")
+    else:
+        print(f"livro '{titulo}' não está cadastrado na biblioteca.")
+
+def verificar_disponibilidade(biblioteca):
+    titulo = input("digite o título do livro: ").strip()  # solicita o título do livro
+    if not titulo:  # verifica se o título não está vazio
+        print("o título do livro não pode ser vazio.")
+        return
+    if Library.verificar_disponibilidade(biblioteca, titulo):  # verifica a disponibilidade do livro
+        print(f"livro '{titulo}' está disponível.")
+    else:
+        print(f"livro '{titulo}' não está disponível.")
 
 def main():
-    library = Library()  # cria uma instância da classe library
+    biblioteca = Library()  # cria uma instância da classe library
     
     while True:
         print("\n1. cadastrar livro")
@@ -42,58 +90,19 @@ def main():
         print("4. verificar disponibilidade")
         print("5. sair")
         
-        choice = input("escolha uma opção: ")  # solicita ao usuário que escolha uma opção
+        escolha = input("escolha uma opção: ")  # solicita ao usuário que escolha uma opção
         
-        if choice == '1':  # opção para cadastrar um livro
-            title = input("digite o título do livro: ").strip()  # solicita o título do livro
-            if not title:  # verifica se o título não está vazio
-                print("o título do livro não pode ser vazio.")
-                continue
-            try:
-                quantity = int(input("digite a quantidade: "))  # solicita a quantidade do livro
-                if quantity <= 0:  # verifica se a quantidade é um número inteiro positivo
-                    raise ValueError
-            except ValueError:
-                print("quantidade inválida. deve ser um número inteiro positivo.")
-                continue
-            library.add_book(title, quantity)  # adiciona o livro à biblioteca
-            print(f"livro '{title}' cadastrado com sucesso!")
-        
-        elif choice == '2':  # opção para fazer empréstimo de um livro
-            title = input("digite o título do livro: ").strip()  # solicita o título do livro
-            if not title:  # verifica se o título não está vazio
-                print("o título do livro não pode ser vazio.")
-                continue
-            if library.borrow_book(title):  # tenta emprestar o livro
-                print(f"empréstimo do livro '{title}' realizado com sucesso!")
-            else:
-                print(f"livro '{title}' não disponível para empréstimo.")
-        
-        elif choice == '3':  # opção para devolver um livro
-            title = input("digite o título do livro: ").strip()  # solicita o título do livro
-            if not title:  # verifica se o título não está vazio
-                print("o título do livro não pode ser vazio.")
-                continue
-            if title in library.books:  # verifica se o livro está cadastrado
-                library.return_book(title)  # devolve o livro
-                print(f"livro '{title}' devolvido com sucesso!")
-            else:
-                print(f"livro '{title}' não está cadastrado na biblioteca.")
-        
-        elif choice == '4':  # opção para verificar a disponibilidade de um livro
-            title = input("digite o título do livro: ").strip()  # solicita o título do livro
-            if not title:  # verifica se o título não está vazio
-                print("o título do livro não pode ser vazio.")
-                continue
-            if library.check_availability(title):  # verifica a disponibilidade do livro
-                print(f"livro '{title}' está disponível.")
-            else:
-                print(f"livro '{title}' não está disponível.")
-        
-        elif choice == '5':  # opção para sair do programa
+        if escolha == '1':  # opção para cadastrar um livro
+            cadastrar_livro(biblioteca)
+        elif escolha == '2':  # opção para fazer empréstimo de um livro
+            fazer_emprestimo(biblioteca)
+        elif escolha == '3':  # opção para devolver um livro
+            devolver_livro(biblioteca)
+        elif escolha == '4':  # opção para verificar a disponibilidade de um livro
+            verificar_disponibilidade(biblioteca)
+        elif escolha == '5':  # opção para sair do programa
             print("saindo...")
             break  # encerra o loop e sai do programa
-        
         else:
             print("opção inválida. tente novamente.")  # mensagem de erro para opção inválida
 

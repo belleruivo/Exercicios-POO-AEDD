@@ -16,7 +16,8 @@ class CardsGame:
         self.pilha_de_descarte = []  # aqui inicializamos a pilha de descarte
         self.jogador_atual = jogadores[0]  # aqui inicializamos com o primeiro jogador
 
-    def criar_baralho(self):  # aqui criamos o baralho com as cartas do jogo
+    @staticmethod
+    def criar_baralho():  # aqui criamos o baralho com as cartas do jogo
         cores = ['Vermelho', 'Amarelo', 'Verde', 'Azul']
         valores = list(range(1, 10)) + ['Pular', 'Reverter', 'Comprar Dois']
         baralho = [(cor, str(valor)) for cor in cores for valor in valores]
@@ -59,7 +60,46 @@ class CardsGame:
         indice_atual = lista_de_jogadores.index(self.jogador_atual)
         self.jogador_atual = lista_de_jogadores[(indice_atual + 1) % len(lista_de_jogadores)]  # calcula o próximo jogador
 
-def main():
+    def inicializar_jogo(self):
+        self.embaralhar_baralho()
+        self.distribuir_cartas()
+        print("\n====================================")
+        print("           Mãos iniciais            ")
+        print("====================================")
+        for jogador, mao in self.jogadores.items():
+            print(f"{jogador}: {mao}")
+
+    def jogar(self):
+        while True:
+            jogador = self.jogador_atual
+            print("\n====================================")
+            print(f"           É a vez de {jogador}           ")
+            print("====================================")
+            print(f"Sua mão: {self.jogadores[jogador]}")
+            carta_para_jogar = input("Digite a carta para jogar (ex: 'Vermelho 5' ou 'Curinga Comprar Quatro'): ")
+
+            try:
+                partes = carta_para_jogar.split()  # divide a entrada em partes
+                cor = partes[0]
+                valor = ' '.join(partes[1:])
+                carta = (cor, valor)
+            except ValueError:
+                print("Entrada inválida. Certifique-se de digitar no formato 'Cor Valor'.")
+                continue
+
+            if not self.jogar_carta(jogador, carta):  # tenta jogar a carta
+                continue
+
+            if not self.jogadores[jogador]:  # verifica se o jogador venceu
+                print(f"{jogador} venceu o jogo!")
+                break
+
+            print("\n====================================")
+            print(f"Pilha de descarte: {self.pilha_de_descarte}")
+            print(f"Jogador atual: {self.jogador_atual}")
+            print("====================================")
+
+def obter_jogadores():
     while True:
         num_jogadores = input("Digite o número de jogadores (2-3): ")
         if not num_jogadores.isdigit():  # verifica se a entrada é um número
@@ -80,45 +120,13 @@ def main():
             else:
                 jogadores.append(nome)
                 break
-    
-    jogo = CardsGame(jogadores)  # aqui criamos o objeto CardsGame
-    jogo.embaralhar_baralho()  # aqui embaralhamos o baralho
-    jogo.distribuir_cartas()  # aqui distribuímos as cartas
-    
-    print("\n====================================")
-    print("           Mãos iniciais            ")
-    print("====================================")
-    for jogador, mao in jogo.jogadores.items():  # aqui exibimos as mãos iniciais dos jogadores
-        print(f"{jogador}: {mao}")
-    
-    while True:
-        jogador = jogo.jogador_atual
-        print("\n====================================")
-        print(f"           É a vez de {jogador}           ")
-        print("====================================")
-        print(f"Sua mão: {jogo.jogadores[jogador]}")
-        carta_para_jogar = input("Digite a carta para jogar (ex: 'Vermelho 5' ou 'Curinga Comprar Quatro'): ")
-        
-        try:
-            partes = carta_para_jogar.split()  # divide a entrada em partes
-            cor = partes[0]
-            valor = ' '.join(partes[1:])
-            carta = (cor, valor)
-        except ValueError:
-            print("Entrada inválida. Certifique-se de digitar no formato 'Cor Valor'.")
-            continue
-        
-        if not jogo.jogar_carta(jogador, carta):  # tenta jogar a carta
-            continue
-        
-        if not jogo.jogadores[jogador]:  # verifica se o jogador venceu
-            print(f"{jogador} venceu o jogo!")
-            break
-        
-        print("\n====================================")
-        print(f"Pilha de descarte: {jogo.pilha_de_descarte}")
-        print(f"Jogador atual: {jogo.jogador_atual}")
-        print("====================================")
+    return jogadores
+
+def main():
+    jogadores = obter_jogadores()
+    jogo = CardsGame(jogadores)
+    jogo.inicializar_jogo()
+    jogo.jogar()
 
 if __name__ == "__main__":
     main()  # aqui chamamos a função main para executar o código
