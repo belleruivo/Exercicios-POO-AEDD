@@ -4,12 +4,13 @@ série: 450/10 + 445/11 + 440/12 + 435/13 + ...
 '''
 
 def soma():
+    n_termos = 30
     numerador = 450
     denominador = 10
     termo = 1
     soma = 0
 
-    while termo <= 30:
+    while termo <= n_termos:
         valor_termo = numerador / denominador
         numerador -= 5
         denominador += 1
@@ -18,6 +19,8 @@ def soma():
     
     return soma
 
-print(f"\nA soma dos 30 primeiros termos da série é: {soma()}\n")
+def main():
+    print(f"\nA soma dos 30 primeiros termos da série é: {soma()}\n")
 
+main()
 

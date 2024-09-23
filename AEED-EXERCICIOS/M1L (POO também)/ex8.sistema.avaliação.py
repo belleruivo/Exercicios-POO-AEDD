@@ -17,24 +17,29 @@ mf>= 5 aprovado
 ne -> Nota do exame
 
 """
-def main():
-    notas = []
-    print("-="*18, "Cálculo de Média Final", "-="*18)
-    
+def calcular_media_parcial(notas):
+    return sum(notas) / len(notas) if notas else 0
+
+def calcular_nota_exame(mp):
+    return (0.6 * mp - 5) / -0.4
+
+def ler_creditos():
     while True:
         try:
             creditos = int(input("Qual o número de créditos da disciplina: "))
             if creditos <= 0:
                 print("O número de créditos deve ser maior que zero. Tente novamente.\n")
                 continue
-            break
+            return creditos
         except ValueError:
             print("Você inseriu um valor errado. Tente novamente\n")
 
-    for c in range(0, creditos):
+def ler_notas(creditos):
+    notas = []
+    for c in range(creditos):
         while True:
             try:
-                nota = float(input(f"Nota {c+1}: "))
+                nota = float(input(f"Nota {c + 1}: "))
                 if 0 <= nota <= 10:
                     notas.append(nota)
                     break
@@ -42,17 +47,24 @@ def main():
                     print("A nota deve estar entre 0 e 10. Tente novamente.")
             except ValueError:
                 print("Você inseriu um valor inválido. Tente novamente.")
-        
-    if len(notas) > 0:
-        mp = sum(notas) / len(notas)
-        print(f"\nMédia parcial: {mp:.2f}")
+    return notas
+
+def main():
+    print("-=" * 18, "Cálculo de Média Final", "-=" * 18)
+
+    creditos = ler_creditos()
+    notas = ler_notas(creditos)
+
+    mp = calcular_media_parcial(notas)
+    print(f"\nMédia parcial: {mp:.2f}")
 
     if mp >= 7:
         print("\nParabéns! Você passou direto pela matéria.")
     else:
-        ne = (0.6*mp - 5)/-0.4
+        ne = calcular_nota_exame(mp)
         print(f"""\nInfelizmente você não passou direto.
 Para conseguir passar nessa matéria, você terá que tirar no mínimo {ne:.2f} no exame final.""")
-    print("-="*48)
-    
+
+    print("-=" * 48)
+
 main()

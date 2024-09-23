@@ -17,7 +17,6 @@ c. O total da folha de pagamentos atual
 d. O total da folha de pagamentos futura nos dois casos estudados, indicando
 qual o caminho mais econômico para a empresa.
 '''
-#Falta adicionar a questão de inserir virgula ao invés de ponto
 def aum_uniforme(salarios):
     sala_uniforme = []
 
@@ -42,11 +41,10 @@ def aum_progressivo(salarios):
     return sum(sala_progressivo)
 
 
-def main():
-    
-    print("-="*20, "CÁLCULO DE AUMENTOS", "-="*20,"\n")
-    print("Digite os salários dos seus funcionários e insira o número (0) caso queira finalizar o programa")
+def coletar_salarios():
     salarios = []
+    print("Digite os salários dos seus funcionários e insira o número (0) caso queira finalizar o programa")
+    
     while True:
         try:
             valor = float(input("Digite o salário: "))
@@ -57,22 +55,47 @@ def main():
             else:
                 salarios.append(valor)
         except ValueError:
-            print("Por favor, insira um caractere numérico.\n")
+            print("Por favor, insira um valor numérico válido.\n")
 
-    if len(salarios) == 0:
+    return salarios
+
+def calcular_estatisticas(salarios):
+    if not salarios:
+        return None, None, None
+    
+    total_salarios = sum(salarios)
+    media_salarios = total_salarios / len(salarios)
+    
+    return total_salarios, media_salarios, len(salarios)
+
+def exibir_resultados(salarios):
+    total_uniforme = aum_uniforme(salarios)
+    total_progressivo = aum_progressivo(salarios)
+    total_salarios, media_salarios, num_funcionarios = calcular_estatisticas(salarios)
+
+    if num_funcionarios is None:
         print("Nenhum salário foi inserido. Programa finalizado.")
+        return
 
-    print(f"\nTotal de funcionários: {len(salarios)}")
-    print(f"Salário médio dos funcionários: {sum(salarios)/len(salarios):.2f}")
-    print(f"Total da folha de pagamento atual: {sum(salarios):.2f}")
-    print(f"Total da folha de pagamento com um aumento uniforme: {aum_uniforme(salarios):.2f}")
-    print(f"Total da folha de pagamento com um aumento progressivo: {aum_progressivo(salarios):.2f}")
+    print(f"\nTotal de funcionários: {num_funcionarios}")
+    print(f"Salário médio dos funcionários: {media_salarios:.2f}")
+    print(f"Total da folha de pagamento atual: {total_salarios:.2f}")
+    print(f"Total da folha de pagamento com um aumento uniforme: {total_uniforme:.2f}")
+    print(f"Total da folha de pagamento com um aumento progressivo: {total_progressivo:.2f}")
 
-    if aum_uniforme(salarios) > aum_progressivo(salarios):
-        print("\nDesssa forma, o aumento progressivo é mais econômico para a empresa")
-    elif aum_uniforme(salarios) == aum_progressivo(salarios):
-        print("\nDesssa forma, os dois aumentos geram o mesmo gasto para a empresa")
+    comparar_aumentos(total_uniforme, total_progressivo)
+
+def comparar_aumentos(total_uniforme, total_progressivo):
+    if total_uniforme > total_progressivo:
+        print("\nO aumento progressivo é mais econômico para a empresa.")
+    elif total_uniforme == total_progressivo:
+        print("\nOs dois aumentos geram o mesmo gasto para a empresa.")
     else:
-        print("\nDesssa forma, o aumento uniforme é mais econômico para a empresa")
+        print("\nO aumento uniforme é mais econômico para a empresa.")
 
-main()  
+def main():
+    print("-="*20, "CÁLCULO DE AUMENTOS", "-="*20, "\n")
+    salarios = coletar_salarios()
+    exibir_resultados(salarios)
+    print("-="*51)
+main()

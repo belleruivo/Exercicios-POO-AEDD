@@ -4,11 +4,10 @@ programa para calcular o valor de pi com precisão de 0,00001 (o programa encerr
 quando a parcela da série for menor que a precisão).
 '''
 
-def num_pi():
+def num_pi(precisao):
     numerador = 4
     denominador = 1
     sinal = 1
-    precisao = 0.00001
     resul = 0
 
     while True:
@@ -23,5 +22,8 @@ def num_pi():
     
     return resul
 
-print(f"\nO número de pi com precisão 0,00001 é: {num_pi()}\n")
+def main():
+    precisao = 0.00001
+    print(f"\nO número de pi com precisão 0,00001 é: {num_pi(precisao)}\n")
 
+main()
