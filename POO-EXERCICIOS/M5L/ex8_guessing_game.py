@@ -3,6 +3,9 @@
 adivinhação. essa classe deve gerar um número aleatório, permitir que o jogador faça
 palpites e informar se o palpite está correto, informando se é maior ou menor que o
 número gerado.
+
+Em todos os exercícios abaixo, identifique a possibilidade de usar além dos métodos de
+objetos, métodos de classe (@classmethod) e métodos fora de contexto (@staticmethod).
 '''
 
 import random  # importa o módulo random

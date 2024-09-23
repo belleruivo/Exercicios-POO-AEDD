@@ -1,4 +1,7 @@
 '''
+Em todos os exercícios abaixo, identifique a possibilidade de usar além dos métodos de
+objetos, métodos de classe (@classmethod) e métodos fora de contexto (@staticmethod).
+
 6. implemente uma classe chamada library que represente uma biblioteca virtual. essa
 classe deve permitir cadastrar livros, fazer empréstimos, devolver livros e verificar a
 disponibilidade de um livro.

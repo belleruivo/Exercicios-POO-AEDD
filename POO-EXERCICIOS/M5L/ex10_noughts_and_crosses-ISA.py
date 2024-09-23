@@ -1,4 +1,7 @@
 '''
+Em todos os exercícios abaixo, identifique a possibilidade de usar além dos métodos de
+objetos, métodos de classe (@classmethod) e métodos fora de contexto (@staticmethod).
+
 10. Escreva um programa completo para jogar o jogo da velha. Para tanto crie uma
 classe NoughtsAndCrosses (jogo da velha):
 • a classe deve conter como dados privados um array bidimensional 3x3 para
