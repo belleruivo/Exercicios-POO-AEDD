@@ -40,15 +40,8 @@ class NoughtsAndCrosses:
         jogador_atual = EstadoCasa.JOGADOR1
         while True:
             self.exibir_grade()
-            try:
-                # Entrada do jogador para linha e coluna
-                linha = int(input(f"Jogador {1 if jogador_atual == EstadoCasa.JOGADOR1 else 2}, insira a linha (0-2): "))
-                coluna = int(input(f"Jogador {1 if jogador_atual == EstadoCasa.JOGADOR1 else 2}, insira a coluna (0-2): "))
-                if linha < 0 or linha > 2 or coluna < 0 or coluna > 2:
-                    print("Movimento inválido! As coordenadas devem estar entre 0 e 2.")
-                    continue
-            except ValueError:
-                print("Entrada inválida! As coordenadas devem estar entre 0 e 2.")
+            linha, coluna = self.obter_movimento(jogador_atual)
+            if linha is None or coluna is None:
                 continue
 
             # Verifica se a casa está vazia antes de fazer o movimento
@@ -85,9 +78,34 @@ class NoughtsAndCrosses:
     def verificar_empate(self):
         return all(casa != EstadoCasa.VAZIA for linha in self.__tabuleiro for casa in linha)
 
-# Função principal para iniciar o jogo
+    @staticmethod
+    def validar_entrada(entrada):
+        try:
+            valor = int(entrada)
+            if 0 <= valor <= 2:
+                return valor
+            else:
+                print("Movimento inválido! As coordenadas devem estar entre 0 e 2.")
+                return None
+        except ValueError:
+            print("Entrada inválida! As coordenadas devem estar entre 0 e 2.")
+            return None
+
+    @classmethod
+    def novo_jogo(cls):
+        return cls()
+
+    def obter_movimento(self, jogador_atual):
+        try:
+            linha = self.validar_entrada(input(f"Jogador {1 if jogador_atual == EstadoCasa.JOGADOR1 else 2}, insira a linha (0-2): "))
+            coluna = self.validar_entrada(input(f"Jogador {1 if jogador_atual == EstadoCasa.JOGADOR1 else 2}, insira a coluna (0-2): "))
+            return linha, coluna
+        except ValueError:
+            print("Entrada inválida! As coordenadas devem estar entre 0 e 2.")
+            return None, None
+
 def main():
-    jogo = NoughtsAndCrosses()
+    jogo = NoughtsAndCrosses.novo_jogo()
     jogo.jogar()
 
 if __name__ == "__main__":

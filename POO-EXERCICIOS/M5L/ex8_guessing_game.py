@@ -22,17 +22,34 @@ class GuessingGame:
         else:
             return "parabéns! você adivinhou o número."
 
-if __name__ == "__main__":
-    game = GuessingGame()  # cria uma instância do jogo
-    while True:
+    @staticmethod
+    def validar_palpite(player_input):
         try:
-            player_input = int(input("digite seu palpite (entre 0 e 100): "))  # solicita um palpite do jogador
-            if player_input < 0 or player_input > 100:
-                print("por favor, digite um número entre 0 e 100.")  # valida se o palpite está entre 0 e 100
-                continue
-            result = game.guess(player_input)  # verifica o palpite
-            print(result)  # imprime o resultado
-            if result == "parabéns! você adivinhou o número.":
-                break  # termina o loop se o jogador adivinhar corretamente
+            player_guess = int(player_input)
+            if 0 <= player_guess <= 100:
+                return player_guess
+            else:
+                print("por favor, digite um número entre 0 e 100.")
+                return None
         except ValueError:
-            print("por favor, digite um número válido.")  # trata entradas inválidas
+            print("por favor, digite um número válido.")
+            return None
+
+    @classmethod
+    def novo_jogo(cls):
+        return cls()
+
+def main():
+    game = GuessingGame.novo_jogo()  # cria uma nova instância do jogo
+    while True:
+        player_input = input("digite seu palpite (entre 0 e 100): ")  # solicita um palpite do jogador
+        player_guess = GuessingGame.validar_palpite(player_input)
+        if player_guess is None:
+            continue
+        result = game.guess(player_guess)  # verifica o palpite
+        print(result)  # imprime o resultado
+        if result == "parabéns! você adivinhou o número.":
+            break  # termina o loop se o jogador adivinhar corretamente
+
+if __name__ == "__main__":
+    main()  # chama a função main para iniciar o programa
