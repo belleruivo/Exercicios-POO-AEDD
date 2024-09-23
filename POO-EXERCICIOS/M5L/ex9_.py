@@ -49,15 +49,16 @@ class Fatura:
     def calcular_valor_fatura(self):
         return self.quantidade * self.preco_unitario
 
-def obter_entrada(mensagem, tipo=float):
-    while True:
-        try:
-            if tipo == int:
-                return int(input(mensagem))
-            else:
-                return float(input(mensagem))
-        except ValueError:
-            print("Entrada inválida. Por favor, insira um valor numérico.\n")
+    @staticmethod
+    def obter_entrada(mensagem, tipo=float):
+        while True:
+            try:
+                if tipo == int:
+                    return int(input(mensagem))
+                else:
+                    return float(input(mensagem))
+            except ValueError:
+                print("Entrada inválida. Por favor, insira um valor numérico.\n")
 
 
 def main():
@@ -66,10 +67,10 @@ def main():
 
     print("-="*30)
     while True:
-        numero_item = obter_entrada("Digite o número do item: ", tipo=int)
+        numero_item = Fatura.obter_entrada("Digite o número do item: ", tipo=int)
         descricao = input("Digite a descrição do item: ")
-        quantidade = obter_entrada("Digite a quantidade comprada: ", tipo=int)
-        preco_unitario = obter_entrada("Digite o preço unitário: ")
+        quantidade = Fatura.obter_entrada("Digite a quantidade comprada: ", tipo=int)
+        preco_unitario = Fatura.obter_entrada("Digite o preço unitário: ")
 
         
         fatura = Fatura(numero_item, descricao, quantidade, preco_unitario)

@@ -2,229 +2,134 @@
 classe deve ter funcionalidades para adicionar amigos, publicar mensagens,
 comentar em posts e buscar por usuários.'''
 
-class User:
+class Usuario:
     def __init__(self, nome):
         self.nome = nome
         self.amigos = []
+        self.posts = []
 
     def adicionar_amigo(self, amigo):
         if amigo not in self.amigos:
             self.amigos.append(amigo)
-            amigo.amigos.append(self)  
-            print(f"{amigo.nome} foi adicionado como amigo de {self.nome}.\n")
+            amigo.amigos.append(self)
+            print(f"{amigo.nome} agora é amigo(a) de {self.nome}.\n")
         else:
-            print(f"{amigo.nome} já é amigo de {self.nome}.")
+            print(f"{amigo.nome} já é seu amigo.\n")
 
-class Post:
-    def __init__(self, usuario, mensagem):
-        self.usuario = usuario
-        self.mensagem = mensagem
-        self.comentarios = []
+    def publicar_post(self, conteudo):
+        post = Post(conteudo, self)
+        self.posts.append(post)
+        print(f"{self.nome} publicou: {conteudo}\n")
+        return post
 
-    def adicionar_comentario(self, comentario):
-        self.comentarios.append(comentario)
+    def comentar_post(self, post, comentario):
+        post.adicionar_comentario(self, comentario)
+        print(f"{self.nome} comentou no post de {post.autor.nome}: {comentario}\n")
 
     def __str__(self):
-        return f"{self.mensagem} (Publicado por: {self.usuario.nome}, Comentários: {len(self.comentarios)})"
+        return self.nome
+
+
+class Post:
+    def __init__(self, conteudo, autor):
+        self.conteudo = conteudo
+        self.autor = autor
+        self.comentarios = []
+
+    def adicionar_comentario(self, usuario, comentario):
+        self.comentarios.append((usuario, comentario))
+
+    def mostrar_post(self):
+        print(f"Post de {self.autor.nome}: {self.conteudo}")
+        if self.comentarios:
+            print("Comentários:")
+            for comentario in self.comentarios:
+                print(f"   {comentario[0].nome} comentou: {comentario[1]}")
+
 
 class SocialNetwork:
     def __init__(self):
         self.usuarios = []
-        self.posts = []  # Armazena todos os posts
 
     def adicionar_usuario(self, nome):
-        usuario = User(nome)
+        usuario = Usuario(nome)
         self.usuarios.append(usuario)
-        print(f"Usuário {nome} adicionado à rede social.\n")
+        print(f"Usuário {nome} foi adicionado à rede.\n")
+        return usuario
 
     def buscar_usuario(self, nome):
         for usuario in self.usuarios:
-            if usuario.nome.lower() == nome.lower():
-                print(f"Usuário {nome} encontrado!\n")
+            if usuario.nome == nome:
                 return usuario
         print(f"Usuário {nome} não encontrado.\n")
         return None
+    
 
-    def publicar_post(self, nome_usuario, mensagem):
-        usuario = self.buscar_usuario(nome_usuario)
-        if usuario:
-            post = Post(usuario, mensagem)
-            self.posts.append(post)  # Adiciona o post à lista global de posts
-            print("Post realizado com sucesso!\n")
-
-    def listar_posts(self):
-        if not self.posts:
-            print("Nenhum post disponível.")
-        else:
-            print("Posts disponíveis:")
-            for post in self.posts:
-                print(post)
-
-def main():
-    rede_social = SocialNetwork()
+def menu():
+    rede = SocialNetwork()
     print("-="*30)
     while True:
-        print("Menu:")
+        print("MENU:")
         print("1. Adicionar Usuário")
-        print("2. Buscar Usuário")
+        print("2. Adicionar Amigo")
         print("3. Publicar Post")
-        print("4. Adicionar Amigo")
-        print("5. Comentar em Post")
-        print("6. Listar Posts")
-        print("7. Sair")
-
-        escolha = input("\nEscolha uma opção: ")
-        print()
-
-        if escolha == '1':
-            nome = input("Digite o nome do usuário: ")
-            rede_social.adicionar_usuario(nome)
-        elif escolha == '2':
-            nome = input("Digite o nome do usuário a ser buscado: ")
-            rede_social.buscar_usuario(nome)
-        elif escolha == '3':
-            nome_usuario = input("Digite o nome do usuário que publicará: ")
-            mensagem = input("Digite a mensagem do post: ")
-            rede_social.publicar_post(nome_usuario, mensagem)
-        elif escolha == '4':
-            nome_usuario = input("Digite o nome do usuário: ")
-            nome_amigo = input("Digite o nome do amigo a ser adicionado: ")
-            usuario = rede_social.buscar_usuario(nome_usuario)
-            amigo = rede_social.buscar_usuario(nome_amigo)
-            if usuario and amigo:
-                usuario.adicionar_amigo(amigo)
-        elif escolha == '5':
-            nome_usuario = input("Digite o nome do usuário que vai comentar: ")
-            usuario = rede_social.buscar_usuario(nome_usuario)
-            if usuario:
-                rede_social.listar_posts()  # Lista todos os posts disponíveis
-                mensagem = input("Digite a mensagem do post que deseja comentar: ")
-                comentario = input("Digite seu comentário: ")
-                post = next((p for p in rede_social.posts if p.mensagem.lower() == mensagem.lower()), None)
-                if post:
-                    post.adicionar_comentario(comentario)
-                    print(f"{nome_usuario} comentou: {comentario}\n")
-                else:
-                    print("Post não encontrado.")
-        elif escolha == '7':
-            print("Saindo da rede social. Até logo!")
-            print("-="*30)
-            break
-        else:
-            print("Opção inválida! Tente novamente.\n")
-
-main()
-'''
-class User:
-    def __init__(self, nome):
-        self.nome = nome
-        self.amigos = []
-
-    def adicionar_amigo(self, amigo):
-        if amigo not in self.amigos:
-            self.amigos.append(amigo)
-            amigo.amigos.append(self)  
-            print(f"{amigo.nome} foi adicionado como amigo de {self.nome}.\n")
-        else:
-            print(f"{amigo.nome} já é amigo de {self.nome}.")
-
-class Post:
-    def __init__(self, usuario, mensagem):
-        self.usuario = usuario
-        self.mensagem = mensagem
-        self.comentarios = []
-
-    def adicionar_comentario(self, comentario):
-        self.comentarios.append(comentario)
-
-    def __str__(self):
-        return f"{self.mensagem} (Publicado por: {self.usuario.nome}, Comentários: {len(self.comentarios)})"
-
-class SocialNetwork:
-    def __init__(self):
-        self.usuarios = []
-        self.posts = []  
-
-    def adicionar_usuario(self, nome):
-        usuario = User(nome)
-        self.usuarios.append(usuario)
-        print(f"Usuário {nome} adicionado à rede social.\n")
-
-    def buscar_usuario(self, nome, escolha=None):
-        for usuario in self.usuarios:
-            if usuario.nome.lower() == nome.lower():
-                if escolha == "2":
-                    print(f"Usuário {nome} encontrado!\n")
-                return usuario
-        print(f"Usuário {nome} não encontrado.\n")
-        return None
-
-    def publicar_post(self, nome_usuario, mensagem):
-        usuario = self.buscar_usuario(nome_usuario)
-        if usuario:
-            post = Post(usuario, mensagem)
-            self.posts.append(post)  
-            print("Post realizado com sucesso!\n")
-
-    def listar_posts(self):
-        if not self.posts:
-            print("Nenhum post disponível.")
-        else:
-            print("Posts disponíveis:")
-            for post in self.posts:
-                print(post)
-
-def main():
-    rede_social = SocialNetwork()
-    print("-="*30)
-    while True:
-        print("Menu:")
-        print("1. Adicionar Usuário")
-        print("2. Buscar Usuário")
-        print("3. Publicar Post")
-        print("4. Adicionar Amigo")
-        print("5. Comentar em Post")
+        print("4. Comentar em Post")
+        print("5. Buscar Usuário")
         print("6. Sair")
-
+        
         escolha = input("\nEscolha uma opção: ")
-        print()
 
         if escolha == '1':
-            nome = input("Digite o nome do usuário: ")
-            rede_social.adicionar_usuario(nome)
+            nome = input("\nNome do usuário: ")
+            rede.adicionar_usuario(nome)
+
         elif escolha == '2':
-            nome = input("Digite o nome do usuário a ser buscado: ")
-            rede_social.buscar_usuario(nome)
+            nome1 = input("\nNome do usuário que vai adicionar um amigo: ")
+            nome2 = input("Nome do amigo a ser adicionado: ")
+            usuario1 = rede.buscar_usuario(nome1)
+            usuario2 = rede.buscar_usuario(nome2)
+            if usuario1 and usuario2:
+                usuario1.adicionar_amigo(usuario2)
+
         elif escolha == '3':
-            nome_usuario = input("Digite o nome do usuário que publicará: ")
-            mensagem = input("Digite a mensagem do post: ")
-            rede_social.publicar_post(nome_usuario, mensagem)
-        elif escolha == '4':
-            nome_usuario = input("Digite o nome do usuário: ")
-            nome_amigo = input("Digite o nome do amigo a ser adicionado: ")
-            usuario = rede_social.buscar_usuario(nome_usuario)
-            amigo = rede_social.buscar_usuario(nome_amigo)
-            if usuario and amigo:
-                usuario.adicionar_amigo(amigo)
-        elif escolha == '5':
-            nome_usuario = input("Digite o nome do usuário que vai comentar: ")
-            usuario = rede_social.buscar_usuario(nome_usuario)
+            nome = input("\nNome do usuário que vai publicar: ")
+            usuario = rede.buscar_usuario(nome)
             if usuario:
-                rede_social.listar_posts()  # Lista todos os posts disponíveis
-                mensagem = input("Digite a mensagem do post que deseja comentar: ")
-                comentario = input("Digite seu comentário: ")
-                post = next((p for p in rede_social.posts if p.mensagem.lower() == mensagem.lower()), None)
-                if post:
-                    post.adicionar_comentario(comentario)
-                    print(f"{nome_usuario} comentou: {comentario}\n")
-                else:
-                    print("Post não encontrado.")
+                conteudo = input("Escreva o conteúdo do post: ")
+                usuario.publicar_post(conteudo)
+
+        elif escolha == '4':
+            nome = input("Nome do usuário que vai comentar: ")
+            usuario = rede.buscar_usuario(nome)
+            if usuario:
+                autor_post = input("Nome do autor do post: ")
+                usuario_autor = rede.buscar_usuario(autor_post)
+                if usuario_autor:
+                    if usuario_autor.posts:
+                        for i, post in enumerate(usuario_autor.posts):
+                            print(f"Post {i+1}: {post.conteudo}")
+                        num_post = int(input("\nNúmero do post para comentar: ")) - 1
+                        if 0 <= num_post < len(usuario_autor.posts):
+                            comentario = input("Escreva seu comentário: ")
+                            usuario.comentar_post(usuario_autor.posts[num_post], comentario)
+                        else:
+                            print("Número de post inválido.")
+                    else:
+                        print(f"{usuario_autor.nome} não tem posts para comentar.\n")
+
+        elif escolha == '5':
+            nome = input("\nNome do usuário para buscar: ")
+            usuario = rede.buscar_usuario(nome)
+            if usuario:
+                print(f"Usuário encontrado: {usuario.nome}\n")
+
         elif escolha == '6':
-            print("Saindo da rede social. Até logo!")
+            print("\nSaindo...")
             print("-="*30)
             break
-        else:
-            print("Opção inválida! Tente novamente.\n")
 
-main()
-'''
+        else:
+            print("Opção inválida, tente novamente.\n")
+
+
+menu()

@@ -16,6 +16,9 @@ classe NoughtsAndCrosses (jogo da velha):
 from enum import Enum
 
 class CellState(Enum):
+    # EMPTY (0): célula vazia.
+    # PLAYER_1 (1): célula ocupada pelo jogador 1.
+    # PLAYER_2 (2): célula ocupada pelo jogador 2.
     EMPTY = 0
     PLAYER_1 = 1
     PLAYER_2 = 2
