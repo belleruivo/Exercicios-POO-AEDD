@@ -1,5 +1,5 @@
-# Crie uma classe Invoice para que uma loja de suprimentos de informática possa
-# utilizá-la para representar a fatura de um item vendido na loja. Uma Invoice deve
+# Crie uma classe Fatura para que uma loja de suprimentos de informática possa
+# utilizá-la para representar a fatura de um item vendido na loja. Uma Fatura deve
 # incluir quatro variáveis de instância: o número da fatura (string), a descrição (string),
 # a quantidade comprada de um item (int) e o preço por item (float). Sua classe deve ter
 # um construtor que inicializa as quatro variáveis de instância.
@@ -9,7 +9,11 @@
 # configurada como 0. Se o preço do item não for positivo, deve ser configurado como
 # 0.0. Teste a classe implementada e seus métodos.
 
-class Invoice:
+print("-" * 42)
+print("    FATURA DA LOJA DE INFORMÁTICA")
+print("-" * 42)
+
+class Fatura:
     def __init__(self, numFatura, descricao, quantidade, precoItem):
         self.numFatura = numFatura
         self.descricao = descricao
@@ -34,10 +38,10 @@ class Invoice:
     def set_quantidade(self, quantidade):
         self.quantidade = quantidade if quantidade > 0 else 0
 
-    def get_precoItem(self):
+    def get_preco_por_item(self):
         return self.precoItem
 
-    def set_precoItem(self, precoItem):
+    def set_preco_por_item(self, precoItem):
         self.precoItem = precoItem if precoItem > 0 else 0.0
 
     def calcular_fatura(self):
@@ -49,20 +53,20 @@ def main():
     quantidade = 5
     precoItem = 50.0
 
-    fatura = Invoice(numFatura, descricao, quantidade, precoItem)
+    fatura = Fatura(numFatura, descricao, quantidade, precoItem)
 
-    print(f"Numero da fatura: {fatura.get_numFatura()}")
-    print(f"Descrição: {fatura.get_descricao()}")
-    print(f"Quantidade: {fatura.get_quantidade()}")
-    print(f"Preço por item: R$ {fatura.get_precoItem():.2f}")
+    print(f"NÚMERO DA FATURA: {fatura.get_numFatura()}")
+    print(f"DESCRIÇÃO: {fatura.get_descricao()}")
+    print(f"QUANTIDADE: {fatura.get_quantidade()}")
+    print(f"PREÇO POR ITEM: R$ {fatura.get_preco_por_item():.2f}")
+    print(f"VALOR DA FATURA: R$ {fatura.calcular_fatura():.2f}")
 
-    print(f"Valor total da fatura: R$ {fatura.calcular_fatura()}".format())
-
+    print()
     fatura.set_quantidade(-10)
-    fatura.set_precoItem(-20.0) 
+    fatura.set_preco_por_item(-20.0)
 
-    print(f"Quantidade ajustada: {fatura.get_quantidade()}")
-    print(f"Preço ajustado: R$ {fatura.get_precoItem():.2f}")
-    print(f"Valor ajustado da fatura: R$ {fatura.calcular_fatura():.2f}")
+    print(f"QUANTIDADE CONFIGURADA: {fatura.get_quantidade()}")
+    print(f"PREÇO CONFIGURADO: R$ {fatura.get_preco_por_item():.2f}")
+    print(f"VALOR AJUSTADO DA FATURA: R$ {fatura.calcular_fatura():.2f}")
 
 main()
