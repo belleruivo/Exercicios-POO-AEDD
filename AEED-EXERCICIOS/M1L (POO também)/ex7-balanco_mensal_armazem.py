@@ -5,10 +5,6 @@ quantidade vendida. A partir desses dados imprima: o número total de mercadoria
 diferentes lidas, o faturamento total e o lucro total do armazém. 
 '''
 
-print("------------------------------------------------------------------------------------------------")
-print("Olá, seja bem-vindo(a)! Seja bem vindo ao programa que calcula o balanço mensal!")
-print("------------------------------------------------------------------------------------------------")
-
 def ler_dados_mercadoria():
     while True:
         try:
@@ -52,7 +48,7 @@ def calcular_faturamento_e_lucro(preco_custo, preco_venda, quantidade_vendida):
     lucro = (preco_venda - preco_custo) * quantidade_vendida
     return faturamento, lucro
 
-def main():
+def coletar_dados():
     total_faturamento = 0
     total_lucro = 0
     numero_mercadorias = 0
@@ -68,6 +64,15 @@ def main():
         total_faturamento += faturamento
         total_lucro += lucro
         numero_mercadorias += 1
+    
+    return total_faturamento, total_lucro, numero_mercadorias
+
+def main():
+    print("------------------------------------------------------------------------------------------------")
+    print("Olá, seja bem-vindo(a)! Seja bem vindo ao programa que calcula o balanço mensal!")
+    print("------------------------------------------------------------------------------------------------")
+
+    total_faturamento, total_lucro, numero_mercadorias = coletar_dados()
     
     print("\nRelatório do Balanço Mensal:")
     print(f"Número total de mercadorias diferentes lidas: {numero_mercadorias}")

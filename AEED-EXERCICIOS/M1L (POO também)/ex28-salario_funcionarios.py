@@ -56,44 +56,9 @@ def ler_dados_funcionarios():
             if any(char.isdigit() for char in nome):
                 raise ValueError("O nome do funcionário não pode conter números.")
             
-            while True:
-                try:
-                    salario_fixo = input("Salário fixo: ").strip()
-                    if not salario_fixo:
-                        raise ValueError("O salário fixo não pode ser vazio.")
-                    if not salario_fixo.replace('.', '', 1).isdigit():
-                        raise ValueError("O salário fixo deve ser um número válido.")
-                    salario_fixo = float(salario_fixo)
-                    if salario_fixo <= 0:
-                        raise ValueError("O salário fixo deve ser um número positivo.")
-                    break
-                except ValueError as e:
-                    print(f"Erro de entrada: {e}")
-            
-            while True:
-                try:
-                    tipo_tv = input("Tipo de TV vendida (8K/4K): ").strip().upper()
-                    if not tipo_tv:
-                        raise ValueError("O tipo de TV não pode ser vazio.")
-                    if tipo_tv not in ['8K', '4K']:
-                        raise ValueError("Tipo de TV inválido. Deve ser '8K' ou '4K'.")
-                    break
-                except ValueError as e:
-                    print(f"Erro de entrada: {e}")
-            
-            while True:
-                try:
-                    quantidade_vendida = input("Quantidade de TVs vendidas: ").strip()
-                    if not quantidade_vendida:
-                        raise ValueError("A quantidade de TVs vendidas não pode ser vazia.")
-                    if not quantidade_vendida.isdigit():
-                        raise ValueError("A quantidade de TVs vendidas deve ser um número inteiro válido.")
-                    quantidade_vendida = int(quantidade_vendida)
-                    if quantidade_vendida <= 0:
-                        raise ValueError("A quantidade de TVs vendidas deve ser um número inteiro positivo.")
-                    break
-                except ValueError as e:
-                    print(f"Erro de entrada: {e}")
+            salario_fixo = ler_salario_fixo()
+            tipo_tv = ler_tipo_tv()
+            quantidade_vendida = ler_quantidade_vendida()
             
             comissao = calcular_comissao(tipo_tv, quantidade_vendida)
             salario_liquido = calcular_salario_liquido(salario_fixo, comissao)
@@ -109,6 +74,48 @@ def ler_dados_funcionarios():
         except ValueError as e:
             print(f"Erro de entrada: {e}")
     return funcionarios
+
+def ler_salario_fixo():
+    while True:
+        try:
+            salario_fixo = input("Salário fixo: ").strip()
+            if not salario_fixo:
+                raise ValueError("O salário fixo não pode ser vazio.")
+            if not salario_fixo.replace('.', '', 1).isdigit():
+                raise ValueError("O salário fixo deve ser um número válido.")
+            salario_fixo = float(salario_fixo)
+            if salario_fixo <= 0:
+                raise ValueError("O salário fixo deve ser um número positivo.")
+            return salario_fixo
+        except ValueError as e:
+            print(f"Erro de entrada: {e}")
+
+def ler_tipo_tv():
+    while True:
+        try:
+            tipo_tv = input("Tipo de TV vendida (8K/4K): ").strip().upper()
+            if not tipo_tv:
+                raise ValueError("O tipo de TV não pode ser vazio.")
+            if tipo_tv not in ['8K', '4K']:
+                raise ValueError("Tipo de TV inválido. Deve ser '8K' ou '4K'.")
+            return tipo_tv
+        except ValueError as e:
+            print(f"Erro de entrada: {e}")
+
+def ler_quantidade_vendida():
+    while True:
+        try:
+            quantidade_vendida = input("Quantidade de TVs vendidas: ").strip()
+            if not quantidade_vendida:
+                raise ValueError("A quantidade de TVs vendidas não pode ser vazia.")
+            if not quantidade_vendida.isdigit():
+                raise ValueError("A quantidade de TVs vendidas deve ser um número inteiro válido.")
+            quantidade_vendida = int(quantidade_vendida)
+            if quantidade_vendida <= 0:
+                raise ValueError("A quantidade de TVs vendidas deve ser um número inteiro positivo.")
+            return quantidade_vendida
+        except ValueError as e:
+            print(f"Erro de entrada: {e}")
 
 def imprimir_relatorio(funcionarios):
     total_funcionarios = len(funcionarios)
