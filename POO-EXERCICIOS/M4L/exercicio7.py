@@ -59,8 +59,8 @@ class Fatura:
 
 def main():
     fatura1 = Fatura("12345", "Mouse sem fio", 2, 50.0)
-    print("Número da fatura: {}".format(fatura1.get_numero()))
-    print("Descrição: {}".format(fatura1.get_descricao()))
+    print(f"Número da fatura: {fatura1.get_numero()}")
+    print(f"Descrição: {fatura1.get_descricao()}")
     print(f"Quantidade: {fatura1.get_quantidade()}")
     print(f"Preço por item: R$ {fatura1.get_preco_por_item():.2f}")
     print(f"Valor total da fatura: R$ {fatura1.calcular_valor_fatura():.2f}")
