@@ -55,7 +55,7 @@ class Schedule:
 
     @staticmethod
     def is_valid_phone(phone_number):
-        return phone_number.isdigit() and (len(phone_number) == 10 or len(phone_number) == 11)
+        return phone_number.isdigit() and (len(phone_number) == 9 or len(phone_number) == 11)
 
 
 def main():
@@ -89,5 +89,4 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-if __name__ == "__main__":
-    main()
+main()

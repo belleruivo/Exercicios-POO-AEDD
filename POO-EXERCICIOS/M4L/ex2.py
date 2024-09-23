@@ -90,14 +90,17 @@ class Bicycle:
 
     # Método para calcular a velocidade relativa entre duas bicicletas
     def relative_speed(self, other_bike):
-        return self.speed_controller.get_speed() - other_bike.speed_controller.get_speed()
+        return abs(self.speed_controller.get_speed() - other_bike.speed_controller.get_speed())
 
 # Testando a classe Bicycle e suas classes relacionadas
 if __name__ == "__main__":
     bike1 = Bicycle(speed=15, cadence=80, gear=5, serial_number=1200)
     bike2 = Bicycle(speed=20, cadence=90, gear=6, serial_number=1500)
 
+    # Imprimindo o status das bicicletas
+    print("Bike 1")
     bike1.print_status()
+    print("Bike 2")
     bike2.print_status()
 
     # Calculando e exibindo a velocidade relativa entre as duas bicicletas

@@ -69,6 +69,12 @@ def calcular_imposto(renda_liquida):
     else:
         return 0.20 * renda_liquida
 
+def processar_contribuinte(cpf, dependentes, renda_mensal):
+    desconto = dependentes * DESCONTO_DEPENDENTE
+    renda_liquida = renda_mensal - desconto
+    imposto = calcular_imposto(renda_liquida)
+    return imposto
+
 def processar_contribuintes():
     contribuintes = []
     total_impostos = 0.0
@@ -83,9 +89,7 @@ def processar_contribuintes():
             break
 
         cpf, dependentes, renda_mensal = dados
-        desconto = dependentes * DESCONTO_DEPENDENTE
-        renda_liquida = renda_mensal - desconto
-        imposto = calcular_imposto(renda_liquida)
+        imposto = processar_contribuinte(cpf, dependentes, renda_mensal)
 
         contribuintes.append((cpf, imposto))
         total_impostos += imposto

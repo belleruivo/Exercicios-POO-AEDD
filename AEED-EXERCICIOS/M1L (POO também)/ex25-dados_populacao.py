@@ -27,23 +27,20 @@ def coletar_dados():
             if idade == 0:
                 break
 
-            while True:
-                sexo = input("Digite o sexo do habitante (M/F): ").strip().upper()
-                if sexo in ['M', 'F']:
-                    break
+            sexo = input("Digite o sexo do habitante (M/F): ").strip().upper()
+            while sexo not in ['M', 'F']:
                 print("Sexo inválido. Digite 'M' para masculino ou 'F' para feminino.")
+                sexo = input("Digite o sexo do habitante (M/F): ").strip().upper()
 
-            while True:
-                cor_olhos = input("Digite a cor dos olhos do habitante (azuis, verdes, castanhos): ").strip().lower()
-                if cor_olhos in ['azuis', 'verdes', 'castanhos']:
-                    break
+            cor_olhos = input("Digite a cor dos olhos do habitante (azuis, verdes, castanhos): ").strip().lower()
+            while cor_olhos not in ['azuis', 'verdes', 'castanhos']:
                 print("Cor dos olhos inválida. Escolha entre 'azuis', 'verdes' ou 'castanhos'.")
+                cor_olhos = input("Digite a cor dos olhos do habitante (azuis, verdes, castanhos): ").strip().lower()
 
-            while True:
-                cor_cabelos = input("Digite a cor dos cabelos do habitante (louros, castanhos, pretos): ").strip().lower()
-                if cor_cabelos in ['louros', 'castanhos', 'pretos']:
-                    break
+            cor_cabelos = input("Digite a cor dos cabelos do habitante (louros, castanhos, pretos): ").strip().lower()
+            while cor_cabelos not in ['louros', 'castanhos', 'pretos']:
                 print("Cor dos cabelos inválida. Escolha entre 'louros', 'castanhos' ou 'pretos'.")
+                cor_cabelos = input("Digite a cor dos cabelos do habitante (louros, castanhos, pretos): ").strip().lower()
 
             habitantes.append({'idade': idade, 'sexo': sexo, 'cor_olhos': cor_olhos, 'cor_cabelos': cor_cabelos})
         except ValueError as e:

@@ -4,9 +4,6 @@ do primeiro ano, do ano de 2023, construir um programa que leia, calcule e mostr
 média aritmética das idades. O programa é encerrado quando for lida uma idade igual
 a zero e deve rejeitar idades negativas, pedindo que o usuário redigite. 
 '''
-print("------------------------------------------------------------------------------------------------")
-print("Olá, seja bem-vindo(a) ao programa que calcula a média aritmética das idades dos alunos de Odonto do ano de 2023!")
-print("------------------------------------------------------------------------------------------------")
 
 def ler_idade():
     while True:
@@ -27,8 +24,7 @@ def calcular_media(total_idades, quantidade_alunos):
     else:
         return 0
 
-def main():
-
+def coletar_idades():
     total_idades = 0
     quantidade_alunos = 0
     idades_digitadas = []
@@ -40,7 +36,15 @@ def main():
         total_idades += idade
         quantidade_alunos += 1
         idades_digitadas.append(idade)
+    
+    return total_idades, quantidade_alunos, idades_digitadas
 
+def main():
+    print("------------------------------------------------------------------------------------------------")
+    print("Olá, seja bem-vindo(a) ao programa que calcula a média aritmética das idades dos alunos de Odonto do ano de 2023!")
+    print("------------------------------------------------------------------------------------------------")
+
+    total_idades, quantidade_alunos, idades_digitadas = coletar_idades()
     media_idade = calcular_media(total_idades, quantidade_alunos)
 
     if quantidade_alunos > 0:
