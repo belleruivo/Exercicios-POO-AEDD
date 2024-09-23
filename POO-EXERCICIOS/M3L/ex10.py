@@ -83,5 +83,4 @@ def main():
     # Embaralhando e ordenando a lista de estudantes
     shuffle_and_sort_students(students)
 
-
 main()
