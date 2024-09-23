@@ -11,69 +11,75 @@ import random
 
 class CardsGame:
     # Atributo de classe que define as cartas do jogo
-    deck = [f'{rank} de {suit}' for suit in ['Copas', 'Paus', 'Ouros', 'Espadas']
-            for rank in ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valete', 'Dama', 'Rei']]
+    baralho = [f'{valor} de {naipe}' for naipe in ['Copas', 'Paus', 'Ouros', 'Espadas']
+               for valor in ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valete', 'Dama', 'Rei']]
+    # 'baralho' é uma lista que contém todas as combinações de valores e naipes de cartas
 
-    def __init__(self, players):
-        self.players = players
-        self.hands = {player: [] for player in players}
-        self.current_card = None
+    def __init__(self, jogadores):
+        self.jogadores = jogadores  # Lista de jogadores
+        self.maos = {jogador: [] for jogador in jogadores}  # Dicionário que mapeia cada jogador para suas cartas
+        self.carta_atual = None  
 
     @classmethod
-    def shuffle_deck(cls):
+    def embaralhar_baralho(cls):
         """Método de classe para embaralhar o baralho."""
-        random.shuffle(cls.deck)
+        random.shuffle(cls.baralho)  # embaralha a lista 'baralho' da classe
+        # Usamos @classmethod para acessar e modificar o atributo de classe 'baralho'
 
-    def deal_cards(self, num_cards=5):
+    def distribuir_cartas(self, num_cartas=5):
         """Distribui cartas para os jogadores."""
-        self.shuffle_deck()
-        for player in self.players:
-            self.hands[player] = [self.deck.pop() for _ in range(num_cards)]
+        self.embaralhar_baralho()  # embaralha antes de distribuir
+        for jogador in self.jogadores:
+            self.maos[jogador] = [self.baralho.pop() for _ in range(num_cartas)]
+            # pra cada jogador, distribui 'num_cartas' cartas removidas do baralho
 
     @staticmethod
-    def card_value(card):
-        """Método estático que retorna o valor de uma carta."""
-        rank_order = {'As': 14, 'Rei': 13, 'Dama': 12, 'Valete': 11, 
-                      '10': 10, '9': 9, '8': 8, '7': 7, '6': 6, 
-                      '5': 5, '4': 4, '3': 3, '2': 2}
-        rank = card.split(' de ')[0].capitalize()
-        return rank_order[rank]
+    def valor_carta(carta):
+        # retorna o valor de uma carta.
+        ordem_valores = {'As': 14, 'Rei': 13, 'Dama': 12, 'Valete': 11, 
+                         '10': 10, '9': 9, '8': 8, '7': 7, '6': 6, 
+                         '5': 5, '4': 4, '3': 3, '2': 2}
+        valor = carta.split(' de ')[0].capitalize()  # pega o valor da carta e capitaliza
+        return ordem_valores[valor]  # valor numérico da carta
+        # esse método não depende de nenhum atributo da instância ou da classe
 
-    def play_round(self):
-        """Joga uma rodada e determina o vencedor."""
-        played_cards = {}
-        for player in self.players:
-            print(f"\n{player}, suas cartas: {self.hands[player]}")
-            card = input(f"Escolha uma carta para jogar: ").lower()
-            while card not in [c.lower() for c in self.hands[player]]:
+    def jogar_rodada(self):
+        # joga uma rodada e determina o vencedor.
+        cartas_jogadas = {}
+        for jogador in self.jogadores:
+            print(f"\n{jogador}, suas cartas: {self.maos[jogador]}")
+            carta = input(f"Escolha uma carta para jogar: ").lower()
+            while carta not in [c.lower() for c in self.maos[jogador]]:
                 print("Você não tem essa carta. Escolha uma carta válida.\n")
-                card = input(f"Escolha uma carta para jogar: ").lower()
-            self.hands[player] = [c for c in self.hands[player] if c.lower() != card]
-            played_cards[player] = card
-            print(f"{player} jogou {card}.")
+                carta = input(f"Escolha uma carta para jogar: ").lower()
+            self.maos[jogador] = [c for c in self.maos[jogador] if c.lower() != carta]
+            # remove a carta jogada da mão do jogador
+            cartas_jogadas[jogador] = carta
+            print(f"{jogador} jogou {carta}.")
 
-        # Determinar o vencedor
-        winner = max(played_cards, key=lambda player: self.card_value(played_cards[player]))
-        print(f"\nO vencedor da rodada é {winner} com {played_cards[winner]}!")
+        vencedor = max(cartas_jogadas, key=lambda jogador: self.valor_carta(cartas_jogadas[jogador]))
+        # acha jogador com a carta de maior valor
+        print(f"\nO vencedor da rodada é {vencedor} com {cartas_jogadas[vencedor]}!")
 
 def main():
-    players = []
+    jogadores = []
     for i in range(2):
         while True:
-            player_name = input(f"Nome do jogador {i + 1}: ").strip()
-            if player_name:
-                players.append(player_name)
+            nome_jogador = input(f"Nome do jogador {i + 1}: ").strip()
+            # 'i + 1' é usado para exibir o número do jogador começando de 1
+            if nome_jogador:
+                jogadores.append(nome_jogador)  # adc o nome do jogador à lista 'jogadores'
                 break
             else:
                 print("O nome do jogador não pode estar em branco. Por favor, insira um nome válido.")
     
-    jogo = CardsGame(players)
-    jogo.deal_cards()
+    jogo = CardsGame(jogadores)  # instância de CardsGame com os jogadores
+    jogo.distribuir_cartas()  
     
     while True:
-        jogo.play_round()
+        jogo.jogar_rodada()  
         if input("Deseja jogar outra rodada? (s/n) ").lower() != 's':
-            break
+            break 
 
 if __name__ == "__main__":
-    main()
+    main()  
