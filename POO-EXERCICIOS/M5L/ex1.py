@@ -16,10 +16,14 @@ class VirtualStore:
         self.produtos = []
         self.carrinho = []
 
+    @classmethod
+    def criar_produto(cls, nome, preco):
+        return Product(nome, preco)
+
     def adicionar_produto(self):
         nome = input("Digite o nome do produto: ")
         preco = self.obter_entrada("Digite o preço do produto: R$ ", tipo=float, positivo=True)
-        produto = Product(nome, preco)
+        produto = self.criar_produto(nome, preco)
         self.produtos.append(produto)
         print(f"Produto '{produto.nome}' cadastrado com sucesso!\n")
 
@@ -42,11 +46,19 @@ class VirtualStore:
         print(f"Produto '{nome_produto}' não encontrado.\n")
 
     def aplicar_desconto(self):
-        porcentagem_desconto = self.obter_entrada("Digite a porcentagem de desconto (Sem %): ", tipo=float, positivo=True)
+        while True:
+            porcentagem_desconto = input("Digite a porcentagem de desconto (Sem %): ")
+            if porcentagem_desconto.isdigit():
+                porcentagem_desconto = int(porcentagem_desconto)  
+                break  
+            else:
+                print("Entrada inválida! Digite apenas números inteiros.\n")
+    
         for produto in self.carrinho:
             produto.preco -= produto.preco * (porcentagem_desconto / 100)
+    
         print(f"Desconto de {porcentagem_desconto}% aplicado a todos os produtos no carrinho.\n")
-
+    
     def calcular_total(self):
         total = sum(produto.preco for produto in self.carrinho)
         return total
