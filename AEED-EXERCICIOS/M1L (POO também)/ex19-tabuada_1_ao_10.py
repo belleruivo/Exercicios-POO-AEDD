@@ -48,7 +48,7 @@ def imprimir_resultados(perguntas, acertos, erros):
     print(f"Acertos: {acertos}")
     print(f"Erros: {erros}")
 
-def main():
+def executar_tabuada():
     perguntas = 0
     acertos = 0
     erros = 0
@@ -69,6 +69,12 @@ def main():
             print("Errado! Tente novamente.")
 
     imprimir_resultados(perguntas, acertos, erros)
+
+def main():
+    print("------------------------------------------------------------------------------------------------")
+    print("Olá, seja bem-vindo(a) ao programa de estudo de tabuadas!")
+    print("------------------------------------------------------------------------------------------------")
+    executar_tabuada()
 
 if __name__ == "__main__":
     main()

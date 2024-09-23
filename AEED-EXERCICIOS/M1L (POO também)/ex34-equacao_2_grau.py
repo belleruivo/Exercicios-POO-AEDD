@@ -27,38 +27,39 @@ def resolve_equacao_segundo_grau(a, b, c):
         raiz2 = (-b - math.sqrt(delta)) / (2*a)
         return 2, raiz1, raiz2
 
+def ler_coeficiente(mensagem):
+    while True:
+        try:
+            coeficiente = float(input(mensagem))
+            return coeficiente
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um número válido.")
+
+def ler_coeficientes():
+    while True:
+        a = ler_coeficiente("Digite o coeficiente a (diferente de zero): ")
+        if a != 0:
+            break
+        print("O coeficiente 'a' não pode ser zero.")
+    
+    b = ler_coeficiente("Digite o coeficiente b: ")
+    c = ler_coeficiente("Digite o coeficiente c: ")
+    return a, b, c
+
+def imprimir_resultado(num_raizes, raiz1, raiz2):
+    if num_raizes == 0:
+        print("A equação não possui raízes reais.")
+    elif num_raizes == 1:
+        print(f"A equação possui uma raiz real: {raiz1}")
+    else:
+        print(f"A equação possui duas raízes reais: {raiz1} e {raiz2}")
+
 def main():
-    while True:
-        try:
-            a = float(input("Digite o coeficiente a (diferente de zero): "))
-            if a == 0:
-                raise ValueError("O coeficiente 'a' não pode ser zero.")
-            break
-        except ValueError:
-            print("Entrada inválida. Por favor, digite um número válido para 'a'.")
-
-    while True:
-        try:
-            b = float(input("Digite o coeficiente b: "))
-            break
-        except ValueError:
-            print("Entrada inválida. Por favor, digite um número válido para 'b'.")
-
-    while True:
-        try:
-            c = float(input("Digite o coeficiente c: "))
-            break
-        except ValueError:
-            print("Entrada inválida. Por favor, digite um número válido para 'c'.")
+    a, b, c = ler_coeficientes()
     
     try:
         num_raizes, raiz1, raiz2 = resolve_equacao_segundo_grau(a, b, c)
-        if num_raizes == 0:
-            print("A equação não possui raízes reais.")
-        elif num_raizes == 1:
-            print(f"A equação possui uma raiz real: {raiz1}")
-        else:
-            print(f"A equação possui duas raízes reais: {raiz1} e {raiz2}")
+        imprimir_resultado(num_raizes, raiz1, raiz2)
     except ValueError as e:
         print(e)
 

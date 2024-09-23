@@ -24,6 +24,14 @@ def ler_valor_N():
         except ValueError:
             print("Entrada inválida. Por favor, insira um número inteiro válido.")
 
-N = ler_valor_N()
-valor_serie = calcular_serie(N)
-print(f"O valor da série S é: {valor_serie}")
+def main():
+    print("------------------------------------------------------------------------------------------------")
+    print("Olá, seja bem-vindo(a) ao programa que calcula o valor da série S!")
+    print("------------------------------------------------------------------------------------------------")
+
+    N = ler_valor_N()
+    valor_serie = calcular_serie(N)
+    print(f"O valor da série S é: {valor_serie}")
+
+if __name__ == "__main__":
+    main()

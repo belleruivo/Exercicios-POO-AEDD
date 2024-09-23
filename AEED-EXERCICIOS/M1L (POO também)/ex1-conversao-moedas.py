@@ -14,15 +14,12 @@ Libra esterlina     4,529
 Yuan                0,515
 '''
 
-print("-"*65)
-print("Olá, seja bem-vindo(a) ao programa que converte moedas para real!\nPara começar, digite o número equivalente à moeda que deseja converter:")
-print("-"*65)
-
-taxas = { #dicionário global com as taxas
-    1: 3.258,  
-    2: 4.095,  
-    3: 4.529,  
-    4: 0.515   
+# Constantes para as taxas de conversão
+TAXAS = {
+    1: 3.258,  # Dólar Americano
+    2: 4.095,  # Euro
+    3: 4.529,  # Libra Esterlina
+    4: 0.515   # Yuan
 }
 
 def menu():
@@ -46,34 +43,47 @@ def process_input(input_str):
     except ValueError:
         return None
 
+def get_opcao():
+    while True:
+        try:
+            opcao = int(input("\nDigite a opção desejada: "))
+            return opcao
+        except ValueError:
+            print("\nOpção inválida. Por favor, digite um número presente no menu!")
+
+def get_valor():
+    while True:
+        print("\nPor favor, insira o valor no formato '5000' ou '5000.00' para centavos.")
+        print("Não use separadores de milhar como '1.000' ou '1.000,00'.")
+        custo = input("Digite o valor na moeda selecionada: ")
+        custo = process_input(custo)
+        if custo is not None:
+            return custo
+        else:
+            print("\nValor inválido. Por favor, digite um número válido.")
+
 def main():
+    print("-"*65)
+    print("Olá, seja bem-vindo(a) ao programa que converte moedas para real!\nPara começar, digite o número equivalente à moeda que deseja converter:")
+    print("-"*65)
+
     while True: # laço de repetição para o menu
         menu()
 
-        try:
-            opcao = int(input("\nDigite a opção desejada: "))
-        except ValueError:
-            print("\nOpção inválida. Por favor, digite um número presente no menu! ")
-            continue # loop começa de novo, pedindo pro usuário inserir a opção desejada
+        opcao = get_opcao()
 
         if opcao == 5:
             print("\nPrograma encerrado.")
             break  # fecha o loop e termina o programa
         
-        taxa = taxas.get(opcao)
+        taxa = TAXAS.get(opcao)
         if taxa is None:
             print("Opção inválida. Tente novamente.")
             continue # loop começa de novo, pedindo pro usuário inserir a opção desejada
          
-        while True:
-            print("\nPor favor, insira o valor no formato '5000' ou '5000.00' para centavos.")
-            print("Não use separadores de milhar como '1.000' ou '1.000,00'.")
-            custo = input("Digite o valor na moeda selecionada: ")
-            custo = process_input(custo)
-            if custo is not None:
-                valor_em_reais = custo * taxa
-                print(f"\nO valor da transação é: R$ {valor_em_reais:.2f} Reais")
-                break  # sai do loop após a conversão bem-sucedida
-            else:
-                print("\nValor inválido. Por favor, digite um número válido.")
-main()
+        custo = get_valor()
+        valor_em_reais = custo * taxa
+        print(f"\nO valor da transação é: R$ {valor_em_reais:.2f} Reais")
+
+if __name__ == "__main__":
+    main()

@@ -9,10 +9,6 @@ import sys
 # limite de dígitos permitidos para conversão de string
 sys.set_int_max_str_digits(10000)
 
-print("-"*65)
-print("Olá, seja bem-vindo(a) ao programa que imprime os termos da série de Fibonacci!\nPara começar, digite o número de termos que deseja imprimir:")
-print("-"*65)
-
 MAX_TERMOS = 100
 
 def ler_numero_termos():
@@ -36,7 +32,15 @@ def fibonacci(n):
         a, b = b, a + b # atualizando os valores de a e b, indo pro looping até acabar
     return termos
 
-num_termos = ler_numero_termos()
-termos = fibonacci(num_termos)
-print("Os primeiros", num_termos, "termos da série de Fibonacci são:")
-print(termos)
+def main():
+    print("-"*65)
+    print("Olá, seja bem-vindo(a) ao programa que imprime os termos da série de Fibonacci!\nPara começar, digite o número de termos que deseja imprimir:")
+    print("-"*65)
+
+    num_termos = ler_numero_termos()
+    termos = fibonacci(num_termos)
+    print("Os primeiros", num_termos, "termos da série de Fibonacci são:")
+    print(termos)
+
+if __name__ == "__main__":
+    main()

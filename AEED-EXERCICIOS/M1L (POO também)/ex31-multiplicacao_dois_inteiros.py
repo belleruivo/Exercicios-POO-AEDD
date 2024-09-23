@@ -24,17 +24,19 @@ def imprime_tabuada(n):
     for i in range(1, 11):
         print(f"{n} x {i} = {multiplica(n, i)}")
 
-def main():
+def ler_numero():
     while True:
         try:
             numero = int(input("Digite um número inteiro entre 1 e 10: "))
-            if numero < 1 or numero > 10:
+            if 1 <= numero <= 10:
+                return numero
+            else:
                 print("Número inválido. Por favor, digite um número inteiro entre 1 e 10.")
-                continue
-            break
         except ValueError:
             print("Entrada inválida. Por favor, digite um número inteiro.")
-    
+
+def main():
+    numero = ler_numero()
     imprime_tabuada(numero)
 
 if __name__ == "__main__":
