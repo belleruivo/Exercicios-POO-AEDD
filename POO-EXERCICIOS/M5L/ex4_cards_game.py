@@ -56,7 +56,7 @@ class CardsGame:
                 carta[0] == 'Curinga')        # verifica se a carta é um curinga
 
     def proximo_turno(self):  # aqui passamos a vez para o próximo jogador
-        lista_de_jogadores = list(self.jogadores.keys())
+        lista_de_jogadores = list(self.jogadores.keys()) 
         indice_atual = lista_de_jogadores.index(self.jogador_atual)
         self.jogador_atual = lista_de_jogadores[(indice_atual + 1) % len(lista_de_jogadores)]  # calcula o próximo jogador
 
