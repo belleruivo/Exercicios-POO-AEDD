@@ -11,7 +11,8 @@ def busca_sequencial(valor, lista):
     return -1
 
 def busca_binaria(valor, lista):
-    esquerda, direita = 0, len(lista) - 1
+    esquerda = 0
+    direita = len(lista) - 1
     while esquerda <= direita:
         meio = (esquerda + direita) // 2
         if lista[meio] == valor:
