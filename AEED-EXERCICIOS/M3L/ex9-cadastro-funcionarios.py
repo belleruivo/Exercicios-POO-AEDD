@@ -11,7 +11,6 @@ def swap(list, i, j):
     list[j] = temp
 
 def selectionSort(list):
-    i = 0
     for i in range(len(list)):
         maxIndex = i
         for j in range(i+1, len(list)):
@@ -49,14 +48,13 @@ def cadastrar_funcionarios():
     for i in range(n):
         nome = input(f"\nDigite o nome do funcionário {i + 1}: ")
         salario = float(input(f"Digite o salário do funcionário {i + 1}: "))
-        funcionarios.append((nome, salario))
+        funcionarios.append([nome, salario])
     return funcionarios
 
-def exibir_funcionarios(titulo, funcionarios):
+def exibir_funcionarios(funcionarios, titulo):
     print(f"\n{titulo}:")
-    for func in funcionarios:
-        print(f"Nome: {func['nome']}, Salário: {func['salario']}")
-
+    for nome, salario in funcionarios:
+        print(f"Nome: {nome}, Salário: R${salario:.2f}")
 
 def main():
     funcionarios = cadastrar_funcionarios()

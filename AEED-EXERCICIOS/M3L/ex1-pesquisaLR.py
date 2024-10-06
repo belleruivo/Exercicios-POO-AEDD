@@ -3,11 +3,20 @@ função de busca chamada pesquisaLR que receba como parâmetro o valor a ser
 encontrado e a referência do vetor onde a busca será efetuada. A função retornará -1,
 caso não encontre o item, ou retornará o índice, caso o encontre.'''
 
+import random 
+
 def pesquisaLR(valor, lista):
     for i in range(len(lista)):
         if valor == lista[i]:
             return i
     return -1
+
+def gerarLista():
+    lista_n = []
+    for c in range(10):
+        n = random.randint(0, 30)
+        lista_n.append(n)
+    return lista_n
 
 def main():
     while True:
@@ -15,15 +24,18 @@ def main():
             valor = int(input("Insira o valor a ser procurado: "))
             break
         except ValueError:
-            print("Por favor, insira um número inteiro válido.")
+            print("\nPor favor, insira um número inteiro válido.")
 
-    lista = [1, 5, 2, 8, 7, 9, 10]
+    lista = gerarLista()
+
+    print(f"\nA lista é: {lista}")
 
     resultado = pesquisaLR(valor, lista)
+
     if resultado != -1:
-        print(f"O valor {valor} foi encontrado no índice: {resultado}")
+        print(f"\nO valor {valor} foi encontrado no índice: {resultado}")
     else:
-        print("Valor não encontrado.")
+        print("\nValor não encontrado.")
 
 
 main()

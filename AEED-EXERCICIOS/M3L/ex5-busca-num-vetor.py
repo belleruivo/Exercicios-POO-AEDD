@@ -44,29 +44,29 @@ def main():
                 print("Por favor, insira um número inteiro válido\n")
 
     numeros_ordenados = sorted(numeros)
-    print(f"Números cadastrados e ordenados: {numeros_ordenados}\n")
+    print(f"\nNúmeros cadastrados e ordenados: {numeros_ordenados}\n")
 
     valor = int(input("Insira um número para verificar: "))
     
     pos_sequencial = busca_sequencial(valor, numeros_ordenados)
     if pos_sequencial != -1:
-        print(f"Busca Sequencial: O número {valor} foi encontrado na posição {pos_sequencial}.")
+        print(f"\nBusca Sequencial: O número {valor} foi encontrado na posição {pos_sequencial}.")
         if pos_sequencial % 2 == 0:
-            print("A posição é par.\n")
+            print("A posição é par.")
         else:
-            print("A posição é ímpar.\n")
+            print("A posição é ímpar.")
     else:
-        print("Busca Sequencial: Número não encontrado.")
+        print("\nBusca Sequencial: Número não encontrado.")
 
     pos_binaria = busca_binaria(valor, numeros_ordenados)
     if pos_binaria != -1:
-        print(f"Busca Binária: O número {valor} foi encontrado na posição {pos_binaria}.")
+        print(f"\nBusca Binária: O número {valor} foi encontrado na posição {pos_binaria}.")
         if pos_binaria % 2 == 0:
             print("A posição é par.\n")
         else:
             print("A posição é ímpar.\n")
     else:
-        print("Busca Binária: Número não encontrado.")
+        print("Busca Binária: Número não encontrado.\n")
 
 main()
 
