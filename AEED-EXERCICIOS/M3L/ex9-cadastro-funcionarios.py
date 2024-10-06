@@ -43,12 +43,37 @@ def bubbleSort(list):
 
 def cadastrar_funcionarios():
     funcionarios = []
-    n = int(input("Quantos funcionários deseja cadastrar? "))
+    
+    while True:
+        try:
+            n = int(input("Quantos funcionários deseja cadastrar? "))
+            if n <= 0:
+                print("O número de funcionários deve ser maior que zero.\n")
+                continue
+            break
+        except ValueError:
+            print("Por favor, insira um número válido.\n")
 
     for i in range(n):
-        nome = input(f"\nDigite o nome do funcionário {i + 1}: ")
-        salario = float(input(f"Digite o salário do funcionário {i + 1}: "))
+        while True:
+            nome = input(f"\nDigite o nome do funcionário {i + 1}: ")
+            if not nome:
+                print("O nome não pode estar vazio.")
+            else:
+                break 
+        
+        while True:
+            try:
+                salario = float(input(f"Digite o salário do funcionário {i + 1}: "))
+                if salario < 0:
+                    print("O salário não pode ser negativo.")
+                    continue
+                break 
+            except ValueError:
+                print("Por favor, insira um valor de salário válido.\n")
+    
         funcionarios.append([nome, salario])
+
     return funcionarios
 
 def exibir_funcionarios(funcionarios, titulo):
