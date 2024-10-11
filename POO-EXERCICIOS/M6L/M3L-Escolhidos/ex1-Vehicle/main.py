@@ -1,5 +1,6 @@
 from vehicle import Vehicle
 from gps import GPS
+from consumo import Consumo
 
 def main():
     print("-="*40)
@@ -41,10 +42,35 @@ def main():
         if destino.replace(" ", "").isalpha():
             break
         print("Destino inválido. Certifique-se de inserir somente letras.\n")
-    
-    gps = GPS(localizacao, destino)
-    veiculo = Vehicle(velocidade, direção, nome, gps)
 
-    veiculo.imprimir()    
+    
+    while True:
+        try:
+            distancia = float(input("Qual a distância entre as duas cidades?(Km): ").replace(",", "."))
+            break
+        except:
+            print("Distância inválida. Certifique-se de inserir somente números\n")
+
+    while True:
+        try:
+            consumo_km = float(input("Quantos km seu carro faz por litro: ").replace(",", "."))
+            break
+        except:
+            print("Distância inválida. Certifique-se de inserir somente números\n")
+
+    while True:
+        try:
+            combustivel = float(input("Qual o valor do combustível: ").replace(",", "."))
+            break
+        except:
+            print("Distância inválida. Certifique-se de inserir somente números\n")
+
+    
+    gps = GPS(localizacao, destino, distancia)
+    consumo = Consumo(combustivel, consumo_km, gps)
+    carro = Vehicle(velocidade, direção, nome, gps, consumo)    
+    carro.imprimir()
+   
+        
         
 main()
