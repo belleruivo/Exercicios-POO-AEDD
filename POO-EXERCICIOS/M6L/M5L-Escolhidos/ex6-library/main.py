@@ -17,9 +17,8 @@ def cadastrar_livro(biblioteca):
         isbn = solicitar_input("Digite o ISBN do livro: ", validar_isbn=True)
         categoria = solicitar_input("Digite a categoria do livro: ")
 
-        # Chamada do método para cadastrar livro
-        biblioteca.cadastrar_livro(titulo, autor, isbn, categoria)
-        print(f"Livro '{titulo}' cadastrado com sucesso.")
+        mensagem = biblioteca.cadastrar_livro(titulo, autor, isbn, categoria)
+        print(mensagem)
         
     except ValueError as e:
         print(f"Erro ao cadastrar livro: {e}")
@@ -32,8 +31,8 @@ def cadastrar_usuario(biblioteca):
         if not user_id.isdigit():
             raise ValueError("O ID do usuário deve ser numérico.")
         
-        biblioteca.cadastrar_usuario(nome, int(user_id))
-        print(f"Usuário '{nome}' cadastrado com sucesso.")
+        mensagem = biblioteca.cadastrar_usuario(nome, int(user_id))
+        print(mensagem)
         
     except ValueError as e:
         print(f"Erro ao cadastrar usuário: {e}")
@@ -46,8 +45,8 @@ def fazer_emprestimo(biblioteca):
         if not user_id.isdigit():
             raise ValueError("O ID do usuário deve ser numérico.")
 
-        biblioteca.emprestar_livro(isbn, int(user_id))
-        print("Empréstimo realizado com sucesso.")
+        mensagem = biblioteca.emprestar_livro(isbn, int(user_id))
+        print(mensagem)
         
     except ValueError as e:
         print(f"Erro ao fazer empréstimo: {e}")
@@ -60,8 +59,8 @@ def devolver_livro(biblioteca):
         if not user_id.isdigit():
             raise ValueError("O ID do usuário deve ser numérico.")
 
-        biblioteca.devolver_livro(isbn, int(user_id))
-        print("Devolução realizada com sucesso.")
+        mensagem = biblioteca.devolver_livro(isbn, int(user_id))
+        print(mensagem)
         
     except ValueError as e:
         print(f"Erro ao devolver livro: {e}")
