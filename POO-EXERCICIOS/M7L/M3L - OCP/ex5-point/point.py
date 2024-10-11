@@ -12,33 +12,38 @@ dAB² = (xB - xA)² + (yB - yA)².
 import math
 
 class Point:
-    def __init__(self, x=0, y=0):
+    def __init__(self, x=1, y=1):
         self.x = x
         self.y = y
-    
-    def getX(self):
+
+    def get_x(self):
         return self.x
-    
-    def getY(self):
+
+    def get_y(self):
         return self.y
 
-    def setX(self, x):
+    def set_x(self, x):
         self.x = x
-    
-    def setY(self, y):
+
+    def set_y(self, y):
         self.y = y
-    
-    def mover(self, dx, dy):
-        self.x += dx
-        self.y += dy
-    
-    def distancia(self, outro_ponto):
-        dx = outro_ponto.getX() - self.x
-        dy = outro_ponto.getY() - self.y
+
+    def exibir(self):
+        print(f"Ponto(x: {self.x}, y: {self.y})")
+
+class ManipuladorDePonto:
+    @staticmethod
+    def mover(ponto, dx, dy):
+        ponto.set_x(ponto.get_x() + dx)
+        ponto.set_y(ponto.get_y() + dy)
+
+    @staticmethod
+    def calcular_distancia(ponto1, ponto2):
+        dx = ponto2.get_x() - ponto1.get_x()
+        dy = ponto2.get_y() - ponto1.get_y()
         return math.sqrt(dx**2 + dy**2)
     
-    def exibir(self):
-        print(f"Point(x: {self.x}, y: {self.y})")
+    #exemplo: poderia adicionar um metodo rotacionar sem alterar a classe Point
 
 def obter_coordenada(mensagem):
     while True:
@@ -49,7 +54,7 @@ def obter_coordenada(mensagem):
             print("Entrada inválida. Por favor, insira um caractere numérico.\n")
 
 def main():
-    print("-="*30)
+    print("-=" * 30)
     print("Insira as coordenadas do primeiro ponto:")
     x1 = obter_coordenada("Digite o valor de x1: ")
     y1 = obter_coordenada("Digite o valor de y1: ")
@@ -60,24 +65,22 @@ def main():
     y2 = obter_coordenada("Digite o valor de y2: ")
     ponto2 = Point(x2, y2)
 
-   
     print("\nPonto 1:")
     ponto1.exibir()
-    
+
     print("\nPonto 2:")
     ponto2.exibir()
-
 
     print("\nAgora, vamos mover o primeiro ponto.")
     dx = obter_coordenada("Digite o deslocamento em x (dx): ")
     dy = obter_coordenada("Digite o deslocamento em y (dy): ")
-    ponto1.mover(dx, dy)
+    ManipuladorDePonto.mover(ponto1, dx, dy)
 
     print("\nPonto 1 após o movimento:")
     ponto1.exibir()
 
-    distancia = ponto1.distancia(ponto2)
+    distancia = ManipuladorDePonto.calcular_distancia(ponto1, ponto2)
     print(f"\nA distância entre o ponto 1 e o ponto 2 é: {distancia:.2f}")
-    print("-="*30)
+    print("-=" * 30)
 
 main()
