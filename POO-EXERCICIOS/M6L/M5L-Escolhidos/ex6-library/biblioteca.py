@@ -21,38 +21,32 @@ class Biblioteca:
             self.catalogo.adicionar_livro(livro)
             autor.adicionar_livro(livro)
             categoria.adicionar_livro(livro)
-            # A mensagem de sucesso só será exibida aqui
-            return f"Livro '{titulo}' cadastrado com sucesso."  # Mudei para retornar a mensagem
-
+            return f"Livro '{titulo}' cadastrado com sucesso."
         except ValueError as e:
-            return f"Erro ao cadastrar livro: {e}"  # Retorna mensagem de erro
-
+            return f"Erro ao cadastrar livro: {e}"
 
     def cadastrar_usuario(self, nome, user_id):
         try:
             usuario = Usuario(nome, user_id)
             self.usuarios.append(usuario)
-            print(f"Usuário '{nome}' cadastrado com sucesso.")
+            return f"Usuário '{nome}' cadastrado com sucesso."
         except ValueError as e:
-            print(f"Erro ao cadastrar usuário: {e}")
+            return f"Erro ao cadastrar usuário: {e}"
 
     def emprestar_livro(self, isbn, user_id):
-        try:
-            livro = self.catalogo.buscar_livro(isbn)
-            if livro and livro.disponivel:
-                usuario = next((u for u in self.usuarios if u.user_id == user_id), None)
-                if usuario:
-                    emprestimo = Emprestimo(livro, usuario)
-                    self.emprestimos.append(emprestimo)
-                    usuario.adicionar_emprestimo(emprestimo)
-                    livro.alterar_disponibilidade(False)
-                    print(f"Livro '{livro.titulo}' emprestado para '{usuario.nome}'.")
-                else:
-                    raise ValueError("Usuário não encontrado.")
+        livro = self.catalogo.buscar_livro(isbn)
+        if livro and livro.disponivel:
+            usuario = next((u for u in self.usuarios if u.user_id == user_id), None)
+            if usuario:
+                emprestimo = Emprestimo(livro, usuario)
+                self.emprestimos.append(emprestimo)
+                usuario.adicionar_emprestimo(emprestimo)
+                livro.alterar_disponibilidade(False)
+                return f"Livro '{livro.titulo}' emprestado para '{usuario.nome}'."
             else:
-                raise ValueError("Livro não disponível ou não encontrado.")
-        except ValueError as e:
-            print(f"Erro ao fazer empréstimo: {e}")
+                return "Erro ao fazer empréstimo: Usuário não encontrado."
+        else:
+            return "Erro ao fazer empréstimo: Livro não disponível ou não encontrado."
 
     def devolver_livro(self, isbn, user_id):
         try:
@@ -65,15 +59,15 @@ class Biblioteca:
                         emprestimo.registrar_devolucao()
                         usuario.remover_emprestimo(emprestimo)
                         livro.alterar_disponibilidade(True)
-                        print(f"Livro '{livro.titulo}' devolvido por '{usuario.nome}'.")
+                        return f"Livro '{livro.titulo}' devolvido com sucesso."
                     else:
-                        raise ValueError("Empréstimo não encontrado.")
+                        return "Erro ao devolver livro: Empréstimo não encontrado."
                 else:
-                    raise ValueError("Usuário não encontrado.")
+                    return "Erro ao devolver livro: Usuário não encontrado."
             else:
-                raise ValueError("Livro não encontrado.")
+                return "Erro ao devolver livro: Livro não encontrado."
         except ValueError as e:
-            print(f"Erro ao devolver livro: {e}")
+            return f"Erro ao devolver livro: {e}"
 
     def verificar_disponibilidade(self, isbn):
         try:
@@ -81,10 +75,9 @@ class Biblioteca:
             if livro:
                 return livro.disponivel
             else:
-                raise ValueError("Livro não encontrado.")
+                return "Erro ao verificar disponibilidade: Livro não encontrado."
         except ValueError as e:
-            print(f"Erro ao verificar disponibilidade: {e}")
-            return False
+            return f"Erro ao verificar disponibilidade: {e}"
 
     def buscar_ou_criar_autor(self, nome):
         try:
@@ -94,7 +87,7 @@ class Biblioteca:
                 self.autores.append(autor)
             return autor
         except ValueError as e:
-            print(f"Erro ao buscar ou criar autor: {e}")
+            return f"Erro ao buscar ou criar autor: {e}"
 
     def buscar_ou_criar_categoria(self, nome):
         try:
@@ -104,8 +97,7 @@ class Biblioteca:
                 self.categorias.append(categoria)
             return categoria
         except ValueError as e:
-            print(f"Erro ao buscar ou criar categoria: {e}")
+            return f"Erro ao buscar ou criar categoria: {e}"
 
     def __repr__(self):
         return f"Biblioteca(catalogo={self.catalogo}, usuarios={self.usuarios}, emprestimos={self.emprestimos}, autores={self.autores}, categorias={self.categorias})"
-1
