@@ -4,6 +4,22 @@ Essa classe deve permitir adicionar, editar e remover contatos, além de buscar 
 contatos a partir de um nome ou número de telefone.
 '''
 
+class SearchStrategy:
+    def search(self, contacts, query):
+        raise NotImplementedError("Subclasses devem implementar o método de busca.")
+
+class SearchByName(SearchStrategy):
+    def search(self, contacts, query):
+        return contacts.get(query, "Contato não encontrado.")
+
+class SearchByPhone(SearchStrategy):
+    def search(self, contacts, query):
+        for name, number in contacts.items():
+            if number == query:
+                return f"Contato encontrado: {name}"
+        return "Número não encontrado."
+
+
 class Schedule:
     def __init__(self):
         self.contacts = {}
@@ -12,7 +28,7 @@ class Schedule:
         name = input("Digite o nome do contato: ")
         phone_number = input("Digite o número de telefone: ")
 
-        if not self.is_valid_phone(phone_number):
+        if not ContactValidator.is_valid_phone(phone_number):
             print("Número de telefone inválido. Tente novamente.")
             return
 
@@ -24,7 +40,7 @@ class Schedule:
         name = input("Digite o nome do contato que deseja editar: ")
         if name in self.contacts:
             new_phone_number = input("Digite o novo número de telefone: ")
-            if not self.is_valid_phone(new_phone_number):
+            if not ContactValidator.is_valid_phone(new_phone_number):
                 print("Número de telefone inválido. Tente novamente.")
                 return
             self.contacts[name] = new_phone_number
@@ -41,18 +57,13 @@ class Schedule:
         else:
             print(f"Contato {name} não encontrado.")
 
-    def search_by_name(self):
-        name = input("Digite o nome que deseja buscar: ")
-        print(self.contacts.get(name, "Contato não encontrado."))
+    def search(self, strategy: SearchStrategy):
+        query = input("Digite a busca: ")
+        result = strategy.search(self.contacts, query)
+        print(result)
 
-    def search_by_phone(self):
-        phone_number = input("Digite o número de telefone que deseja buscar: ")
-        for name, number in self.contacts.items():
-            if number == phone_number:
-                print(f"Contato encontrado: {name}")
-                return
-        print("Número não encontrado.")
 
+class ContactValidator:
     @staticmethod
     def is_valid_phone(phone_number):
         return phone_number.isdigit() and (len(phone_number) == 9 or len(phone_number) == 11)
@@ -79,9 +90,9 @@ def main():
         elif choice == '3':
             agenda.remove_contact()
         elif choice == '4':
-            agenda.search_by_name()
+            agenda.search(SearchByName())
         elif choice == '5':
-            agenda.search_by_phone()
+            agenda.search(SearchByPhone())
         elif choice == '6':
             print("Saindo da agenda...")
             break
@@ -89,4 +100,5 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-main()
+if __name__ == "__main__":
+    main()
