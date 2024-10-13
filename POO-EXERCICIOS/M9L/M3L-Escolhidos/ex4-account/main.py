@@ -10,7 +10,6 @@ def main():
     conta = Account(nome_conta, saldo_conta)
     banco = Bank(nome_banco)
     
-    # Exibindo informações
     conta.displayAccount()
     banco.displayBank()
 
