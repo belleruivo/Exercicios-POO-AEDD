@@ -1,4 +1,8 @@
-from virtualstore import VirtualStore
+'''1. Crie uma classe chamada VirtualStore que represente uma plataforma de vendas
+online. Essa classe deve ter funcionalidades para cadastrar produtos, gerar carrinho
+de compras, aplicar descontos e calcular o valor total da compra.'''
+
+from virtualStore import VirtualStore
 from cliente import Cliente
 
 def main():
@@ -20,11 +24,7 @@ def main():
         print()
 
         if escolha == '1':
-            while True: 
-                nome_cliente = input("Digite o nome do cliente: ").lower()
-                if nome_cliente.replace(" ", "").isalpha():
-                    break
-                print("Nome inválido. Certifique-se de inserir somente letras.\n")
+            nome_cliente = input("Digite o nome do cliente: ").lower()
             email_cliente = input("Digite o e-mail do cliente: ").lower()
 
             if loja.cliente_existe(nome_cliente, email_cliente):
@@ -48,11 +48,12 @@ def main():
         elif escolha == '6':
             cliente = loja.selecionar_cliente()
             if cliente:
-                loja.aplicar_desconto(cliente)
+                percentual = loja.obter_entrada("Digite a porcentagem de desconto: ", tipo=float, positivo=True)
+                loja.aplicar_desconto(cliente, percentual)
         elif escolha == '7':
             cliente = loja.selecionar_cliente()
             if cliente:
-                loja.finalizar_compra(cliente)
+                loja.finalizar_compra(cliente)  # Mudar para apenas passar o cliente
         elif escolha == '8':
             print("Saindo da loja. Obrigado!")
             print("-=" * 30)
