@@ -63,6 +63,4 @@ def main():
     print(f"Total fatura com imposto: {total_com_imposto:.2f}")
     print("-=" * 30)
 
-
-if __name__ == "__main__":
-    main()
+main()
