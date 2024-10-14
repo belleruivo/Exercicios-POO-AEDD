@@ -2,7 +2,7 @@
 classe deve ter funcionalidades para adicionar amigos, publicar mensagens,
 comentar em posts e buscar por usuários.'''
 
-class Usuario:
+class UsuarioBase:
     def __init__(self, nome, email):
         self.nome = nome
         self.email = email
@@ -22,7 +22,7 @@ class Usuario:
             print(f"{amigo.nome} já é seu amigo.\n")
 
     def publicar_post(self, conteudo):
-        post = Post(conteudo, self)
+        post = PostBase(conteudo, self)
         self.posts.append(post)
         print(f"{self.nome} publicou: {conteudo}\n")
         return post
@@ -35,7 +35,7 @@ class Usuario:
         return self.nome
 
 
-class Post:
+class PostBase:
     def __init__(self, conteudo, autor):
         self.conteudo = conteudo
         self.autor = autor
@@ -52,19 +52,45 @@ class Post:
                 print(f"   {comentario[0].nome} comentou: {comentario[1]}")
 
 
+class PostImagem(PostBase):
+    def __init__(self, conteudo, autor, imagem):
+        super().__init__(conteudo, autor)
+        self.imagem = imagem
+
+    def mostrar_post(self):
+        super().mostrar_post()
+        print(f"Imagem: {self.imagem}")
+
+
+class PostVideo(PostBase):
+    def __init__(self, conteudo, autor, video):
+        super().__init__(conteudo, autor)
+        self.video = video
+
+    def mostrar_post(self):
+        super().mostrar_post()
+        print(f"Vídeo: {self.video}")
+
+
 class SocialNetwork:
     def __init__(self):
         self.usuarios = []
 
-    def adicionar_usuario(self, nome, email):
-        if any(usuario.email == email for usuario in self.usuarios):
-            print(f"Já existe um usuário cadastrado com o email {email}.\n")
-            return None
+    def adicionar_usuario(self, nome):
+        while True:
+            email = input("Email do usuário: ")
+            if '@' not in email:
+                print("Email inválido. O email deve conter '@'. Tente novamente.")
+                continue
 
-        usuario = Usuario(nome, email)
-        self.usuarios.append(usuario)
-        print(f"Usuário {nome} ({email}) foi adicionado à rede.\n")
-        return usuario
+            if any(usuario.email == email for usuario in self.usuarios):
+                print(f"Já existe um usuário cadastrado com o email {email}.\n")
+                continue
+
+            usuario = UsuarioBase(nome, email)
+            self.usuarios.append(usuario)
+            print(f"Usuário {nome} ({email}) foi adicionado à rede.\n")
+            return usuario
 
     def buscar_usuario_por_numero(self, numero):
         if 0 <= numero < len(self.usuarios):
@@ -83,8 +109,7 @@ class SocialNetwork:
 
     def listar_posts(self, usuario):
         if not usuario.posts:
-            print(f"{usuario.nome} não tem posts.\n")
-            return
+            return  # Não imprime nada se o usuário não tiver posts
         print(f"Posts de {usuario.nome}:")
         for i, post in enumerate(usuario.posts, start=1):
             print(f"{i}. {post.conteudo}")
@@ -107,8 +132,7 @@ def menu():
 
         if escolha == '1':
             nome = input("\nNome do usuário: ")
-            email = input("Email do usuário: ")
-            rede.adicionar_usuario(nome, email)
+            rede.adicionar_usuario(nome)
 
         elif escolha == '2':
             rede.listar_usuarios()  # Exibir lista de usuários
@@ -128,8 +152,28 @@ def menu():
                 num = int(input("\nNúmero do usuário que vai publicar: ")) - 1
                 usuario = rede.buscar_usuario_por_numero(num)
                 if usuario:
+                    print("Escolha o tipo de post:")
+                    print("1. Texto")
+                    print("2. Imagem")
+                    print("3. Vídeo")
+                    tipo_post = input("Digite o número do tipo de post: ")
                     conteudo = input("Escreva o conteúdo do post: ")
-                    usuario.publicar_post(conteudo)
+
+                    if tipo_post == '1':
+                        usuario.publicar_post(conteudo)
+                    elif tipo_post == '2':
+                        imagem = input("Insira a URL da imagem: ")
+                        post_imagem = PostImagem(conteudo, usuario, imagem)
+                        usuario.posts.append(post_imagem)
+                        print(f"{usuario.nome} publicou uma imagem: {conteudo}\n")
+                    elif tipo_post == '3':
+                        video = input("Insira a URL do vídeo: ")
+                        post_video = PostVideo(conteudo, usuario, video)
+                        usuario.posts.append(post_video)
+                        print(f"{usuario.nome} publicou um vídeo: {conteudo}\n")
+                    else:
+                        print("Tipo de post inválido.")
+
             except ValueError:
                 print("Entrada inválida. Por favor, insira um número.\n")
 
@@ -151,28 +195,29 @@ def menu():
                     autor_post_num = int(input("Número do autor do post que você deseja comentar: ")) - 1
                     usuario_autor = rede.buscar_usuario_por_numero(autor_post_num)
                     if usuario_autor:
-                        rede.listar_posts(usuario_autor)
-                        try:
-                            num_post = int(input("\nNúmero do post para comentar: ")) - 1
-                            if 0 <= num_post < len(usuario_autor.posts):
-                                comentario = input("Escreva seu comentário: ")
-                                usuario.comentar_post(usuario_autor.posts[num_post], comentario)
-                            else:
-                                print("Número de post inválido.")
-                        except ValueError:
-                            print("Entrada inválida. Por favor, insira um número.\n")
+                        rede.listar_posts(usuario_autor)  # Exibir os posts do autor selecionado
+                        if usuario_autor.posts:  # Verifica se o autor tem posts
+                            try:
+                                num_post = int(input("\nNúmero do post para comentar: ")) - 1
+                                if 0 <= num_post < len(usuario_autor.posts):
+                                    comentario = input("Escreva seu comentário: ")
+                                    usuario.comentar_post(usuario_autor.posts[num_post], comentario)
+                                else:
+                                    print("Número de post inválido.")
+                            except ValueError:
+                                print("Entrada inválida. Por favor, insira um número.\n")
+                        else:
+                            print(f"{usuario_autor.nome} não tem posts.\n")
             except ValueError:
                 print("Entrada inválida. Por favor, insira um número.\n")
 
         elif escolha == '5':
-            rede.listar_usuarios()  # Exibir lista de usuários
-            try:
-                num = int(input("\nNúmero do usuário para buscar: ")) - 1
-                usuario = rede.buscar_usuario_por_numero(num)
-                if usuario:
-                    print(f"Usuário encontrado: {usuario.nome} ({usuario.email})\n")
-            except ValueError:
-                print("Entrada inválida. Por favor, insira um número.\n")
+            nome_procurado = input("\nDigite o nome do usuário para buscar: ")
+            usuario_encontrado = next((usuario for usuario in rede.usuarios if usuario.nome.lower() == nome_procurado.lower()), None)
+            if usuario_encontrado:
+                print(f"Usuário encontrado: {usuario_encontrado.nome} ({usuario_encontrado.email})\n")
+            else:
+                print("Usuário não encontrado.\n")
 
         elif escolha == '6':
             print("\nSaindo...")
@@ -184,3 +229,7 @@ def menu():
 
 
 menu()
+
+
+
+

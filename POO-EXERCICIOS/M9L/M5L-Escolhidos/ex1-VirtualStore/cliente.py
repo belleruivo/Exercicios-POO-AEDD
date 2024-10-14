@@ -1,13 +1,13 @@
 class Cliente:
-    def __init__(self, nome, email, loja=None):
+    def __init__(self, nome, email, VirtualStore=None):
         self.nome = nome
         self.email = email
         self.carrinho = []
-        self.loja = loja  # Referência à loja
+        self.virtualStre = VirtualStore  # Referência à loja
 
         # Se a loja for fornecida, adicione este cliente a ela
-        if loja:
-            loja.adicionar_cliente(self)
+        if VirtualStore:
+            VirtualStore.adicionar_cliente(self)
 
     def adicionar_ao_carrinho(self, produto):
         self.carrinho.append(produto)

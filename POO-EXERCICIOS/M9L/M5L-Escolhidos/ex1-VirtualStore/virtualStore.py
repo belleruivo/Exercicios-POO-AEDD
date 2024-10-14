@@ -125,7 +125,11 @@ class VirtualStore:
             if nome_cliente.replace(" ", "").isalpha():
                 break
             print("Nome inválido. Certifique-se de inserir somente letras.\n")
-        email_cliente = input("Digite o e-mail do cliente: ").lower()
+        while True:
+            email_cliente = input("Digite o e-mail do cliente: ").lower()
+            if '@' in email_cliente and email_cliente.count('@') == 1: 
+                break
+            print("E-mail inválido. Tente novamente!.\n")
 
         if self.cliente_existe(nome_cliente, email_cliente):
             print(f"Cliente '{nome_cliente}' já está cadastrado!\n")
