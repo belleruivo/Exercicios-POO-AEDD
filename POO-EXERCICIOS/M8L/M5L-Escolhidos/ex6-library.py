@@ -47,7 +47,7 @@ class Usuario:
 
 
 class Emprestimo:
-    def __init__(self, usuario, livro):
+    def __init__(self, usuario: Usuario, livro: Livro):
         self.usuario = usuario
         self.livro = livro
 
@@ -77,20 +77,16 @@ class Biblioteca:
         else:
             print(f"Usuário '{nome}' já está cadastrado.")
 
-    def emprestar_livro(self, nome_usuario, titulo_livro):
-        usuario = self.usuarios.get(nome_usuario)
+    def emprestar_livro(self, usuario: Usuario, titulo_livro: str):
         livro = self.livros.get(titulo_livro)
-
         if usuario and livro:
             emprestimo = Emprestimo(usuario, livro)
             emprestimo.efetuar_emprestimo()
         else:
             print("Usuário ou livro não encontrados.")
 
-    def devolver_livro(self, nome_usuario, titulo_livro):
-        usuario = self.usuarios.get(nome_usuario)
+    def devolver_livro(self, usuario: Usuario, titulo_livro: str):
         livro = self.livros.get(titulo_livro)
-
         if usuario and livro:
             emprestimo = Emprestimo(usuario, livro)
             emprestimo.efetuar_devolucao()
@@ -124,13 +120,15 @@ def main():
 
         elif opcao == '3':
             nome_usuario = input("Nome do usuário: ").strip()
+            usuario = biblioteca.usuarios.get(nome_usuario)
             titulo_livro = input("Título do livro: ").strip()
-            biblioteca.emprestar_livro(nome_usuario, titulo_livro)
+            biblioteca.emprestar_livro(usuario, titulo_livro)
 
         elif opcao == '4':
             nome_usuario = input("Nome do usuário: ").strip()
+            usuario = biblioteca.usuarios.get(nome_usuario)
             titulo_livro = input("Título do livro: ").strip()
-            biblioteca.devolver_livro(nome_usuario, titulo_livro)
+            biblioteca.devolver_livro(usuario, titulo_livro)
 
         elif opcao == '5':
             print("Saindo...")

@@ -70,44 +70,78 @@ class User:
             else:
                 print(f"Biblioteca {biblioteca}: sem livros emprestados.")
 
-
 # Função principal para rodar o sistema
 def main():
     # Criando uma biblioteca
     biblioteca1 = Library("Biblioteca Central")
     
     # Criando usuários
-    usuario1 = User("Isabelle")
-    usuario2 = User("Arthur")
+    usuario1 = User(input("Digite o nome do primeiro usuário: "))
+    usuario2 = User(input("Digite o nome do segundo usuário: "))
     
     # Registrando usuários na biblioteca
     biblioteca1.registrar_usuario(usuario1)
     biblioteca1.registrar_usuario(usuario2)
     
-    # Adicionando livros à biblioteca
-    biblioteca1.adicionar_livro("O Senhor dos Anéis", 2)
-    biblioteca1.adicionar_livro("1984", 3)
-    
-    # Usuário 1 faz um empréstimo
-    biblioteca1.emprestar_livro("O Senhor dos Anéis", usuario1)
-    
-    # Verificar empréstimos do usuário 1
-    usuario1.verificar_emprestimos()
-    
-    # Usuário 1 devolve o livro
-    biblioteca1.devolver_livro("O Senhor dos Anéis", usuario1)
-    
-    # Verificar empréstimos novamente
-    usuario1.verificar_emprestimos()
+    # Loop principal para interação com o usuário
+    while True:
+        print("\nEscolha uma opção:")
+        print("1 - Adicionar livro")
+        print("2 - Emprestar livro")
+        print("3 - Devolver livro")
+        print("4 - Verificar empréstimos")
+        print("5 - Verificar disponibilidade de livro")
+        print("0 - Sair")
 
-    # Usuário 2 tenta emprestar um livro indisponível
-    biblioteca1.emprestar_livro("1984", usuario2)
-    
-    # Verificar disponibilidade de um livro
-    if biblioteca1.verificar_disponibilidade("O Senhor dos Anéis"):
-        print("O livro 'O Senhor dos Anéis' está disponível.")
-    else:
-        print("O livro 'O Senhor dos Anéis' não está disponível.")
+        opcao = input("Digite sua opção: ")
+
+        if opcao == "1":  # Adicionar livro
+            titulo = input("Digite o título do livro: ")
+            quantidade = int(input("Digite a quantidade do livro: "))
+            biblioteca1.adicionar_livro(titulo, quantidade)
+
+        elif opcao == "2":  # Emprestar livro
+            titulo = input("Digite o título do livro: ")
+            usuario_nome = input("Digite o nome do usuário: ")
+            if usuario_nome == usuario1.name:
+                biblioteca1.emprestar_livro(titulo, usuario1)
+            elif usuario_nome == usuario2.name:
+                biblioteca1.emprestar_livro(titulo, usuario2)
+            else:
+                print("Usuário não encontrado.")
+
+        elif opcao == "3":  # Devolver livro
+            titulo = input("Digite o título do livro: ")
+            usuario_nome = input("Digite o nome do usuário: ")
+            if usuario_nome == usuario1.name:
+                biblioteca1.devolver_livro(titulo, usuario1)
+            elif usuario_nome == usuario2.name:
+                biblioteca1.devolver_livro(titulo, usuario2)
+            else:
+                print("Usuário não encontrado.")
+
+        elif opcao == "4":  # Verificar empréstimos
+            usuario_nome = input("Digite o nome do usuário: ")
+            if usuario_nome == usuario1.name:
+                usuario1.verificar_emprestimos()
+            elif usuario_nome == usuario2.name:
+                usuario2.verificar_emprestimos()
+            else:
+                print("Usuário não encontrado.")
+
+        elif opcao == "5":  # Verificar disponibilidade de livro
+            titulo = input("Digite o título do livro: ")
+            if biblioteca1.verificar_disponibilidade(titulo):
+                print(f"O livro '{titulo}' está disponível.")
+            else:
+                print(f"O livro '{titulo}' não está disponível.")
+
+        elif opcao == "0":  # Sair do loop
+            print("Saindo do sistema...")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
     main()
