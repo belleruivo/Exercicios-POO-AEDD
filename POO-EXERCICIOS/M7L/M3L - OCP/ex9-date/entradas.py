@@ -2,14 +2,13 @@ import calendar
 import locale
 from datetime import datetime
 
-# Configura a localidade para português do Brasil
 locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
 
 def obter_dia(mes, ano):
     while True:
         try:
             dia = int(input("Digite o dia: "))
-            dias_no_mes = calendar.monthrange(ano, mes)[1]  # Quantidade de dias no mês e ano especificados
+            dias_no_mes = calendar.monthrange(ano, mes)[1]
             if 1 <= dia <= dias_no_mes:
                 return dia
             else:

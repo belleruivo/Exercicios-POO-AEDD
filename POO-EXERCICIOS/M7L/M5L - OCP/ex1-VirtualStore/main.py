@@ -24,15 +24,21 @@ def main():
         print()
 
         if escolha == '1':
-            nome_cliente = input("Digite o nome do cliente: ").lower()
-            email_cliente = input("Digite o e-mail do cliente: ").lower()
+            while True:
+                nome_cliente = input("Digite o nome do cliente: ").lower()
+                if nome_cliente.replace(" ", "").isalpha():
+                    break
+                print("Nome inválido. Certifique-se de inserir somente letras.\n")
+            email_cliente = loja.obter_email()
 
             if loja.cliente_existe(nome_cliente, email_cliente):
                 print(f"Cliente '{nome_cliente}' já está cadastrado!\n")
             else:
                 cliente = Cliente(nome_cliente, email_cliente)
                 loja.clientes.append(cliente)
+
                 print(f"Cliente '{cliente.nome}' cadastrado com sucesso!\n")
+                
         elif escolha == '2':
             loja.adicionar_produto()
         elif escolha == '3':

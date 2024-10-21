@@ -1,3 +1,7 @@
+'''1. Crie uma classe chamada VirtualStore que represente uma plataforma de vendas
+online. Essa classe deve ter funcionalidades para cadastrar produtos, gerar carrinho
+de compras, aplicar descontos e calcular o valor total da compra.'''
+
 from virtualstore import VirtualStore
 from cliente import Cliente
 
@@ -19,20 +23,23 @@ def main():
         escolha = input("\nEscolha uma opção: ")
         print()
 
+
         if escolha == '1':
-            while True: 
+            while True:
                 nome_cliente = input("Digite o nome do cliente: ").lower()
                 if nome_cliente.replace(" ", "").isalpha():
                     break
                 print("Nome inválido. Certifique-se de inserir somente letras.\n")
-            email_cliente = input("Digite o e-mail do cliente: ").lower()
+            email_cliente = loja.obter_email()
 
             if loja.cliente_existe(nome_cliente, email_cliente):
                 print(f"Cliente '{nome_cliente}' já está cadastrado!\n")
             else:
                 cliente = Cliente(nome_cliente, email_cliente)
                 loja.clientes.append(cliente)
+
                 print(f"Cliente '{cliente.nome}' cadastrado com sucesso!\n")
+
         elif escolha == '2':
             loja.adicionar_produto()
         elif escolha == '3':

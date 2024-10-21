@@ -1,13 +1,17 @@
+''' 1. Escreva uma classe chamada Vehicle que possua campos para a velocidade atual em
+km/h, a direção em graus dos pneus e o nome do proprietário. Crie métodos de
+acesso e impressão para esta classe e faça um programa de teste.
+'''
 from vehicle import Vehicle
 from gps import GPS
 from consumo import Consumo
 
 def main():
     print("-="*40)
-    print("INSIRA SUAS INFORMAÇÕES:")
+    print("INSIRA SUAS INFORMAÇÕES:\n")
     while True:
         try:
-            velocidade = float(input("\nDigite a velocidade atual do veículo (km/h): "))
+            velocidade = float(input("Digite a velocidade atual do veículo (km/h): "))
             if velocidade < 0:
                 print("A velocidade não pode ser negativa. Tente novamente.")
                 continue

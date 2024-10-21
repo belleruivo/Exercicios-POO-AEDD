@@ -14,7 +14,7 @@ class DistanciaPontos:
         return math.sqrt(dx**2 + dy**2)
     
 class RotacaoPontos:
-    @staticmethod #Aqui foi adicionado mais uma classe para mostrar como não interfere na classe principal Point
+    @staticmethod #aqui foi adicionado mais uma classe para mostrar como não interfere na classe principal Point
     def rotacionar(ponto, angulo, origem_x=0, origem_y=0):
         rad = math.radians(angulo)
         x_rotacionado = origem_x + math.cos(rad) * (ponto.get_x() - origem_x) - math.sin(rad) * (ponto.get_y() - origem_y)

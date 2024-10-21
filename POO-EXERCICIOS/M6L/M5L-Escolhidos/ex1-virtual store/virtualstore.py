@@ -51,13 +51,7 @@ class VirtualStore:
             print("O carrinho está vazio!\n")
             return
         
-        while True:
-            porcentagem_desconto = input("Digite a porcentagem de desconto (%): ")
-            if porcentagem_desconto.isdigit():
-                porcentagem_desconto = int(porcentagem_desconto)
-                break
-            else:
-                print("Entrada inválida! Digite apenas números inteiros.\n")
+        porcentagem_desconto = self.obter_entrada("Digite a porcentagem de desconto (%): ", tipo=float, positivo=True)
         
         for produto in cliente.carrinho:
             produto.preco -= produto.preco * (porcentagem_desconto / 100)
@@ -85,15 +79,24 @@ class VirtualStore:
                 return tipo
             print("Tipo de pagamento inválido! Tente novamente.\n")
 
-    def obter_entrada(self, mensagem, tipo=str, positivo=False):
+    def obter_entrada(self, mensagem, tipo=float, positivo=False):
         while True:
             try:
-                entrada = tipo(input(mensagem))
-                if positivo and entrada < 0:
-                    raise ValueError("O valor não pode ser negativo.")
-                return entrada
+                entrada = input(mensagem).replace(",", ".")  
+                valor = tipo(entrada)  
+                if positivo and valor < 0:
+                    print("O valor deve ser positivo. Tente novamente.")
+                    continue
+                return valor  
             except ValueError:
-                print(f"Entrada inválida. Tente novamente.\n")
+                print("Entrada inválida. Certifique-se de inserir um número válido.")
+    
+    def obter_email(self):
+        while True:
+            email = input("Digite o e-mail do cliente: ").strip().lower()
+            if "@" in email:
+                return email
+            print("E-mail inválido! Tente novamente.\n")
 
     def selecionar_cliente(self):
         if not self.clientes:

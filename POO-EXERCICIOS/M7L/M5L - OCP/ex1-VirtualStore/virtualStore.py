@@ -56,10 +56,9 @@ class VirtualStore:
         total = cliente.calcular_total()
         cliente.mostrar_carrinho()
         
-        # Mostrar o total antes de solicitar o pagamento
         print(f"Total da compra: R$ {total:.2f}\n")
-        pagamento = self.obter_pagamento(total)  # Solicita a forma de pagamento
-        pagamento.processar_pagamento()  # Processa o pagamento
+        pagamento = self.obter_pagamento(total)
+        pagamento.processar_pagamento() 
         print("Compra finalizada com sucesso!\n")
 
     def registrar_pagamento(self, tipo_pagamento):
@@ -72,21 +71,30 @@ class VirtualStore:
     def obter_pagamento(self, total):
         while True:
             tipo = input("Escolha o tipo de pagamento (cartão/dinheiro): ").strip().lower()
-            self.registrar_pagamento(tipo)  # Registra o pagamento se não existir
+            self.registrar_pagamento(tipo)
             if tipo in self.pagamentos:
                 return self.pagamentos[tipo](total)
             else:
                 print("Tipo de pagamento inválido! Tente novamente.\n")
 
-    def obter_entrada(self, mensagem, tipo=str, positivo=False):
+    def obter_entrada(self, mensagem, tipo=float, positivo=False):
         while True:
             try:
-                entrada = tipo(input(mensagem))
-                if positivo and entrada < 0:
-                    raise ValueError("O valor não pode ser negativo.")
-                return entrada
+                entrada = input(mensagem).replace(",", ".")  
+                valor = tipo(entrada)  
+                if positivo and valor < 0:
+                    print("O valor deve ser positivo. Tente novamente.")
+                    continue
+                return valor  
             except ValueError:
-                print(f"Entrada inválida. Tente novamente.\n")
+                print("Entrada inválida. Certifique-se de inserir um número válido.")
+                
+    def obter_email(self):
+        while True:
+            email = input("Digite o e-mail do cliente: ").strip().lower()
+            if "@" in email:
+                return email
+            print("E-mail inválido! Tente novamente.\n")
 
     def selecionar_cliente(self):
         if not self.clientes:

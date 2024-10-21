@@ -20,7 +20,7 @@ class Consumo:
     
     def calcular_custo_viagem(self):
         distancia = self.gps.get_distancia()
-        custo_total = distancia * (1 / self.consumo_por_km) * self.valor_combustivel
+        custo_total = (distancia / self.consumo_por_km) * self.valor_combustivel
         return custo_total
     
     def imprimir(self):
