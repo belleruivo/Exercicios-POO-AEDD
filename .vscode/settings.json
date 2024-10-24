@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./POO-EXERCICIOS/M5L/ex8_"
+    ]
+}
