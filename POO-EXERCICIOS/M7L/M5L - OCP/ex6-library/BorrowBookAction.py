@@ -1,7 +1,6 @@
 from LibraryAction import LibraryAction
 
 class BorrowBookAction(LibraryAction):
-    """Ação para emprestar um livro."""
     def execute(self):
         title = input("Digite o título do livro: ").strip()
         if not title:

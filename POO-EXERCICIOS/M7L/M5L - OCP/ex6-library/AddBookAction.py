@@ -1,7 +1,6 @@
 from LibraryAction import LibraryAction
 
 class AddBookAction(LibraryAction):
-    """Ação para adicionar um livro na biblioteca."""
     def execute(self):
         title = input("Digite o título do livro: ").strip()
         if not title:

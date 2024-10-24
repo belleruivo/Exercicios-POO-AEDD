@@ -1,6 +1,6 @@
 class Card:
     def __init__(self, naipe: str, valor: str):
-        self.naipe = naipe
+        self.naipe = naipe #string
         self.valor = valor
 
     def __str__(self) -> str:
