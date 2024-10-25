@@ -1,8 +1,6 @@
 class Categoria:
     def __init__(self, nome):
-        # inicializa a classe categoria com nome e uma lista vazia de livros
         if not nome:
-            # verifica se o nome é fornecido, caso contrário, lança um erro
             raise ValueError("Nome da categoria é obrigatório.")
         self.nome = nome
         self.livros = []

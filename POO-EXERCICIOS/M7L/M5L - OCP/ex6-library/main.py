@@ -1,3 +1,8 @@
+'''
+Refazer as listas M3L e M5L, aplicando o Princípio Aberto-Fechado e mostrar as diferenças
+de seu código, antes e depois.
+'''
+
 from Library import Library
 from AddBookAction import AddBookAction
 from BorrowBookAction import BorrowBookAction
@@ -32,3 +37,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# Você criou subclasses como AddBookAction, BorrowBookAction, CheckAvailabilityAction e ReturnBookAction, todas herdando de LibraryAction. Cada uma dessas classes implementa o método execute() de maneira específica. Isso demonstra que, para adicionar novas funcionalidades à biblioteca (como, por exemplo, a ação de remover um livro), você pode criar uma nova classe de ação sem precisar alterar as classes existentes.
+# ou seja, seria so adicionar no dicionario do mainw

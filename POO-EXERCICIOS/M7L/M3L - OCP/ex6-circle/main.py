@@ -1,4 +1,8 @@
-# main.py
+'''
+Refazer as listas M3L e M5L, aplicando o Princípio Aberto-Fechado e mostrar as diferenças
+de seu código, antes e depois.
+'''
+
 from point import Point
 from circle import Circle
 from rectangle import Rectangle
@@ -21,3 +25,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Análise do Código
+# Classe Abstrata Shape:
+
+# A classe Shape é uma classe abstrata que define os métodos area() e circumference(). Qualquer forma que herde de Shape deve implementar esses métodos.
+# Isso permite que você adicione novas formas (por exemplo, triângulos, elipses, etc.) sem modificar o código existente. Você simplesmente cria uma nova classe que herda de Shape e implementa os métodos necessários.
+# Classes Concretas (Circle e Rectangle):
+
+# As classes Circle e Rectangle estendem a classe Shape e implementam os métodos area() e circumference().
+# Se você quiser adicionar uma nova forma, como um triângulo, você pode simplesmente criar uma nova classe chamada Triangle que herda de Shape, sem ter que alterar as classes Circle, Rectangle ou Shape.
+# Extensibilidade:
+
+# O código permite a adição de novas formas ao sistema sem modificar as classes existentes. Isso é fundamental para o OCP, pois a lógica existente permanece intacta e não precisa ser testada novamente após a adição de novas formas.
+# O uso de uma classe base (abstrata) e a herança garante que novos comportamentos possam ser adicionados de forma segura e sem impacto nas implementações existentes.

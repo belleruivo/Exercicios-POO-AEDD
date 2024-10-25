@@ -1,3 +1,7 @@
+'''Escolha pelo menos 5 exercícios das listas M3L e M5L (5 de cada) para expandir o projeto do
+exercício, incluindo novas classes relacionadas, conforme a sua criatividade, demonstrando
+a injeção de dependência.'''
+
 from game import GuessingGame
 from player import Player
 from score_tracker import ScoreTracker
@@ -41,3 +45,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# explicacao:
+# Identificação das Classes
+# Dificuldade: Define o nível de dificuldade e o intervalo de números com base nesse nível.
+# GuessingGame: Controla a lógica do jogo, incluindo a verificação dos palpites do jogador.
+# History: Armazena o histórico dos palpites do jogador.
+# MessageHandler: Gerencia as interações com o usuário, como obter o nome do jogador e a dificuldade.
+# Player: Representa o jogador e coleta os palpites.
+# ScoreTracker: Mantém e exibe a pontuação do jogador.
+# Análise da Injeção de Dependência
+# A injeção de dependência é uma técnica que ajuda a reduzir o acoplamento entre classes, facilitando testes e manutenção. No seu código, a injeção de dependência está sendo aplicada nas seguintes classes:
+
+# GuessingGame: Recebe player, score_tracker e dificuldade no construtor. Isso é apropriado, pois permite que o jogo utilize instâncias de Player e ScoreTracker sem criar suas próprias instâncias internamente.
+
+# Player: Recebe dificuldade para solicitar palpites de acordo com o nível de dificuldade. Isso também é uma boa prática, pois mantém a lógica de dificuldade separada.
+
+# As classes Dificuldade, History, MessageHandler e ScoreTracker não utilizam injeção de dependência em seus construtores, o que é aceitável, pois elas não dependem de outras classes para funcionar corretamente.
