@@ -1,19 +1,24 @@
-class PostBase:
+from abc import ABC, abstractmethod
+
+class PostBase(ABC):
     def __init__(self, conteudo, autor):
         self.conteudo = conteudo
         self.autor = autor
         self.comentarios = []
 
+    @abstractmethod
+    def mostrar_post(self):
+        pass
+
     def adicionar_comentario(self, usuario, comentario):
         self.comentarios.append((usuario, comentario))
 
-    def mostrar_post(self):
-        print(f"Post de {self.autor.nome}: {self.conteudo}")
-        if self.comentarios:
-            print("Comentários:")
-            for comentario in self.comentarios:
-                print(f"   {comentario[0].nome} comentou: {comentario[1]}")
+class PostTexto(PostBase):
+    def __init__(self, conteudo, autor):
+        super().__init__(conteudo, autor)
 
+    def mostrar_post(self):
+        print(f"\nPost de {self.autor.nome}: {self.conteudo}")
 
 class PostImagem(PostBase):
     def __init__(self, conteudo, autor, imagem):
@@ -24,25 +29,12 @@ class PostImagem(PostBase):
         super().mostrar_post()
         print(f"Imagem: {self.imagem}")
 
-
-class PostVideo(PostBase):
-    def __init__(self, conteudo, autor, video):
-        super().__init__(conteudo, autor)
-        self.video = video
-
-    def mostrar_post(self):
-        super().mostrar_post()
-        print(f"Vídeo: {self.video}")
-
-
 class PostFactory:
     @staticmethod
     def criar_post(tipo_post, conteudo, autor, midia=None):
         if tipo_post == '1':
-            return PostBase(conteudo, autor)
+            return PostTexto(conteudo, autor)
         elif tipo_post == '2':
             return PostImagem(conteudo, autor, midia)
-        elif tipo_post == '3':
-            return PostVideo(conteudo, autor, midia)
         else:
             raise ValueError("Tipo de post inválido.")

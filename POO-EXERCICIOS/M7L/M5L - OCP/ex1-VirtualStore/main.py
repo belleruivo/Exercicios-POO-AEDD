@@ -4,7 +4,7 @@ de compras, aplicar descontos e calcular o valor total da compra.'''
 
 from virtualStore import VirtualStore
 from carrinho import Cart
-from descontos import Discount
+from descontos import *
 
 def obter_entrada(mensagem, tipo=str, positivo=False):
     while True:
@@ -55,10 +55,14 @@ def main():
                 continue
 
             valor_desconto = obter_entrada(
-                f"Digite o valor do desconto {'(%)' if tipo_desconto in ['percentual'] else '(R$)'}: ", 
+                f"Digite o valor do desconto {'(%)' if tipo_desconto == 'percentual' else '(R$)'}: ", 
                 tipo=float, positivo=True
             )
-            desconto = Discount(tipo_desconto, valor_desconto)
+            if tipo_desconto == "percentual":
+                desconto = DiscountPercentage(valor_desconto)
+            else:
+                desconto = DiscountFixed(valor_desconto)
+
             carrinho.definir_desconto(desconto)
         elif escolha == '5':
             carrinho.mostrar_carrinho()

@@ -1,4 +1,5 @@
 from usuario import UsuarioBase
+
 class SocialNetwork:
     def __init__(self):
         self.usuarios = []
@@ -25,7 +26,6 @@ class SocialNetwork:
             print(f"Usuário encontrado: {usuario.nome} ({usuario.email})")
             return usuario
         else:
-            # Exibe a lista de usuários com o mesmo nome
             print(f"Vários usuários encontrados com o nome '{nome_procurado}':")
             for i, usuario in enumerate(usuarios_encontrados, start=1):
                 print(f"{i}. {usuario.nome} ({usuario.email})")
@@ -49,7 +49,7 @@ class SocialNetwork:
                 print("Email inválido. O email deve conter '@'. Tente novamente.")
                 continue
             if any(usuario.email == email for usuario in self.usuarios):
-                print(f"Já existe um usuário cadastrado com o email {email}.")
+                print(f"Já existe um usuário cadastrado com o email {email}.\n")
                 continue
             return email
 
@@ -69,7 +69,7 @@ class SocialNetwork:
 
     def listar_posts(self, usuario):
         if not usuario.posts:
-            return  # Não imprime nada se o usuário não tiver posts
+            return  
         print(f"Posts de {usuario.nome}:")
         for i, post in enumerate(usuario.posts, start=1):
             print(f"{i}. {post.conteudo}")

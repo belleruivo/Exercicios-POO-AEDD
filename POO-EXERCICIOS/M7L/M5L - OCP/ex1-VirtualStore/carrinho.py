@@ -23,4 +23,4 @@ class Cart:
         
     def definir_desconto(self, desconto):
         self.desconto = desconto
-        print(f"Desconto '{desconto.tipo}' definido para o carrinho.\n")
+        print(f"Desconto definido para o carrinho.\n")
