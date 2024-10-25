@@ -1,3 +1,8 @@
+# Crie um sistema chamado Sistema de Gestão de Pessoas (SGP). Nele, haverá um script
+# principal chamado main.py com um menu para gerenciar dados de colaboradores
+# relacionados com a empresa. Escreva todo o programa documentando e testando restrições
+# de entradas de dados e exceções (pesquise como funciona o try-except no Python).
+
 from person import Person
 
 def main():
