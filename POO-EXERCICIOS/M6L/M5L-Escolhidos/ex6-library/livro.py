@@ -1,8 +1,6 @@
 class Livro:
     def __init__(self, titulo, autor, isbn, categoria):
-        # inicializa a classe livro com titulo, autor, isbn, disponibilidade e categoria
         if not titulo or not isbn:
-            # verifica se o titulo e o isbn são fornecidos, caso contrário, lança um erro
             raise ValueError("Título e ISBN do livro são obrigatórios.")
         self.titulo = titulo
         self.autor = autor
