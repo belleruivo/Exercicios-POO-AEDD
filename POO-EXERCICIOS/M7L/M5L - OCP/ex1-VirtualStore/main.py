@@ -3,69 +3,72 @@ online. Essa classe deve ter funcionalidades para cadastrar produtos, gerar carr
 de compras, aplicar descontos e calcular o valor total da compra.'''
 
 from virtualStore import VirtualStore
-from cliente import Cliente
+from carrinho import Cart
+from descontos import Discount
+
+def obter_entrada(mensagem, tipo=str, positivo=False):
+    while True:
+        try:
+            entrada = input(mensagem).replace(',', '.')
+            entrada = tipo(entrada)
+            if positivo and entrada < 0:
+                raise ValueError("O valor não pode ser negativo.")
+            return entrada
+        except ValueError:
+            print(f"Entrada inválida. Tente novamente.\n")
 
 def main():
     loja = VirtualStore()
+    carrinho = Cart()
     print("-=" * 30)
 
     while True:
         print("Menu:")
-        print("1. Cadastrar Cliente")
-        print("2. Cadastrar Produto")
-        print("3. Mostrar Produtos")
-        print("4. Adicionar ao Carrinho")
-        print("5. Mostrar Carrinho")
-        print("6. Aplicar Desconto")
-        print("7. Finalizar Compra")
-        print("8. Sair")
+        print("1. Cadastrar Produto")
+        print("2. Mostrar Produtos")
+        print("3. Adicionar ao Carrinho")
+        print("4. Aplicar Desconto")
+        print("5. Finalizar Compra")
+        print("6. Sair")
 
         escolha = input("\nEscolha uma opção: ")
         print()
 
         if escolha == '1':
-            while True:
-                nome_cliente = input("Digite o nome do cliente: ").lower()
-                if nome_cliente.replace(" ", "").isalpha():
-                    break
-                print("Nome inválido. Certifique-se de inserir somente letras.\n")
-            email_cliente = loja.obter_email()
-
-            if loja.cliente_existe(nome_cliente, email_cliente):
-                print(f"Cliente '{nome_cliente}' já está cadastrado!\n")
-            else:
-                cliente = Cliente(nome_cliente, email_cliente)
-                loja.clientes.append(cliente)
-
-                print(f"Cliente '{cliente.nome}' cadastrado com sucesso!\n")
-                
+            nome = input("Digite o nome do produto: ")
+            preco = obter_entrada("Digite o preço do produto: R$ ", tipo=float, positivo=True)
+            loja.adicionar_produto(nome, preco)
         elif escolha == '2':
-            loja.adicionar_produto()
-        elif escolha == '3':
             loja.mostrar_produtos()
+        elif escolha == '3':
+            nome_produto = input("Digite o nome do produto que deseja adicionar ao carrinho: ")
+            produto = loja.buscar_produto(nome_produto)
+            if produto:
+                carrinho.adicionar_produto(produto)
+                print(f"Produto '{produto.nome}' adicionado ao carrinho!\n")
+            else:
+                print(f"Produto '{nome_produto}' não encontrado.\n")
         elif escolha == '4':
-            cliente = loja.selecionar_cliente()
-            if cliente:
-                loja.adicionar_ao_carrinho(cliente)
+            tipo_desconto = input("Digite o tipo de desconto (percentual/fixo): ").lower()
+            if tipo_desconto not in ["percentual", "fixo"]:
+                print("Tipo de desconto inválido! Tente novamente.\n")
+                continue
+
+            valor_desconto = obter_entrada(
+                f"Digite o valor do desconto {'(%)' if tipo_desconto in ['percentual'] else '(R$)'}: ", 
+                tipo=float, positivo=True
+            )
+            desconto = Discount(tipo_desconto, valor_desconto)
+            carrinho.definir_desconto(desconto)
         elif escolha == '5':
-            cliente = loja.selecionar_cliente()
-            if cliente:
-                cliente.mostrar_carrinho()
+            carrinho.mostrar_carrinho()
+            total = carrinho.calcular_total()
+            print(f"Total da compra: R$ {total:.2f}\n")
         elif escolha == '6':
-            cliente = loja.selecionar_cliente()
-            if cliente:
-                percentual = loja.obter_entrada("Digite a porcentagem de desconto: ", tipo=float, positivo=True)
-                loja.aplicar_desconto(cliente, percentual)
-        elif escolha == '7':
-            cliente = loja.selecionar_cliente()
-            if cliente:
-                loja.finalizar_compra(cliente)  # Mudar para apenas passar o cliente
-        elif escolha == '8':
             print("Saindo da loja. Obrigado!")
             print("-=" * 30)
             break
         else:
             print("Opção inválida! Tente novamente.\n")
-
-
+            
 main()
