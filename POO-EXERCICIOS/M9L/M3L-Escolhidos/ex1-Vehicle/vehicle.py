@@ -1,23 +1,23 @@
-from proprietario import Proprietario
+from abc import ABC, abstractmethod
 
-class Vehicle:
-    def __init__(self, velocidade, direção, owner):
+class VeiculoInterface(ABC):
+    @abstractmethod
+    def get_velocidade(self):
+        pass
+
+    @abstractmethod
+    def get_direcao(self):
+        pass
+
+class Vehicle(VeiculoInterface):
+    def __init__(self, velocidade, direcao, owner):
         self.velocidade = velocidade
-        self.direção = direção
-        self.owner = owner
-        owner.adicionar_veiculo(self)  # Associa o veículo ao proprietário
+        self.direcao = direcao
+        self.owner = owner   #referência ao proprietário do veículo
+        owner.adicionar_veiculo(self)  #associa o veículo ao proprietário
 
-    def getVelocidade(self):
+    def get_velocidade(self):
         return self.velocidade
 
-    def getDireção(self):
-        return self.direção
-
-    def getNome(self):
-        return self.owner.nome  # Obtém o nome do proprietário
-
-    def setVelocidade(self, velocidade):
-        self.velocidade = velocidade
-
-    def setDireção(self, direção):
-        self.direção = direção
+    def get_direcao(self):
+        return self.direcao

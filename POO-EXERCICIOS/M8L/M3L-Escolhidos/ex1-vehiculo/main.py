@@ -8,17 +8,17 @@ def main():
     
     while True:
         try:
-            velocidade = float(input("\nDigite a velocidade atual do veículo (km/h): "))
+            velocidade = int(input("\nDigite a velocidade atual do veículo (km/h): "))
             if velocidade < 0:
                 print("A velocidade não pode ser negativa. Tente novamente.")
                 continue
             break
         except ValueError:
-            print("Entrada inválida. Certifique-se de inserir somente caracteres numéricos.\n")
+            print("Entrada inválida. Certifique-se de inserir somente caracteres numéricos inteiros.")
             
     while True:
         try:
-            direção = float(input("Digite a direção dos pneus (graus): "))
+            direção = float(input("Digite a direção dos pneus (graus): ").replace(",", "."))
             if direção < 0 or direção >= 360:
                 print("A direção deve estar entre 0 e 360 graus. Tente novamente.\n")
                 continue
@@ -48,24 +48,23 @@ def main():
         try:
             distancia = float(input("Qual a distância entre as duas cidades?(Km): ").replace(",", "."))
             break
-        except:
+        except ValueError:
             print("Distância inválida. Certifique-se de inserir somente números\n")
 
     while True:
         try:
             consumo_km = float(input("Quantos km seu carro faz por litro: ").replace(",", "."))
             break
-        except:
+        except ValueError:
             print("Distância inválida. Certifique-se de inserir somente números\n")
 
     while True:
         try:
             combustivel = float(input("Qual o valor do combustível: ").replace(",", "."))
             break
-        except:
+        except ValueError:
             print("Distância inválida. Certifique-se de inserir somente números\n")
 
-    # Criação das dependências
     gps = GPS(localizacao, destino, distancia)
     consumo = Consumo(combustivel, consumo_km, gps)
     carro = Vehicle(velocidade, direção, nome, gps, consumo)    

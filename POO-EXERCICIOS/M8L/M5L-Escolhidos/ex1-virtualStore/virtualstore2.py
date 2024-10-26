@@ -1,42 +1,56 @@
-'''1. Crie uma classe chamada VirtualStore que represente uma plataforma de vendas
-online. Essa classe deve ter funcionalidades para cadastrar produtos, gerar carrinho
-de compras, aplicar descontos e calcular o valor total da compra.'''
+from abc import ABC, abstractmethod
+
+class Discount(ABC):
+    @abstractmethod
+    def calcular_desconto(self, preco):
+        pass
+
+class DiscountPercentage(Discount):
+    def __init__(self, valor):
+        self.valor = valor
+
+    def calcular_desconto(self, preco):
+        return preco * (self.valor / 100)
+
+class DiscountFixed(Discount):
+    def __init__(self, valor):
+        self.valor = valor
+
+    def calcular_desconto(self, preco):
+        return self.valor
+    
+class DiscountManager:
+    def __init__(self):
+        self.desconto = None
+
+    def definir_desconto(self, desconto: Discount):
+        self.desconto = desconto
+
+    def aplicar_desconto(self, total):
+        if self.desconto:
+            return total - self.desconto.calcular_desconto(total)
+        return total
 
 class Product:
     def __init__(self, nome, preco):
         self.nome = nome
         self.preco = preco
 
-    def aplicar_desconto(self, desconto):
-        self.preco -= desconto.calcular_desconto(self.preco)
-
     def __str__(self):
         return f"{self.nome}: R$ {self.preco:.2f}"
 
-
-class Discount:
-    def __init__(self, tipo, valor):
-        self.tipo = tipo
-        self.valor = valor
-
-    def calcular_desconto(self, preco):
-        if self.tipo == "percentual":
-            return preco * (self.valor / 100)
-        elif self.tipo == "fixo":
-            return self.valor
-        else:
-            return 0
-
-
-class Carrinho:
+class Cart:
     def __init__(self):
         self.itens = []
+        self.discount_manager = DiscountManager() 
 
     def adicionar_produto(self, produto):
         self.itens.append(produto)
 
     def calcular_total(self):
-        return sum(produto.preco for produto in self.itens)
+        total = sum(produto.preco for produto in self.itens)
+        total = self.discount_manager.aplicar_desconto(total) 
+        return max(total, 0)
 
     def mostrar_carrinho(self):
         if not self.itens:
@@ -46,12 +60,10 @@ class Carrinho:
         for produto in self.itens:
             print(produto)
         print()
-        
-    def aplicar_desconto(self, desconto):
-        for produto in self.itens:
-            produto.aplicar_desconto(desconto)
-        print(f"Desconto '{desconto.tipo}' aplicado aos produtos no carrinho.\n")
 
+    def definir_desconto(self, desconto: Discount):
+        self.discount_manager.definir_desconto(desconto)  
+        print("Desconto definido para o carrinho.\n")
 
 class VirtualStore:
     def __init__(self):
@@ -80,31 +92,30 @@ class VirtualStore:
                 return produto
         return None
 
-
 def obter_entrada(mensagem, tipo=str, positivo=False):
     while True:
         try:
-            entrada = tipo(input(mensagem))
+            entrada = input(mensagem).replace(',', '.')
+            entrada = tipo(entrada)
             if positivo and entrada < 0:
                 raise ValueError("O valor não pode ser negativo.")
             return entrada
         except ValueError:
             print(f"Entrada inválida. Tente novamente.\n")
 
-
 def main():
     loja = VirtualStore()
-    carrinho = Carrinho()
+    carrinho = Cart()  
     print("-=" * 30)
 
     while True:
-        print("Menu:")
+        print("\nMenu:")
         print("1. Cadastrar Produto")
         print("2. Mostrar Produtos")
         print("3. Adicionar ao Carrinho")
-        print("4. Aplicar Desconto")
-        print("5. Finalizar Compra")
-        print("6. Sair")
+        print("4. Mostrar Carrinho")
+        print("5. Aplicar Desconto")
+        print("6. Finalizar Compra")
 
         escolha = input("\nEscolha uma opção: ")
         print()
@@ -124,27 +135,33 @@ def main():
             else:
                 print(f"Produto '{nome_produto}' não encontrado.\n")
         elif escolha == '4':
+            carrinho.mostrar_carrinho()
+            total = carrinho.calcular_total()
+            print(f"Total da compra: R$ {total:.2f}\n")
+        elif escolha == '5':
             tipo_desconto = input("Digite o tipo de desconto (percentual/fixo): ").lower()
             if tipo_desconto not in ["percentual", "fixo"]:
                 print("Tipo de desconto inválido! Tente novamente.\n")
                 continue
 
             valor_desconto = obter_entrada(
-                f"Digite o valor do desconto {'(%)' if tipo_desconto == 'percentual' else '(em R$)'}: ", 
+                f"Digite o valor do desconto {'(%)' if tipo_desconto == 'percentual' else '(R$)'}: ", 
                 tipo=float, positivo=True
             )
-            desconto = Discount(tipo_desconto, valor_desconto)
-            carrinho.aplicar_desconto(desconto)
-        elif escolha == '5':
+            if tipo_desconto == "percentual":
+                desconto = DiscountPercentage(valor_desconto)
+            else:
+                desconto = DiscountFixed(valor_desconto)
+
+            carrinho.definir_desconto(desconto)
+        elif escolha == '6':
             carrinho.mostrar_carrinho()
             total = carrinho.calcular_total()
             print(f"Total da compra: R$ {total:.2f}\n")
-        elif escolha == '6':
-            print("Saindo da loja. Obrigado!")
+            print("Compra Finalizada. Obrigado!")
             print("-=" * 30)
             break
         else:
             print("Opção inválida! Tente novamente.\n")
-
 
 main()

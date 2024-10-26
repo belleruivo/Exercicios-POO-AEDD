@@ -27,9 +27,9 @@ def main():
         print("1. Cadastrar Produto")
         print("2. Mostrar Produtos")
         print("3. Adicionar ao Carrinho")
-        print("4. Aplicar Desconto")
-        print("5. Finalizar Compra")
-        print("6. Sair")
+        print("4. Mostrar Carrinho")
+        print("5. Aplicar Desconto")
+        print("6. Finalizar Compra")
 
         escolha = input("\nEscolha uma opção: ")
         print()
@@ -49,6 +49,10 @@ def main():
             else:
                 print(f"Produto '{nome_produto}' não encontrado.\n")
         elif escolha == '4':
+            carrinho.mostrar_carrinho()
+            total = carrinho.calcular_total()
+            print(f"Total da compra: R$ {total:.2f}\n")
+        elif escolha == '5':
             tipo_desconto = input("Digite o tipo de desconto (percentual/fixo): ").lower()
             if tipo_desconto not in ["percentual", "fixo"]:
                 print("Tipo de desconto inválido! Tente novamente.\n")
@@ -64,12 +68,11 @@ def main():
                 desconto = DiscountFixed(valor_desconto)
 
             carrinho.definir_desconto(desconto)
-        elif escolha == '5':
+        elif escolha == '6':
             carrinho.mostrar_carrinho()
             total = carrinho.calcular_total()
             print(f"Total da compra: R$ {total:.2f}\n")
-        elif escolha == '6':
-            print("Saindo da loja. Obrigado!")
+            print("Compra Finalizada. Obrigado!")
             print("-=" * 30)
             break
         else:
