@@ -1,6 +1,6 @@
 from vehicle import Vehicle
 
-class VehicleDetalhado(Vehicle): #Associação de classes?
+class VehicleDetalhado(Vehicle): #Associação de classes? 
     # Classe filha que adiciona funcionalidades extras, mantendo Vehicle inalterada.
     def exibir_detalhes(self):
         return (

@@ -6,61 +6,66 @@ na matriz e indique a posição (ou as posições, caso aja repetição) em que 
 encontra (i, j).
 '''
 
-import random
+import random  # importa o módulo random para gerar números aleatórios
 
 def criar_matriz(linhas, colunas, min_valor, max_valor):
+    # cria uma matriz com 'linhas' linhas e 'colunas' colunas, preenchida com números aleatórios entre 'min_valor' e 'max_valor'
     return [[random.randint(min_valor, max_valor) for _ in range(colunas)] for _ in range(linhas)]
 
 def ordenar_matriz(matriz):
+    # ordena cada linha da matriz em ordem crescente
     for linha in matriz:
         linha.sort()
 
 def busca_binaria(linha, elemento):
-    esquerda, direita = 0, len(linha) - 1
-    while esquerda <= direita:
-        meio = (esquerda + direita) // 2
-        if linha[meio] == elemento:
-            return meio
-        elif linha[meio] < elemento:
-            esquerda = meio + 1
-        else:
-            direita = meio - 1
-    return -1
+    # realiza uma busca binária em uma linha para encontrar o 'elemento'
+    esquerda, direita = 0, len(linha) - 1  # define os limites esquerdo e direito da busca
+    while esquerda <= direita:  # enquanto a parte não verificada da linha não for vazia
+        meio = (esquerda + direita) // 2  # encontra o índice do meio
+        if linha[meio] == elemento:  # se o elemento do meio é o procurado
+            return meio  # retorna o índice do meio
+        elif linha[meio] < elemento:  # se o elemento do meio é menor que o procurado
+            esquerda = meio + 1  # move o limite esquerdo para a direita do meio
+        else:  # se o elemento do meio é maior que o procurado
+            direita = meio - 1  # move o limite direito para a esquerda do meio
+    return -1  # retorna -1 se o elemento não for encontrado
 
 def buscar_elemento_matriz(matriz, elemento):
-    posicoes = []
-    for i, linha in enumerate(matriz):
-        indice = busca_binaria(linha, elemento)
-        if indice != -1:
+    # busca o 'elemento' em toda a matriz e retorna uma lista de posições onde ele é encontrado
+    posicoes = []  # inicializa uma lista vazia para armazenar as posições
+    for i, linha in enumerate(matriz):  # percorre cada linha da matriz com seu índice
+        indice = busca_binaria(linha, elemento)  # realiza a busca binária na linha
+        if indice != -1:  # se o elemento foi encontrado na linha
+            # Verifica todas as ocorrências do elemento na linha
             esquerda = indice
-            while esquerda >= 0 and linha[esquerda] == elemento:
-                posicoes.append((i, esquerda))
-                esquerda -= 1
+            while esquerda >= 0 and linha[esquerda] == elemento:  # verifica para a esquerda do índice encontrado
+                posicoes.append((i, esquerda))  # adiciona a posição à lista
+                esquerda -= 1  # move para a esquerda
             direita = indice + 1
-            while direita < len(linha) and linha[direita] == elemento:
-                posicoes.append((i, direita))
-                direita += 1
-    return posicoes
+            while direita < len(linha) and linha[direita] == elemento:  # verifica para a direita do índice encontrado
+                posicoes.append((i, direita))  # adiciona a posição à lista
+                direita += 1  # move para a direita
+    return posicoes  # retorna a lista de posições
 
 def main():
-    linhas, colunas = 500, 50
-    min_valor, max_valor = 1, 10000
+    linhas, colunas = 500, 50  # define o número de linhas e colunas da matriz
+    min_valor, max_valor = 1, 10000  # define o valor mínimo e máximo dos números aleatórios
 
-    matriz = criar_matriz(linhas, colunas, min_valor, max_valor)
-    ordenar_matriz(matriz)
+    matriz = criar_matriz(linhas, colunas, min_valor, max_valor)  # cria a matriz com os valores definidos
+    ordenar_matriz(matriz)  # ordena cada linha da matriz
 
-    elemento_sorteado = random.randint(min_valor, max_valor)
-    print(f"Elemento sorteado: {elemento_sorteado}")
+    elemento_sorteado = random.randint(min_valor, max_valor)  # sorteia um elemento aleatório entre min_valor e max_valor
+    print(f"Elemento sorteado: {elemento_sorteado}")  # imprime o elemento sorteado
 
-    posicoes = buscar_elemento_matriz(matriz, elemento_sorteado)
-    quantidade = len(posicoes)
+    posicoes = buscar_elemento_matriz(matriz, elemento_sorteado)  # busca o elemento sorteado na matriz
+    quantidade = len(posicoes)  # conta a quantidade de posições encontradas
 
-    if quantidade > 0:
-        print(f"Quantidade de elementos iguais a {elemento_sorteado}: {quantidade}")
-        print("Posições (i, j):")
-        for posicao in posicoes:
-            print(posicao)
-    else:
-        print(f"O elemento {elemento_sorteado} não foi encontrado na matriz.")
+    if quantidade > 0:  # se o elemento foi encontrado
+        print(f"Quantidade de elementos iguais a {elemento_sorteado}: {quantidade}")  # imprime a quantidade de elementos encontrados
+        print("Posições (i, j):")  # imprime o cabeçalho das posições
+        for posicao in posicoes:  # percorre cada posição encontrada
+            print(posicao)  # imprime a posição
+    else:  # se o elemento não foi encontrado
+        print(f"O elemento {elemento_sorteado} não foi encontrado na matriz.")  # imprime que o elemento não foi encontrado
 
-main()
+main()  # chama a função principal para executar o programa

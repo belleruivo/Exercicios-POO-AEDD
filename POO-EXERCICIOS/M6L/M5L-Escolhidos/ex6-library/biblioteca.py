@@ -7,9 +7,10 @@ from usuario import Usuario
 
 class Biblioteca:
     def __init__(self):
+        # inicializa a classe biblioteca com um catálogo, listas de usuários, empréstimos, autores e categorias
         self.catalogo = Catalogo()
-        self.usuarios = []
-        self.emprestimos = []
+        self.usuarios = [] # lista vazia
+        self.emprestimos = [] 
         self.autores = []
         self.categorias = []
 
@@ -17,6 +18,7 @@ class Biblioteca:
         try:
             autor = self.buscar_ou_criar_autor(nome_autor)
             categoria = self.buscar_ou_criar_categoria(nome_categoria)
+            # cria um novo livro e adiciona ao catálogo, autor e categoria
             livro = Livro(titulo, autor, isbn, categoria)
             self.catalogo.adicionar_livro(livro)
             autor.adicionar_livro(livro)
@@ -36,6 +38,9 @@ class Biblioteca:
     def emprestar_livro(self, isbn, user_id):
         livro = self.catalogo.buscar_livro(isbn)
         if livro and livro.disponivel:
+            # a função next serve para obter o próximo item de um iterável, no caso, a lista de usuários
+            # Se houver um usuário na lista self.usuarios cujo user_id corresponda ao user_id fornecido, next() retornará esse usuário.
+            # Se não houver nenhum, next() retornará None.
             usuario = next((u for u in self.usuarios if u.user_id == user_id), None)
             if usuario:
                 emprestimo = Emprestimo(livro, usuario)
@@ -80,6 +85,7 @@ class Biblioteca:
             return f"Erro ao verificar disponibilidade: {e}"
 
     def buscar_ou_criar_autor(self, nome):
+        # busca um autor pelo nome ou cria um novo se não existir
         try:
             autor = next((a for a in self.autores if a.nome == nome), None)
             if not autor:
@@ -90,6 +96,7 @@ class Biblioteca:
             return f"Erro ao buscar ou criar autor: {e}"
 
     def buscar_ou_criar_categoria(self, nome):
+        # busca uma categoria pelo nome ou cria uma nova se não existir
         try:
             categoria = next((c for c in self.categorias if c.nome == nome), None)
             if not categoria:
@@ -100,4 +107,5 @@ class Biblioteca:
             return f"Erro ao buscar ou criar categoria: {e}"
 
     def __repr__(self):
+        # retorna uma representação string da biblioteca, incluindo o catálogo, usuários, empréstimos, autores e categorias
         return f"Biblioteca(catalogo={self.catalogo}, usuarios={self.usuarios}, emprestimos={self.emprestimos}, autores={self.autores}, categorias={self.categorias})"

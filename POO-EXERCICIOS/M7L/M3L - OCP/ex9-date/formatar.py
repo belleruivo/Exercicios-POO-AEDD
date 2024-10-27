@@ -4,7 +4,6 @@ class FormatadorData:
     def formatar(self, data: Date):
         raise NotImplementedError("Este método deve ser implementado pelas subclasses")
 
-# Implementações de diferentes formatos
 class FormatadorISO(FormatadorData):
     def formatar(self, data: Date):
         return f"{data.get_ano()}-{data.get_mes():02}-{data.get_dia():02}"

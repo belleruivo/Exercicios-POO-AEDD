@@ -2,7 +2,7 @@ class Cliente:
     def __init__(self, nome, email):
         self.nome = nome
         self.email = email
-        self.carrinho = []
+        self.carrinho = [] #associação - cada cliente tem um carrinho = lista de produtos
 
     def adicionar_ao_carrinho(self, produto):
         self.carrinho.append(produto)

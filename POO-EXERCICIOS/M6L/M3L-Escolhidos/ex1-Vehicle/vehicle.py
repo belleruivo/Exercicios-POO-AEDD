@@ -2,11 +2,11 @@ from consumo import Consumo
 from gps import GPS
 
 class Vehicle:
-    def __init__(self, velocidade, direção, nome, gps: GPS, consumo: Consumo):
+    def __init__(self, velocidade, direção, nome, gps: GPS, consumo: Consumo): 
         self.velocidade = velocidade
         self.direção = direção
         self.nome = nome
-        self.gps = gps
+        self.gps = gps 
         self.consumo = consumo
                                                                                                                                                
     def getVelocidade(self):

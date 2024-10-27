@@ -15,4 +15,5 @@ class Catalogo:
         return None
 
     def __repr__(self):
+        # retorna uma representação string do catálogo, incluindo a lista de livros
         return f"Catalogo(livros={self.livros})"

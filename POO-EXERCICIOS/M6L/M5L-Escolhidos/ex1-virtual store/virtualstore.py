@@ -3,15 +3,14 @@ from pagamento import Pagamento
 
 class VirtualStore:
     def __init__(self):
-        self.produtos = []
-        self.clientes = []
+        self.produtos = [] 
+        self.clientes = [] #associação - a loja tem uma lista de produtos e clientes
 
     @classmethod
     def criar_produto(cls, nome, preco):
-        return Product(nome, preco)
+        return Product(nome, preco) #cria uma instância da classe Product
 
     def produto_existe(self, nome):
-        """Verifica se um produto com o mesmo nome já está cadastrado."""
         for produto in self.produtos:
             if produto.nome.lower() == nome.lower():
                 return True
@@ -51,13 +50,7 @@ class VirtualStore:
             print("O carrinho está vazio!\n")
             return
         
-        while True:
-            porcentagem_desconto = input("Digite a porcentagem de desconto (%): ")
-            if porcentagem_desconto.isdigit():
-                porcentagem_desconto = int(porcentagem_desconto)
-                break
-            else:
-                print("Entrada inválida! Digite apenas números inteiros.\n")
+        porcentagem_desconto = self.obter_entrada("Digite a porcentagem de desconto (%): ", tipo=float, positivo=True)
         
         for produto in cliente.carrinho:
             produto.preco -= produto.preco * (porcentagem_desconto / 100)
@@ -74,7 +67,7 @@ class VirtualStore:
         print(f"Total da compra: R$ {total:.2f}\n")
 
         tipo_pagamento = self.obter_pagamento()
-        pagamento = Pagamento(tipo_pagamento, total)
+        pagamento = Pagamento(tipo_pagamento, total) #um pagamento é relacionado ao cliente e ao total da compra
         pagamento.processar_pagamento()
         print("Compra finalizada com sucesso!\n")
 
@@ -85,15 +78,24 @@ class VirtualStore:
                 return tipo
             print("Tipo de pagamento inválido! Tente novamente.\n")
 
-    def obter_entrada(self, mensagem, tipo=str, positivo=False):
+    def obter_entrada(self, mensagem, tipo=float, positivo=False):
         while True:
             try:
-                entrada = tipo(input(mensagem))
-                if positivo and entrada < 0:
-                    raise ValueError("O valor não pode ser negativo.")
-                return entrada
+                entrada = input(mensagem).replace(",", ".")  
+                valor = tipo(entrada)  
+                if positivo and valor < 0:
+                    print("O valor deve ser positivo. Tente novamente.")
+                    continue
+                return valor  
             except ValueError:
-                print(f"Entrada inválida. Tente novamente.\n")
+                print("Entrada inválida. Certifique-se de inserir um número válido.")
+    
+    def obter_email(self):
+        while True:
+            email = input("Digite o e-mail do cliente: ").strip().lower()
+            if "@" in email:
+                return email
+            print("E-mail inválido! Tente novamente.\n")
 
     def selecionar_cliente(self):
         if not self.clientes:
