@@ -1,3 +1,7 @@
+# 1. Crie uma classe Person, contendo os atributos encapsulados, com seus respectivos
+# seletores (getters) e modificadores (setters), e ainda o construtor padrão. Atributos:
+# nome, endereço, CPF, RG e telefone.
+
 class Person:
     def __init__(self, nome="", endereco="", cpf="", rg="", telefone=""):
         self.__nome = nome

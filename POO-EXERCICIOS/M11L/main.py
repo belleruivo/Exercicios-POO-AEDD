@@ -1,3 +1,14 @@
+# Crie um sistema chamado Sistema de Gestão de Pessoas (SGP). Nele, haverá um script
+# principal chamado main.py com um menu para gerenciar dados de colaboradores
+# relacionados com a empresa. Escreva todo o programa documentando e testando restrições
+# de entradas de dados e exceções (pesquise como funciona o try-except no Python).
+
+'''Para ajudar a gente a entender, dps a gente apaga -> Sim, o código atende ao Princípio da Substituição de 
+Liskov (Liskov Substitution Principle - LSP) do SOLID. O LSP afirma que uma subclasse deve ser substituível
+por sua superclasse sem alterar o comportamento esperado do sistema. Em outras palavras, 
+qualquer instância da subclasse Supplier pode ser usada em um contexto onde 
+uma instância de Person é esperada, sem causar problemas no programa.'''
+
 from person import Person
 from supplier import Supplier
 
@@ -53,8 +64,9 @@ def add_person():
     return pessoa
 
 def add_supplier():
-    pessoa = add_person()
+    pessoa = add_person() # Cria uma pessoa para ser usada como base para Supplier
     
+    # Dados adicionais exclusivos de Supplier
     while True:
         try:
             value_credit = float(input("Crédito máximo: "))
