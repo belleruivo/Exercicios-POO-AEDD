@@ -3,15 +3,14 @@ from pagamento import Pagamento
 
 class VirtualStore:
     def __init__(self):
-        self.produtos = []
-        self.clientes = []
+        self.produtos = [] 
+        self.clientes = [] #associação - a loja tem uma lista de produtos e clientes
 
     @classmethod
     def criar_produto(cls, nome, preco):
-        return Product(nome, preco)
+        return Product(nome, preco) #cria uma instância da classe Product
 
     def produto_existe(self, nome):
-        """Verifica se um produto com o mesmo nome já está cadastrado."""
         for produto in self.produtos:
             if produto.nome.lower() == nome.lower():
                 return True
@@ -68,7 +67,7 @@ class VirtualStore:
         print(f"Total da compra: R$ {total:.2f}\n")
 
         tipo_pagamento = self.obter_pagamento()
-        pagamento = Pagamento(tipo_pagamento, total)
+        pagamento = Pagamento(tipo_pagamento, total) #um pagamento é relacionado ao cliente e ao total da compra
         pagamento.processar_pagamento()
         print("Compra finalizada com sucesso!\n")
 
