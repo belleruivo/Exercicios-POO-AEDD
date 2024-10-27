@@ -39,16 +39,45 @@ def display_menu():
     return input("Escolha uma opção: ")
 
 def add_person():
-    try:
+    while True:
         nome = input("Nome: ")
-        endereco = input("Endereço: ")
-        cpf = input("CPF: ")
-        rg = input("RG: ")
-        telefone = input("Telefone: ")
-        pessoa = Person(nome, endereco, cpf, rg, telefone)
-        return pessoa
-    except ValueError as e:
-        print(f"Erro ao adicionar pessoa: {e}")
+        if nome.isalpha():  
+            break
+        else:
+            print("O nome deve conter apenas letras. Tente novamente.")
+
+    endereco = input("Endereço: ")
+
+    while True:
+            try:
+                cpf = int(input("CPF: "))
+                if cpf < 0:
+                    print("O CPF não pode ser negativo.")
+                break
+            except ValueError:
+                print(f"Entrada inválida. Certifique-se de inserir um número válido")
+
+    while True:
+            try:
+                rg = int(input("RG: "))
+                if rg < 0:
+                    print("O CPF não pode ser negativo.")
+                break
+            except ValueError:
+                print(f"Entrada inválida. Certifique-se de inserir um número válido")
+    
+    while True:
+            try:
+                telefone = int(input("Telefone: "))
+                if telefone < 0:
+                    print("O CPF não pode ser negativo.")
+                break
+            except ValueError:
+                print(f"Entrada inválida. Certifique-se de inserir um número válido")
+
+    
+    pessoa = Person(nome, endereco, cpf, rg, telefone)
+    return pessoa
 
 def add_supplier():
     try:
