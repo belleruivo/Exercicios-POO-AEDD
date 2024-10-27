@@ -39,30 +39,108 @@ def display_menu():
     return input("Escolha uma opção: ")
 
 def add_person():
-    try:
+    while True:
         nome = input("Nome: ")
-        endereco = input("Endereço: ")
-        cpf = input("CPF: ")
-        rg = input("RG: ")
-        telefone = input("Telefone: ")
-        pessoa = Person(nome, endereco, cpf, rg, telefone)
-        return pessoa
-    except ValueError as e:
-        print(f"Erro ao adicionar pessoa: {e}")
+        if nome.isalpha():  
+            break
+        else:
+            print("O nome deve conter apenas letras. Tente novamente.\n")
+
+    endereco = input("Endereço: ")
+
+    while True:
+        try:
+            cpf = input("CPF (Somente números): ")
+            if len(cpf) == 11 and cpf.isdigit():
+                break
+            else:
+                print("CPF deve ter 11 dígitos e conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+
+    while True:
+        try:
+            rg = input("RG (Somente números): ")
+            if rg.isdigit():
+                break
+            else:
+                print("RG deve conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+    
+    while True:
+        try:
+            telefone = input("Telefone (Somente números): ")
+            if telefone.isdigit():
+                break
+            else:
+                print("Telefone deve conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+
+    pessoa = Person(nome, endereco, cpf, rg, telefone)
+    return pessoa
 
 def add_supplier():
-    try:
+    while True:
         nome = input("Nome: ")
-        endereco = input("Endereço: ")
-        cpf = input("CPF: ")
-        rg = input("RG: ")
-        telefone = input("Telefone: ")
-        value_credit = float(input("Crédito máximo: "))
-        value_debt = float(input("Dívida: "))
-        fornecedor = Supplier(nome, endereco, cpf, rg, telefone, value_credit, value_debt)
-        return fornecedor
-    except ValueError as e:
-        print(f"Erro ao adicionar fornecedor: {e}")
+        if nome.isalpha():  
+            break
+        else:
+            print("O nome deve conter apenas letras. Tente novamente.\n")
+
+    endereco = input("Endereço: ")
+
+    while True:
+        try:
+            cpf = input("CPF (Somente números): ")
+            if len(cpf) == 11 and cpf.isdigit():
+                break
+            else:
+                print("CPF deve ter 11 dígitos e conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+
+    while True:
+        try:
+            rg = input("RG (Somente números): ")
+            if rg.isdigit():
+                break
+            else:
+                print("RG deve conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+    
+    while True:
+        try:
+            telefone = input("Telefone (Somente números): ")
+            if telefone.isdigit():
+                break
+            else:
+                print("Telefone deve conter apenas números.")
+        except ValueError:
+            print("Entrada inválida. Tente novamente.\n")
+
+    while True:
+            try:
+                value_credit = float(input("Crédito máximo: "))
+                if value_credit < 0:
+                    print("O crédito não pode ser negativo.")
+                break
+            except ValueError:
+                print(f"Entrada inválida. Certifique-se de inserir um número válido\n")
+    
+    while True:
+            try:
+                value_debt = float(input("Dívida: "))
+                if value_debt <0:
+                    print("O crédito não pode ser negativo.")
+                break
+            except ValueError:
+                print(f"Entrada inválida. Certifique-se de inserir um número válido\n")
+
+    fornecedor = Supplier(nome, endereco, cpf, rg, telefone, value_credit, value_debt)
+    return fornecedor
 
 def consult_supplier(supplier):
     print(f"\nFornecedor: {supplier.get_nome()}")
@@ -75,6 +153,7 @@ def consult_supplier(supplier):
     print(f"Saldo: {supplier.get_balance()}")
 
 def main():
+    print("-="*30)
     suppliers = []
     
     while True:
@@ -107,5 +186,5 @@ def main():
             break
         else:
             print("Opção inválida. Tente novamente.")
-
+    print("-="*30)
 main()
