@@ -1,9 +1,16 @@
-# account.py
-
 class Account:
-    def __init__(self, name: str, balance: float):
+    def __init__(self, name: str, balance: float, formatter: callable = None):
         self.name = name
         self.balance = balance
+        self.formatter = formatter if formatter else self.default_formatter  # Injeção de dependência
+
+    def default_formatter(self, value: float) -> str:
+        """Formatador padrão para o saldo."""
+        return f"{value:.2f}"
+
+    def formatted_balance(self) -> str:
+        """Retorna o saldo formatado usando o formatador injetado."""
+        return self.formatter(self.balance)
 
     def deposit(self, amount: float):
         """Adiciona um valor ao saldo da conta."""

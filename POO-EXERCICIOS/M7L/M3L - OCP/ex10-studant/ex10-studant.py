@@ -31,9 +31,10 @@ class Student:
     def print_info(self):
         print(f"Nome: {self.name}, Nota: {self.grade}")
 
+
 # Função para testar os operadores de comparação
 def test_comparisons(student1, student2):
-    print(f"\nComparando {student1.name} com {student2.name}:")
+    print(f"Comparando {student1.name} com {student2.name}:")
     if student1 == student2:
         print("Os nomes são iguais.")
     else:
@@ -49,46 +50,37 @@ def test_comparisons(student1, student2):
     else:
         print(f"{student1.name} não vem depois de {student2.name}.")
 
+
 # Função para embaralhar e ordenar a lista de estudantes
 def shuffle_and_sort_students(students):
+    # Embaralhando a lista de estudantes
     random.shuffle(students)
     print("\nLista embaralhada:")
     for student in students:
         student.print_info()
 
+    # Ordenando a lista de estudantes
     students.sort()
     print("\nLista ordenada:")
     for student in students:
         student.print_info()
 
+
 def main():
-    students = []
-    
-    i = 0
-    while True:
-        name = input(f"Digite o nome do aluno {i + 1}° (ou 'sair' para encerrar): ")
-        if name.lower() == 'sair':
-            break
-        if not name.isalpha():
-            print("Por favor, insira um nome válido (não pode conter números ou caracteres especiais).")
-            continue
-        try:
-            grade = float(input("Digite a nota do aluno: "))
-            if grade < 0 or grade > 10:
-                print("Nota inválida. A nota deve estar entre 0 e 11.")
-                continue  
-            students.append(Student(name, grade))
-            i += 1  
-        except ValueError:
-            print("Por favor, insira uma nota válida.")
+    # Criando alguns objetos Student
+    student1 = Student("Ana", 85)
+    student2 = Student("Bruno", 90)
+    student3 = Student("Carlos", 75)
 
-    if len(students) < 2:
-        print("É necessário pelo menos dois alunos para realizar comparações.")
-        return
-    for j in range(len(students) - 1):
-        test_comparisons(students[j], students[j + 1])
+    # Testando as comparações
+    test_comparisons(student1, student2)
+    test_comparisons(student2, student3)
+    test_comparisons(student1, student3)
 
+    # Criando uma lista de estudantes
+    students = [student1, student2, student3]
+
+    # Embaralhando e ordenando a lista de estudantes
     shuffle_and_sort_students(students)
 
-if __name__ == "__main__":
-    main()
+main()

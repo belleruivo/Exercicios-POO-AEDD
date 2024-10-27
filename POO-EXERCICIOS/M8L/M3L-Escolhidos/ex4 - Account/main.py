@@ -1,5 +1,3 @@
-# main.py
-
 from account import Account
 from account_display import AccountDisplay
 from account_manager import AccountManager
@@ -24,7 +22,7 @@ def main():
         elif choice == '2':
             print("\nLista de Contas:")
             for account in manager.list_accounts():
-                account_display = AccountDisplay(account)  # Injeção de dependência
+                account_display = AccountDisplay(account)  # Utilizando o display padrão
                 account_display.display_account()
         
         elif choice == '3':
