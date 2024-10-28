@@ -1,10 +1,8 @@
-from gps import GPS
-
 class Consumo:
-    def __init__(self, valor_combustivel, consumo_por_km, gps: GPS):
+    def __init__(self, valor_combustivel, consumo_por_km, gps): 
         self.valor_combustivel = valor_combustivel
         self.consumo_por_km = consumo_por_km  
-        self.gps = gps
+        self.gps = gps #cria instância de GPS
 
     def set_combustivel(self, valor_combustivel):
         self.valor_combustivel = valor_combustivel
@@ -19,7 +17,7 @@ class Consumo:
         return self.consumo_por_km
     
     def calcular_custo_viagem(self):
-        distancia = self.gps.get_distancia()
+        distancia = self.gps.get_distancia() #utiliza o método get_distancia da classe gps
         custo_total = (distancia / self.consumo_por_km) * self.valor_combustivel
         return custo_total
     

@@ -3,8 +3,6 @@ km/h, a direção em graus dos pneus e o nome do proprietário. Crie métodos de
 acesso e impressão para esta classe e faça um programa de teste.
 '''
 from vehicle import Vehicle
-from gps import GPS
-from consumo import Consumo
 
 def main():
     print("-="*40)
@@ -70,9 +68,7 @@ def main():
             print("Distância inválida. Certifique-se de inserir somente números\n")
 
     
-    gps = GPS(localizacao, destino, distancia)
-    consumo = Consumo(combustivel, consumo_km, gps)
-    carro = Vehicle(velocidade, direção, nome, gps, consumo)    
+    carro = Vehicle(velocidade, direção, nome, localizacao, destino, distancia, combustivel, consumo_km)    
     carro.imprimir()
    
         

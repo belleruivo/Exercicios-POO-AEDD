@@ -66,10 +66,6 @@ def main():
     
     carro = Vehicle(velocidade, direção, nome)    
     carro = Vehicle(velocidade, direção, nome)    
-    print("\nDETALHES DO VEÍCULO:")
-    print(f"\nVelocidade Atual: {carro.getVelocidade()}km/h")
-    print(f"Direção dos Pneus: {carro.getDireção()}°")
-    print(f"Nome do Proprietário: {carro.getNome()}")
-    print("-="*40)
+    carro.imprimir()
         
 main()
