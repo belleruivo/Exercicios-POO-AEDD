@@ -8,11 +8,11 @@ Em todos os exercícios abaixo, identifique a possibilidade de usar além dos m�
 objetos, métodos de classe (@classmethod) e métodos fora de contexto (@staticmethod).
 '''
 
-import random  # importa o módulo random
+import random  
 
 class GuessingGame:
     def __init__(self):
-        self.number = random.randint(1, 100)  # gera um número aleatório entre 1 e 100
+        self.number = random.randint(1, 100)  
 
     def guess(self, player_guess):
         if player_guess < self.number:
@@ -40,16 +40,16 @@ class GuessingGame:
         return cls()
 
 def main():
-    game = GuessingGame.novo_jogo()  # cria uma nova instância do jogo
+    game = GuessingGame.novo_jogo()  
     while True:
-        player_input = input("digite seu palpite (entre 0 e 100): ")  # solicita um palpite do jogador
+        player_input = input("digite seu palpite (entre 0 e 100): ")  
         player_guess = GuessingGame.validar_palpite(player_input)
         if player_guess is None:
             continue
-        result = game.guess(player_guess)  # verifica o palpite
-        print(result)  # imprime o resultado
+        result = game.guess(player_guess)  
+        print(result)  
         if result == "parabéns! você adivinhou o número.":
-            break  # termina o loop se o jogador adivinhar corretamente
+            break
 
 if __name__ == "__main__":
-    main()  # chama a função main para iniciar o programa
+    main()  
