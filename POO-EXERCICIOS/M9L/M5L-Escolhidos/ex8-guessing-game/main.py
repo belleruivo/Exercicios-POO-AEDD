@@ -5,10 +5,11 @@ a injeção de dependência.'''
 from modules import GameSession, Player
 
 def main():
-    name = input("Digite o seu nome: ")
-    player = Player(name)
-    session = GameSession(player)
-    session.play()
+    while True:
+        name = input("Digite o seu nome: ")
+        player = Player(name)
+        session = GameSession(player)
+        session.play()
 
 if __name__ == "__main__":
     main()
