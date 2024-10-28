@@ -139,7 +139,6 @@ def consult_employee(employee):
     print(f"Salário Base: {employee.get_base_salary()}")
     print(f"Imposto: {employee.get_tax()}%")
 
-    # Verifica se o funcionário é um administrador
     if isinstance(employee, Administrator):
         print(f"Ajuda de Custo: {employee.get_subsistence_allowance()}")
         print("Tipo: Administrador")
