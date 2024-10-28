@@ -2,8 +2,8 @@
 exercício, incluindo novas classes relacionadas, conforme a sua criatividade, demonstrando
 a injeção de dependência.'''
 
-from player import Player
-from game_session import GameSession
+from modules.game_session import GameSession
+from modules.player import Player
 
 def main():
     name = input("Digite o seu nome: ")
