@@ -40,13 +40,13 @@ class GuessingGame:
         return cls()
 
 def main():
-    game = GuessingGame.novo_jogo()  # cria uma nova instância do jogo
+    game = GuessingGame.novo_jogo()  
     while True:
         player_input = input("digite seu palpite (entre 0 e 100): ")  
         player_guess = GuessingGame.validar_palpite(player_input)
         if player_guess is None:
             continue
-        result = game.guess(player_guess)  # verifica o palpite
+        result = game.guess(player_guess)  
         print(result)  
         if result == "parabéns! você adivinhou o número.":
             break
