@@ -9,6 +9,8 @@ usual acrescido da referida comissão). Altere o main para que você possa verif
 funcionamento dos métodos implementados na classe FactoryWorker e os herdados.
 from employee import Employee'''
 
+from employee import Employee
+
 class FactoryWorker(Employee):
     def __init__(self, nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production, commission):
         super().__init__(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax)
