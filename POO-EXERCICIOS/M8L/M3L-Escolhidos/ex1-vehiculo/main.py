@@ -3,12 +3,13 @@ from gps import GPS
 from consumo import Consumo
 
 def main():
-    print("-="*40)
-    print("INSIRA SUAS INFORMAÇÕES:")
+    print("-"*50)
+    print("    INSIRA SUAS INFORMAÇÕES:")
+    print("-"*50)
     
     while True:
         try:
-            velocidade = int(input("\nDigite a velocidade atual do veículo (km/h): "))
+            velocidade = int(input("Digite a velocidade atual do veículo (km/h): "))
             if velocidade < 0:
                 print("A velocidade não pode ser negativa. Tente novamente.")
                 continue

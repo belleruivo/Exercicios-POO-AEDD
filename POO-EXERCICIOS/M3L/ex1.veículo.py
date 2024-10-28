@@ -27,20 +27,24 @@ class Vehicle:
         self.nome = nome
         
     def imprimir(self):
-        print("\nDETALHES DO VEÍCULO:")
-        print(f"\nVelocidade Atual: {self.velocidade}km/h")
+        print("-"*40)
+        print("         DETALHES DO VEÍCULO:")
+        print("-"*40)
+        print(f"Velocidade Atual: {self.velocidade}km/h")
         print(f"Direção dos Pneus: {self.direção}°")
         print(f"Nome do Proprietário: {self.nome}")
-        print("-="*40)
+        print("-"*40)
 
         
 
 def main():
-    print("-="*40)
-    print("INSIRA SUAS INFORMAÇÕES:")
+    print("-"*40)
+    print("          INSIRA SUAS INFORMAÇÕES:")
+    print("-"*40)
+    
     while True:
         try:
-            velocidade = float(input("\nDigite a velocidade atual do veículo (km/h): "))
+            velocidade = float(input("Digite a velocidade atual do veículo (km/h): "))
             if velocidade < 0:
                 print("A velocidade não pode ser negativa. Tente novamente.")
                 continue
@@ -64,8 +68,7 @@ def main():
             break
         print("Nome inválido. Certifique-se de inserir somente letras.\n")
     
-    carro = Vehicle(velocidade, direção, nome)    
-    carro = Vehicle(velocidade, direção, nome)    
+    carro = Vehicle(velocidade, direção, nome)   
     carro.imprimir()
         
 main()

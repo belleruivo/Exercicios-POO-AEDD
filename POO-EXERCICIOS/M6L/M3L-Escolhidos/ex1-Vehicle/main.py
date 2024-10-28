@@ -5,8 +5,9 @@ acesso e impressão para esta classe e faça um programa de teste.
 from vehicle import Vehicle
 
 def main():
-    print("-="*40)
-    print("INSIRA SUAS INFORMAÇÕES:\n")
+    print("-"*50)
+    print("    INSIRA SUAS INFORMAÇÕES:")
+    print("-"*50)
     while True:
         try:
             velocidade = float(input("Digite a velocidade atual do veículo (km/h): "))
