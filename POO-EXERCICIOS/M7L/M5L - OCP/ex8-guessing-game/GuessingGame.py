@@ -1,8 +1,8 @@
-import random  # Importa o módulo random
+import random 
 
 class GuessingGame:
     def __init__(self):
-        self.number = random.randint(1, 100)  # Gera um número aleatório entre 1 e 100
+        self.number = random.randint(1, 100) 
 
     def guess(self, player_guess):
         if player_guess < self.number:
