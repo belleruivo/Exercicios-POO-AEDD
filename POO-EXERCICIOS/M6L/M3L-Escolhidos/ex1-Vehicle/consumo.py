@@ -2,7 +2,7 @@ class Consumo:
     def __init__(self, valor_combustivel, consumo_por_km, gps): 
         self.valor_combustivel = valor_combustivel
         self.consumo_por_km = consumo_por_km  
-        self.gps = gps #cria instância de GPS
+        self.gps = gps #um atributo que armazena uma instância da classe GPS
 
     def set_combustivel(self, valor_combustivel):
         self.valor_combustivel = valor_combustivel

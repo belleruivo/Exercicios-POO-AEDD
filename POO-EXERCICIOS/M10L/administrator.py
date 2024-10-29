@@ -7,7 +7,6 @@ um empregado usual acrescido da ajuda de custo). Altere o main para que você
 possa verificar o funcionamento dos métodos implementados na classe
 Administrator e os herdados.'''
 
-# administrator.py
 from employee import Employee
 
 class Administrator(Employee):
@@ -16,7 +15,6 @@ class Administrator(Employee):
         self.subsistence_allowance = subsistence_allowance
 
     def calculate_salary(self):
-        # O salário é o salário base menos os impostos mais a ajuda de custo
         return super().calculate_salary() + self.subsistence_allowance
 
     def get_subsistence_allowance(self):
