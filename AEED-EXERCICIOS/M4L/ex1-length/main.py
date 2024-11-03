@@ -13,27 +13,49 @@ def length(linked_list): #uma instância da classe LinkedList.
         current = current.next
     return count
 
+def menu():
+    option = -1
+
+    while(option < 0 or option > 2):
+        print("\n1 - Preencher a lista com x elementos.\n" +
+            "2 - Exibir comprimento da lista")
+        option = int(input("Digite sua opção: "))
+        if (option < 0 or option > 2):
+            print("\tOpção inválida! Tente novamente")
+
+    return option
+
+
 def main():
-    linked_list = LinkedList()
-    
-    while True:
-        value = input("Digite um valor para adicionar à lista (ou 'sair' para encerrar): ")
-        
-        if value.lower() == 'sair':
-            break
-        
-        #adiciona o novo nó ao final da lista
-        new_node = Node(value)
-        
-        if linked_list.head is None:
-            linked_list.head = new_node  #se a lista estiver vazia, define o novo nó como o cabeçote
+    print("-="*15, "LINKED LIST", "-="*15)
+    choice = 100
+    my_list = LinkedList()
+
+    while choice != 0:
+        choice = menu()
+
+        if choice == 1:
+            print("\nDigite os elementos da lista (0 para sair):")
+            while True:
+                elem = int(input("Digite um elemento: "))
+                if elem == 0:
+                    break
+
+                new_node = Node(elem, my_list.head)
+                my_list.head = new_node
+            print("\nElementos inseridos na lista.")
+
         else:
-            current = linked_list.head
-            while current.next:  #percorre até o último nó
+            print("\nValores na lista:", end=" ")
+            current = my_list.head
+            while current:
+                print(current.data, end=" -> ")
                 current = current.next
-            current.next = new_node  #adiciona o novo nó ao final da lista
-    
+            print("||") 
 
-    print("O comprimento da lista é:", length(linked_list))
-
+            length_of_list = length(my_list)
+            print("Comprimento da lista:", length_of_list)
+            break
+    print("-="*35)
 main()
+

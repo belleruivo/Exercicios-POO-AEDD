@@ -1,35 +1,33 @@
 from node import Node
 
-class ListaEncadeada:
+class UnorderedLinkedList:
     def __init__(self):
-        self.cabeca = None
+        self.head = None
 
-    def adicionar_produto(self, produto):
-        novo_node = Node(produto)
-        if self.cabeca is None:
-            self.cabeca = novo_node
-        else:
-            atual = self.cabeca
-            while atual.proximo:
-                atual = atual.proximo
-            atual.proximo = novo_node
+    def add(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
 
-    def aplicar_desconto(self, taxa_desconto):
-        atual = self.cabeca
-        while atual:
-            desconto = atual.produto.preco * (taxa_desconto / 100)
-            atual.produto.preco -= desconto
-            atual = atual.proximo
+    def apply_discount(self, discount_rate):
+        current = self.head
+        while current:
+            current.data['preco'] *= (1 - discount_rate / 100)
+            current = current.next
 
-    def relatorio(self):
-        quantidade_acima_500 = 0
-        atual = self.cabeca
-        relatorio_produtos = []
-
-        while atual:
-            relatorio_produtos.append((atual.produto.codigo, atual.produto.preco))
-            if atual.produto.quantidade > 500:
-                quantidade_acima_500 += 1
-            atual = atual.proximo
-
-        return relatorio_produtos, quantidade_acima_500
+    def report(self):
+        current = self.head
+        report_data = []
+        count_above_500 = 0
+        
+        while current:
+            product = current.data
+            report_data.append(f"Código: {product['codigo']}, Novo Preço: {product['preco']:.2f}")
+            if product['quantidade'] > 500:
+                count_above_500 += 1
+            current = current.next
+        
+        print("\nRelatório de Produtos:")
+        for line in report_data:
+            print(line)
+        print(f"\nQuantidade de produtos com estoque acima de 500: {count_above_500}")

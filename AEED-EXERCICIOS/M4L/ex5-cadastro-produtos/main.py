@@ -7,11 +7,11 @@ mostrar um relatório com o código e o novo preço. O final desse relatório de
 apresentar também a quantidade de produtos com quantidade estocada superior a
 500.'''
 
-from listaEncadeada import ListaEncadeada
-from produto import Produto
+from listaEncadeada import UnorderedLinkedList
+
 
 def main():
-    lista_produtos = ListaEncadeada()
+    produtos = UnorderedLinkedList()
     
     print("-="*30)
     while True:
@@ -48,9 +48,7 @@ def main():
                 break
             except ValueError:
                 print(f"Entrada inválida. Certifique-se de inserir um número Inteiro\n")
-
-        produto = Produto(codigo, preco, quantidade)
-        lista_produtos.adicionar_produto(produto)
+        produtos.add({'codigo': codigo, 'preco': preco, 'quantidade': quantidade})
 
     while True:
             try:
@@ -61,15 +59,7 @@ def main():
             except ValueError:
                 print(f"Entrada inválida. Certifique-se de inserir um número Inteiro")
 
-    lista_produtos.aplicar_desconto(taxa_desconto)
-
-    relatorio_produtos, quantidade_acima_500 = lista_produtos.relatorio()
-
-    print("\nRelatório de Produtos:")
-    for codigo, preco in relatorio_produtos:
-        print(f"Código: {codigo}, Novo Preço: R${preco:.2f}")
-    
-    print(f"\nQuantidade de produtos com estoque superior a 500: {quantidade_acima_500}")
-    print("-="*30)
+    produtos.apply_discount(taxa_desconto)
+    produtos.report()
 
 main()
