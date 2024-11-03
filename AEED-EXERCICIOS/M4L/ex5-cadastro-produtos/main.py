@@ -48,7 +48,7 @@ def main():
                 break
             except ValueError:
                 print(f"Entrada inválida. Certifique-se de inserir um número Inteiro\n")
-        produtos.add({'codigo': codigo, 'preco': preco, 'quantidade': quantidade})
+        produtos.  append({'codigo': codigo, 'preco': preco, 'quantidade': quantidade})
 
     while True:
             try:

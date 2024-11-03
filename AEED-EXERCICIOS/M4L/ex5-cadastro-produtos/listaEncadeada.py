@@ -3,11 +3,22 @@ from node import Node
 class UnorderedLinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
 
-    def add(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+    def isEmpty(self):
+        if self.head == None:
+            return True
+        return False
+        
+    def append(self, new_data):
+        new_node = Node(new_data)
+
+        if self.isEmpty():
+            self.head = new_node
+            self.tail= new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
 
     def apply_discount(self, discount_rate):
         current = self.head
