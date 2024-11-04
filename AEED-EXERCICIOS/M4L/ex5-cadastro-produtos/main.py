@@ -7,7 +7,7 @@ mostrar um relatório com o código e o novo preço. O final desse relatório de
 apresentar também a quantidade de produtos com quantidade estocada superior a
 500.'''
 
-from listaEncadeada import UnorderedLinkedList
+from unorderedLinkedList import UnorderedLinkedList
 
 
 def main():
@@ -39,7 +39,7 @@ def main():
                     print("O valor não pode ser negativo.")
                 break
             except ValueError:
-                print(f"Entrada inválida. Certifique-se de inserir um número Inteiro\n")
+                print(f"Entrada inválida. Certifique-se de inserir um número válido\n")
         while True:
             try:
                 quantidade = int(input("Digite a quantidade estocada do produto: "))
@@ -48,7 +48,8 @@ def main():
                 break
             except ValueError:
                 print(f"Entrada inválida. Certifique-se de inserir um número Inteiro\n")
-        produtos.  append({'codigo': codigo, 'preco': preco, 'quantidade': quantidade})
+                
+        produtos.append({'codigo': codigo, 'preco': preco, 'quantidade': quantidade})
 
     while True:
             try:

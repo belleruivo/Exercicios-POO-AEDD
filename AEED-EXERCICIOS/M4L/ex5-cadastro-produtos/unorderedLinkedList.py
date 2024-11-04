@@ -12,7 +12,6 @@ class UnorderedLinkedList:
         
     def append(self, new_data):
         new_node = Node(new_data)
-
         if self.isEmpty():
             self.head = new_node
             self.tail= new_node
