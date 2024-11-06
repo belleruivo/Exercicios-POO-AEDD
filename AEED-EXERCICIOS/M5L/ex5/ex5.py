@@ -17,12 +17,14 @@ class Node:
 
 class Queue:
     def __init__(self):
-        self.front = None
-        self.rear = None
+        self.head = None
+        self.tail = None
         self.size = 0
 
     def is_empty(self):
-        return self.size == 0
+        if self.head == None:
+            return True
+        return False
 
     def enqueue(self, airplane):
         new_node = Node(airplane)
@@ -35,12 +37,13 @@ class Queue:
 
     def dequeue(self):
         if self.is_empty():
+            print("Empty List")
             return None
-        removed_airplane = self.front.data
-        self.front = self.front.next
+        removed_airplane = self.head.data
+        self.head = self.head.next
         self.size -= 1
         if self.is_empty():
-            self.rear = None
+            self.tail = None
         return removed_airplane
 
     def peek(self):
@@ -123,5 +126,4 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-if __name__ == "__main__":
-    main()
+main()
