@@ -3,55 +3,63 @@ se são palíndromos. Um palíndromo é uma sequência de caracteres lida da mes
 forma de frente para trás e de trás para a frente; por exemplo, arara."""
 
 class Node:
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, data):
+        self.data = data
         self.next = None
 
 
 class Stack:
     def __init__(self):
-        self.top = None
-        self.size = 0
+        self.head = None
 
     def is_empty(self):
-        return self.size == 0
+        if self.head == None:
+            return True
+        return False
 
-    def push(self, value):
-        new_node = Node(value)
+    def push(self, new_data):
+        new_node = Node(new_data)
         if self.is_empty():
-            self.top = new_node
+            self.head = new_node
         else:
-            new_node.next = self.top
-            self.top = new_node
-        self.size += 1
+            new_node.next = self.head
+            self.head = new_node
 
     def pop(self):
         if self.is_empty():
+            print("Empty stack")
             return None
-        popped_node = self.top
-        self.top = self.top.next
-        self.size -= 1
-        return popped_node.value
+        else:
+            popped_data = self.head.data
+            self.head = self.head.next
+            return popped_data
 
     def peek(self):
-        return None if self.is_empty() else self.top.value
+        return None if self.is_empty() else self.head.data
+    
 
 
-def is_palindrome(s):
+def is_palindrome(word):
     stack = Stack()
-    cleaned_string = ''.join(caractere.lower() for caractere in s if caractere.isalnum())  
+    cleaned_string = ''.join(caractere.lower() for caractere in word if caractere.isalpha()) #mantém apenas letra e números
 
-    for caractere in cleaned_string:
-        stack.push(caractere)
+    if not cleaned_string:
+        return False
+    
+    for c in cleaned_string:
+        stack.push(c)
 
-    for caractere in cleaned_string:
-        if caractere != stack.pop():
+    for c in cleaned_string:
+        if c != stack.pop():
             return False
 
     return True
 
-user_input = input("Digite uma string para verificar se é um palíndromo: ")
-if is_palindrome(user_input):
-    print(f'"{user_input}" é um palíndromo.')
-else:
-    print(f'"{user_input}" não é um palíndromo.')
+def main():
+    word = input("Digite uma string para verificar se é um palíndromo: ")
+    if is_palindrome(word):
+        print(f'"{word}" é um palíndromo.')
+    else:
+        print(f'"{word}" não é um palíndromo.')
+
+main()
