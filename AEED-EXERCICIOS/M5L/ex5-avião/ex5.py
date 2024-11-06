@@ -14,30 +14,27 @@ class Node:
         self.data = data
         self.next = next
 
-
 class Queue:
     def __init__(self):
-        self.head = None
-        self.tail = None
+        self.head = None  # Primeiro avião da fila
+        self.tail = None  # Último avião da fila
         self.size = 0
 
     def is_empty(self):
-        if self.head == None:
-            return True
-        return False
+        return self.head is None
 
     def enqueue(self, airplane):
         new_node = Node(airplane)
         if self.is_empty():
-            self.front = self.rear = new_node
+            self.head = self.tail = new_node
         else:
-            self.rear.next = new_node
-            self.rear = new_node
+            self.tail.next = new_node
+            self.tail = new_node
         self.size += 1
 
     def dequeue(self):
         if self.is_empty():
-            print("Empty List")
+            print("Não há aviões na fila.")
             return None
         removed_airplane = self.head.data
         self.head = self.head.next
@@ -47,10 +44,10 @@ class Queue:
         return removed_airplane
 
     def peek(self):
-        return self.front.data if self.front else None
+        return self.head.data if self.head else None
 
     def list_airplanes(self):
-        current = self.front
+        current = self.head
         airplanes = []
         while current:
             airplanes.append(current.data)
@@ -90,12 +87,19 @@ def main():
             airplane = queue.dequeue()
             if airplane:
                 print(f"Avião autorizado para decolagem: {airplane.name}")
+                if queue.is_empty():
+                    print("Não há mais aviões na fila.")
             else:
-                print("Não há aviões na fila.")
+                print("Não há aviões na fila para autorizar a decolagem.")
 
         elif choice == "3":
             name = input("Nome do avião: ")
-            id_number = int(input("ID do avião: "))
+            id_number = input("ID do avião: ")
+            # Validação do ID para garantir que é um número inteiro
+            while not id_number.isdigit():
+                print("ID inválido. Por favor, insira um número inteiro.")
+                id_number = input("ID do avião: ")
+            id_number = int(id_number)
             model = input("Modelo do avião: ")
             manufacturer = input("Fabricante do avião: ")
             airplane = Airplane(name, id_number, model, manufacturer)
@@ -126,4 +130,5 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-main()
+if __name__ == "__main__":
+    main()
