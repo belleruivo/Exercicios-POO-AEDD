@@ -9,62 +9,8 @@ e. Listar as características do primeiro avião da fila.
 Considere que os aviões possuem um nome e um número inteiro como identificador.
 Adicione outras características conforme achar necessário.'''
 
-class Node:
-    def __init__(self, data, next=None):
-        self.data = data
-        self.next = next
-
-class Queue:
-    def __init__(self):
-        self.head = None  # Primeiro avião da fila
-        self.tail = None  # Último avião da fila
-        self.size = 0
-
-    def is_empty(self):
-        return self.head is None
-
-    def enqueue(self, airplane):
-        new_node = Node(airplane)
-        if self.is_empty():
-            self.head = self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
-        self.size += 1
-
-    def dequeue(self):
-        if self.is_empty():
-            print("Não há aviões na fila.")
-            return None
-        removed_airplane = self.head.data
-        self.head = self.head.next
-        self.size -= 1
-        if self.is_empty():
-            self.tail = None
-        return removed_airplane
-
-    def peek(self):
-        return self.head.data if self.head else None
-
-    def list_airplanes(self):
-        current = self.head
-        airplanes = []
-        while current:
-            airplanes.append(current.data)
-            current = current.next
-        return airplanes
-
-
-class Airplane:
-    def __init__(self, name, id_number, model, manufacturer):
-        self.name = name
-        self.id_number = id_number
-        self.model = model
-        self.manufacturer = manufacturer
-
-    def __str__(self):
-        return f"Avião: {self.name}, ID: {self.id_number}, Modelo: {self.model}, Fabricante: {self.manufacturer}"
-
+from queue import Queue
+from airplane import Airplane
 
 def main():
     queue = Queue()
@@ -130,5 +76,4 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
-if __name__ == "__main__":
-    main()
+main()
