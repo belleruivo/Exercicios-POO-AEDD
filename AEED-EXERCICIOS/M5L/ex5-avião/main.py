@@ -13,7 +13,7 @@ from queue import Queue
 from airplane import Airplane
 
 def main():
-    queue = Queue()
+    queue = Queue()  # Cria uma instância da fila.
 
     while True:
         print("\nControle de Pista de Decolagem de Aviões")
@@ -30,7 +30,7 @@ def main():
             print(f"Número de aviões aguardando na fila: {queue.size}")
 
         elif choice == "2":
-            airplane = queue.dequeue()
+            airplane = queue.dequeue()  # Remove o primeiro avião da fila
             if airplane:
                 print(f"Avião autorizado para decolagem: {airplane.name}")
                 if queue.is_empty():
@@ -41,19 +41,18 @@ def main():
         elif choice == "3":
             name = input("Nome do avião: ")
             id_number = input("ID do avião: ")
-            # Validação do ID para garantir que é um número inteiro
-            while not id_number.isdigit():
+            while not id_number.isdigit():  # Verifica se o ID é um número inteiro.
                 print("ID inválido. Por favor, insira um número inteiro.")
                 id_number = input("ID do avião: ")
             id_number = int(id_number)
             model = input("Modelo do avião: ")
             manufacturer = input("Fabricante do avião: ")
             airplane = Airplane(name, id_number, model, manufacturer)
-            queue.enqueue(airplane)
+            queue.enqueue(airplane)  # Adiciona o avião à fila.
             print(f"Avião {name} adicionado à fila.")
 
         elif choice == "4":
-            airplanes = queue.list_airplanes()
+            airplanes = queue.list_airplanes()  # Lista todos os aviões.
             if airplanes:
                 print("Aviões na fila de espera:")
                 for i, airplane in enumerate(airplanes, start=1):
@@ -62,7 +61,7 @@ def main():
                 print("Não há aviões na fila.")
 
         elif choice == "5":
-            airplane = queue.peek()
+            airplane = queue.peek()  # Exibe as informações do primeiro avião.
             if airplane:
                 print(f"Características do primeiro avião da fila: {airplane}")
             else:
@@ -74,6 +73,5 @@ def main():
 
         else:
             print("Opção inválida. Tente novamente.")
-
 
 main()
