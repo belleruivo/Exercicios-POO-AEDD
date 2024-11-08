@@ -15,7 +15,6 @@ class LinkedList:
             current.next = Node(data)
 
     def imprimir(self):
-        """Imprime os elementos da lista."""
         if not self.head:
             print("Lista vazia!")
         else:
@@ -25,7 +24,6 @@ class LinkedList:
                 current = current.next
 
     def copiar(self):
-        """Cria uma cópia da lista."""
         copia_lista = LinkedList()
         current = self.head
         while current:
