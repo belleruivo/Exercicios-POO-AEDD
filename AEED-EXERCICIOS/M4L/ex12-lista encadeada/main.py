@@ -1,3 +1,11 @@
+'''
+Faça um programa que implemente uma lista encadeada de números inteiros com
+inserção de dados pelo usuário através de um menu. Escreva uma função que faça
+uma cópia da lista e outra função que concatene duas listas encadeadas (isto é,
+engate a segunda no fim da primeira). Faça duas versões da função: uma iterativa e
+uma recursiva.
+'''
+
 from lista import LinkedList
 
 def menu():
