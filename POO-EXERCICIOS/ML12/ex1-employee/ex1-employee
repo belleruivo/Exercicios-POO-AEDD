@@ -25,7 +25,7 @@ class AdministrativeAssistant(Employee):
 
 
     def __str__(self):
-        return (f"Nome: {self.nome}, Matricula: {self.matricula}, Salário: {self.salario} "
+        return (f"Nome: {self.nome}, Matricula: {self.matricula}, Salário: {self.salario}, "
                 f"Turno: {self.turno}, Adicional Noturno: {self.adicional_noturno:.2f}")
 
 class TecnicalAssistent(Employee):
@@ -35,7 +35,7 @@ class TecnicalAssistent(Employee):
 
 
     def __str__(self):
-        return (f"Nome: {self.nome}, Matricula: {self.matricula}, Salário: {self.salario}"
+        return (f"Nome: {self.nome}, Matricula: {self.matricula}, Salário: {self.salario}, "
                 f"Bônus Salarial: {self.bonus_salarial:.2f}")
 
 
@@ -52,7 +52,7 @@ def main():
                 raise ValueError("Escolha uma opção válida.")
             break
         except ValueError:
-            print(f"Erro. Por favor, escolha 1 ou 2.")
+            print(f"Erro. Por favor, escolha 1 ou 2.\n")
 
 
     nome = input("\nDigite o nome: ")
@@ -64,7 +64,7 @@ def main():
             salario = float(input("Digite o salário: R$"))
             break
         except ValueError:
-            print("Insira somente valores numéricos")
+            print("Insira somente valores numéricos\n")
 
 
     if opcao == 1:
@@ -74,13 +74,17 @@ def main():
                 break
             print("Turno inválido! Digite 'dia' ou 'noite'.\n")
         
-        while True:
-            try:
-                adicional_noturno = float(input("Digite o adicional noturno: R$")) 
-                break 
-            except ValueError:
-                print("Certifique-se de inserir somente caracteres nuéricos")  
-                
+        if turno == "noite":
+            while True:
+                try:
+                    adicional_noturno = float(input("Digite o adicional noturno: R$")) 
+                    break 
+                except ValueError:
+                    print("Certifique-se de inserir somente caracteres numéricos\n")  
+        
+        else:
+            adicional_noturno = 0
+                    
         assistente = AdministrativeAssistant(nome, matricula, salario, turno, adicional_noturno)  
     
         
@@ -90,11 +94,12 @@ def main():
                 bonus = float(input("Insira o bonús salarial: "))
                 break
             except ValueError:
-                print("Certifique-se de inserir um caractere numérico válido.")
+                print("Certifique-se de inserir um caractere numérico válido.\n")
                 
         assistente = TecnicalAssistent(nome, matricula, salario, bonus)
 
     print("\nDados do Funcionário")
     print(assistente)
+    print("-="*20)
     
 main()
