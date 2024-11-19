@@ -16,6 +16,11 @@ class Employee:
 
     def __str__(self): #representar o objeto como uma string
         return f"Nome: {self.nome}, Matrícula: {self.matricula}, Salário: R${self.salario:.2f}"
+    
+'''O polimorfismo é aplicado nas classes AdministrativeAssistant e TecnicalAssistant, que sobrescrevem 
+o método __str__() da classe base Employee. Cada subclasse define sua própria versão de __str__(), 
+exibindo informações adicionais específicas. Isso permite que o Python use o método correto dependendo 
+do tipo real do objeto.'''
    
 class AdministrativeAssistant(Employee):
     def __init__(self, nome, matricula, salario, turno, adicional_noturno):
