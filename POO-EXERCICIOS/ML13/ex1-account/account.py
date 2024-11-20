@@ -16,6 +16,12 @@ class Account(ABC):
     def extrato(self):
         return f"Titular: {self.titular}, Saldo: R${self.saldo:.2f}"
     
+'''A classe abstrata Account padroniza o comportamento de diferentes contas bancárias ao definir 
+métodos abstratos (saque e deposito) que obrigam as subclasses (ContaCorrente, ContaPoupança, 
+ContaInvestimento) a implementá-los. Ela também inclui métodos concretos, como extrato, para 
+reutilização de código. Cada subclasse pode adicionar funcionalidades específicas, garantindo
+consistência e flexibilidade no design.'''
+
 class ContaCorrente(Account):
     def __init__(self, titular, saldo, limite):
         super().__init__(titular, saldo)
