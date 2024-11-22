@@ -78,9 +78,9 @@ class ContaInvestimento(Account, RendimentosInterface):
         return f"Depósito de R${valor:.2f} realizado com sucesso!"
 
     def aplicar_rendimentos(self):
-        if self.tipo_investimento == "alto_rendimento":
+        if self.tipo_investimento == '1':
             rendimento = self.saldo * 0.10
-        elif self.tipo_investimento == "baixo_rendimento":
+        elif self.tipo_investimento == '2':
             rendimento = self.saldo * 0.03
         else:
             rendimento = 0
@@ -91,9 +91,9 @@ class ContaInvestimento(Account, RendimentosInterface):
 
 def criar_conta():
     print("Escolha o tipo de conta:")
-    print("1-Corrente")
-    print("2-Poupança")
-    print("3-Investimento")
+    print("1 - Corrente")
+    print("2 - Poupança")
+    print("3 - Investimento")
     
     while True:
         try:
@@ -101,9 +101,9 @@ def criar_conta():
             if opcao in [1, 2, 3]:
                 break
             else:
-                ("Certifique-se de esolher uma opção válida!\n")
+                print("Certifique-se de escolher uma opção válida!\n")  # Correção aqui
         except ValueError:
-            print("Certifique-se de esolher uma opção válida!\n")
+            print("Certifique-se de escolher uma opção válida!\n")
 
     titular = input("Informe o nome do titular: ")
 
@@ -140,14 +140,16 @@ def criar_conta():
             except ValueError:
                 print("Por favor, insira um valor numérico válido para a taxa de juros.\n")
         return ContaPoupança(titular, saldo_inicial, taxa_juros)
+    
     elif opcao == 3:
         while True:
-            tipo_investimento = input("Informe o tipo de investimento (alto_rendimento ou baixo_rendimento): ").lower()
-            if tipo_investimento in ["alto_rendimento", "baixo_rendimento"]:
+            tipo_investimento = input("Informe o tipo de investimento (1-alto_rendimento ou 2-baixo_rendimento): ").lower()
+            if tipo_investimento in ['1', '2']:
                 break
             else:
-                print("Opção inválida! Informe 'alto_rendimento' ou 'baixo_rendimento'.\n")
+                print("Opção inválida! Informe '1' ou '2'.\n")
         return ContaInvestimento(titular, saldo_inicial, tipo_investimento)
+
 
 def operar_conta(conta):
     while True:
@@ -205,3 +207,5 @@ def main():
     conta = criar_conta()
     if conta:
         operar_conta(conta)
+        
+main()

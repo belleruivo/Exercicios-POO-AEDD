@@ -1,5 +1,24 @@
 from abc import ABC, abstractmethod
 
+# Mix-in para adicionar funcionalidade de disponibilidade
+class DisponibilidadeMixin:
+    def __init__(self):
+        self.disponivel = True  # Inicia como disponível
+    
+    def emprestar(self):
+        if self.disponivel:
+            self.disponivel = False
+            return f"O item '{self.titulo}' foi emprestado com sucesso!"
+        else:
+            return f"O item '{self.titulo}' não está disponível para empréstimo."
+    
+    def devolver(self):
+        if not self.disponivel:
+            self.disponivel = True
+            return f"O item '{self.titulo}' foi devolvido com sucesso!"
+        else:
+            return f"O item '{self.titulo}' já está disponível."
+
 class Collection(ABC):
     def __init__(self, titulo, ano):
         self.titulo = titulo
@@ -7,44 +26,49 @@ class Collection(ABC):
 
     @abstractmethod
     def descricao(self):
-        pass  
+        pass
 
-class Livro(Collection):
+class Livro(Collection, DisponibilidadeMixin):
     def __init__(self, titulo, ano, autor, genero):
         super().__init__(titulo, ano)
+        DisponibilidadeMixin.__init__(self)  # Inicializa o mix-in
         self.autor = autor
         self.genero = genero
 
     def descricao(self):
         return f"Livro: {self.titulo}, Autor: {self.autor}, Gênero: {self.genero}, Ano: {self.ano}"
 
-class Revista(Collection):
+class Revista(Collection, DisponibilidadeMixin):
     def __init__(self, titulo, ano, editora, edicao):
         super().__init__(titulo, ano)
+        DisponibilidadeMixin.__init__(self)  # Inicializa o mix-in
         self.editora = editora
         self.edicao = edicao
 
     def descricao(self):
         return f"Revista: {self.titulo}, Editora: {self.editora}, Edição: {self.edicao}, Ano: {self.ano}"
 
-class DVD(Collection):
+class DVD(Collection, DisponibilidadeMixin):
     def __init__(self, titulo, ano, duracao, diretor):
         super().__init__(titulo, ano)
+        DisponibilidadeMixin.__init__(self)  # Inicializa o mix-in
         self.duracao = duracao
         self.diretor = diretor
 
     def descricao(self):
         return f"DVD: {self.titulo}, Diretor: {self.diretor}, Duração: {self.duracao} min, Ano: {self.ano}"
 
-class CD(Collection):
+class CD(Collection, DisponibilidadeMixin):
     def __init__(self, titulo, ano, artista, genero):
         super().__init__(titulo, ano)
+        DisponibilidadeMixin.__init__(self)  # Inicializa o mix-in
         self.artista = artista
         self.genero = genero
 
     def descricao(self):
         return f"CD: {self.titulo}, Artista: {self.artista}, Gênero: {self.genero}, Ano: {self.ano}"
 
+# Função de criação do acervo
 def criar_acervo():
     while True:
         print("\nSelecione o tipo de acervo:")
@@ -92,6 +116,7 @@ def criar_acervo():
             genero = input("Gênero: ").strip()
             return CD(titulo, ano, artista, genero)
 
+# Função principal
 def main():
     acervo = []
     while True:
@@ -113,5 +138,11 @@ def main():
     print("Acervo da Biblioteca:")
     for item in acervo:
         print(item.descricao())
+
+    # Exemplo de uso do mix-in
+    print("\nTestando funcionalidades de disponibilidade:")
+    for item in acervo:
+        print(item.emprestar())  # Tenta emprestar o item
+        print(item.devolver())   # Tenta devolver o item
 
 main()

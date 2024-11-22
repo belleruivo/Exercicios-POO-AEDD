@@ -56,8 +56,8 @@ def criar_conta():
         return ContaPoupança(titular, saldo_inicial, taxa_juros)
     elif opcao == 3:
         while True:
-            tipo_investimento = input("Informe o tipo de investimento (alto_rendimento ou baixo_rendimento): ").lower()
-            if tipo_investimento in ["alto_rendimento", "baixo_rendimento"]:
+            tipo_investimento = input("Informe o tipo de investimento (1-alto_rendimento ou 2-baixo_rendimento): ").lower()
+            if tipo_investimento in ["1", "2"]:
                 break
             else:
                 print("Opção inválida! Informe 'alto_rendimento' ou 'baixo_rendimento'.\n")

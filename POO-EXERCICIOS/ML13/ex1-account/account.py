@@ -76,9 +76,9 @@ class ContaInvestimento(Account):
         return f"Depósito de R${valor:.2f} realizado com sucesso!"
 
     def aplicar_investimento(self):
-        if self.tipo_investimento == "alto_rendimento":
+        if self.tipo_investimento == "1":
             rendimento = self.saldo * 0.10
-        elif self.tipo_investimento == "baixo_rendimento":
+        elif self.tipo_investimento == "2":
             rendimento = self.saldo * 0.03
         else:
             rendimento = 0
