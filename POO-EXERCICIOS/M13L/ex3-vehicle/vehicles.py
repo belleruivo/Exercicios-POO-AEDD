@@ -7,7 +7,7 @@ class Car(Vehicles):
     def register(self):
         num_cars = int(input("How many cars would you like to add?: "))
         for i in range(num_cars):
-            cars_make = input(f"What make is the car {i+1}°:")
+            cars_make = input(f"What make is the car {i+1}°:").capitalize()
             cars_type = input("Is the car automatic or manual?").capitalize()
             cars_insurance = input("Have auto insurance(Y/N)?").lower()
             
@@ -41,30 +41,30 @@ class Motorcycle(Vehicles):
     def register(self):
         num_motorcycle = int(input("How many motorcycles would you like to add?: "))
         for i in range(num_motorcycle):
-            motorcycle_make = input(f"What make is the motorcycle {i+1}°:")
+            motorcycle_make = input(f"What make is the motorcycle {i+1}°:").capitalize()
             motorcycle_type = input("Is the motorcycle automatic or manual?").capitalize()
-            motorcycle_insurance = input("Have auto insurance?").lower()
+            motorcycle_insurance = input("Have auto insurance(Y/N)?").lower()
             has_insurance = True if motorcycle_insurance == 'y' else False
             
             motorcycle_data = {
-                "Cars Make": motorcycle_make,
+                "Motorcycle Make": motorcycle_make,
                 "Type": motorcycle_type,
-                "Insurance": motorcycle_insurance
+                "Insurance": has_insurance
                 }
             self.motorcycles.append(motorcycle_data)
         print("\nMotorcycles registered successfully!")
 
     def consult_vehicle(self):
         if not self.motorcycles:
-            print("No cars registered yet.")
+            print("No motorcycles registered yet.")
             return
 
         print("\nRegistered Motorcycle:")
         for i, motorcycle in enumerate(self.motorcycles, start=1):
             print(f"Motorcycle {i}:")
-            print(f"  Make: {motorcycle['make']}")
-            print(f"  Type: {motorcycle['type']}")
-            print(f"  Insurance: {motorcycle['insurance']}")
+            print(f"  Make: {motorcycle['Motorcycle Make']}")
+            print(f"  Type: {motorcycle['Type']}")
+            print(f"  Insurance: {motorcycle['Insurance']}")
         
         
 class Truck(Vehicles):
@@ -73,28 +73,26 @@ class Truck(Vehicles):
     def register(self):
         num_truck = int(input("How many trucks would you like to add?: "))
         for i in range(num_truck):
-            trucks_make = input(f"What make is the truck {i+1}°:")
+            trucks_make = input(f"What make is the truck {i+1}°:").capitalize()
             trucks_type = input("Is the truck automatic or manual?").capitalize()
-            trucks_insurance = input("Have auto insurance?").lower()
+            trucks_insurance = input("Have auto insurance(Y/N)?").lower()
             has_insurance = True if trucks_insurance == 'y' else False
 
-            
-                
             truck_data = {
-                "Cars Make": trucks_make,
+                "Trucks Make": trucks_make,
                 "Type": trucks_type,
-                "Insurance": trucks_insurance
+                "Insurance": has_insurance
                 }
             self.trucks.append(truck_data)
 
     def consult_vehicle(self):
         if not self.trucks:
-            print("No cars registered yet.")
+            print("No trucks registered yet.")
             return
 
-        print("\nRegistered Cars:")
+        print("\nRegistered Trucks:")
         for i, truck in enumerate(self.trucks, start=1):
             print(f"Truck {i}:")
-            print(f"  Make: {truck['make']}")
-            print(f"  Type: {truck['type']}")
-            print(f"  Insurance: {truck['insurance']}")
+            print(f"  Make: {truck['Trucks Make']}")
+            print(f"  Type: {truck['Type']}")
+            print(f"  Insurance: {truck['Insurance']}")

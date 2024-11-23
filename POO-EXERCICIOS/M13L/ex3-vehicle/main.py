@@ -18,7 +18,7 @@ def main():
                 choice = int(input("Choose one option: "))
 
                 if choice == 1:
-                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3.Truck")
+                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3. Truck")
                     vehicle = int(input("What vehicle do you want register? "))
                     
                     if vehicle == 1:
@@ -29,7 +29,7 @@ def main():
                         truck.register()
 
                 elif choice == 2:
-                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3.Truck")
+                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3. Truck")
                     vehicle = int(input("What vehicle do you want consult? "))
                     
                     if vehicle == 1:
