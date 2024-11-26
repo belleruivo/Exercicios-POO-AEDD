@@ -2,51 +2,51 @@
 Implemente um sistema de Concessionária com os tipos de veículos (automóvel,
 moto, caminhão, etc.), evidenciando a classe Vehicle como uma classe abstrata.
 '''
-from vehicles import Car, Motorcycle, Truck
+from vehicles import * 
 
 def main():
-        car = Car()
-        motorcycle = Motorcycle()
-        truck = Truck()
-        while True:
-            try:
-                print("\n--- Menu ---")
-                print("1. Register Vehicle")
-                print("2. Consult Vehicle")
-                print("3. Exit")
+    carro = Carro()
+    caminhao = Caminhao()
 
-                choice = int(input("Choose one option: "))
+    while True:
+        try:
+            print("-"*20,"Menu", "-"*20)
+            print("1. Registrar Veículo")
+            print("2. Consultar Veículo")
+            print("3. Sair")
 
-                if choice == 1:
-                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3. Truck")
-                    vehicle = int(input("What vehicle do you want register? "))
-                    
-                    if vehicle == 1:
-                        car.register()
-                    if vehicle == 2:
-                        motorcycle.register()
-                    if vehicle == 3:
-                        truck.register()
+            escolha = int(input("Escolha uma opção: "))
 
-                elif choice == 2:
-                    print("VEHICLES:\n1. Car\n2. Motorcycle\n3. Truck")
-                    vehicle = int(input("What vehicle do you want consult? "))
-                    
-                    if vehicle == 1:
-                        car.consult_vehicle()
-                    if vehicle == 2:
-                        motorcycle.consult_vehicle()
-                    if vehicle == 3:
-                        truck.consult_vehicle()
-                
-                elif choice == 3:
-                    print("Exiting...")
-                    break
-                
+            if escolha == 1:
+                print("\nVEÍCULOS:\n1. Carro\n2. Caminhão\n")
+                veiculo = int(input("Qual veículo você deseja registrar? "))
+
+                if veiculo == 1:
+                    carro.registrar()
+                elif veiculo == 2:
+                    caminhao.registrar()
                 else:
-                    print("Wrong value. Try again.")
-            except ValueError:
-                print("Please, enter a valid option.")
+                    print("Opção inválida.")
 
-if __name__ == "__main__":
-    main()
+            elif escolha == 2:
+                print("\nVEÍCULOS:\n1. Carro\n2. Moto\n3. Caminhão\n")
+                veiculo = int(input("Qual veículo você deseja consultar? "))
+
+                if veiculo == 1:
+                    carro.consultar_veiculo()
+                elif veiculo == 2:
+                    caminhao.consultar_veiculo()
+                else:
+                    print("Opção inválida.")
+
+            elif escolha == 3:
+                print("Saindo...")
+                break
+
+            else:
+                print("Valor inválido. Tente novamente.")
+        except ValueError:
+            print("Por favor, insira uma opção válida.")
+
+
+main()

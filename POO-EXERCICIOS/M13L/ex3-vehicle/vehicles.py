@@ -1,98 +1,90 @@
-from interface import Vehicles
+from abc import ABC, abstractmethod
 
-class Car(Vehicles):
+class Veiculos(ABC):
+    @abstractmethod
+    def registrar(self):
+        pass
+    
+    @abstractmethod
+    def consultar_veiculo(self):
+        pass
+
+
+class Carro(Veiculos):
     def __init__(self):
-        self.cars = []
+        self.carros = []
         
-    def register(self):
-        num_cars = int(input("How many cars would you like to add?: "))
-        for i in range(num_cars):
-            cars_make = input(f"What make is the car {i+1}°:").capitalize()
-            cars_type = input("Is the car automatic or manual?").capitalize()
-            cars_insurance = input("Have auto insurance(Y/N)?").lower()
+    def registrar(self):
+        num_carros = int(input("Quantos carros você gostaria de adicionar?: "))
+        for i in range(num_carros):
+            marca_carro = input(f"Qual a marca do carro {i+1}°: ").capitalize()
+            while True:
+                try:
+                    tipo_carro = int(input("O carro é 1-automático ou 2-manual?: "))
+                    if tipo_carro in [1, 2]:
+                        break
+                    else: 
+                        print("Por favor escolher entre (1) e (2)")
+                except ValueError:
+                    print("Por favor escolher entre (1) e (2)")
             
-            has_insurance = True if cars_insurance == 'y' else False
+            seguro_carro = input("Possui seguro automotivo (S/N)?: ").lower()
+            
+            tipo = "Automático" if tipo_carro == 1 else "Manual"
+            possui_seguro = True if seguro_carro == 's' else False
 
-            car_data = {
-                "Cars Make": cars_make,
-                "Type": cars_type,
-                "Insurance": has_insurance
-                }
-            self.cars.append(car_data)
-        print("\nCars registered successfully!")
+            dados_carro = {
+                "Marca do Carro": marca_carro,
+                "Tipo": tipo,
+                "Seguro": possui_seguro
+            }
+            self.carros.append(dados_carro)
+        print("\nCarros registrados com sucesso!")
             
-    def consult_vehicle(self):
-        if not self.cars:
-            print("No cars registered yet.")
+    def consultar_veiculo(self):
+        if not self.carros:
+            print("Nenhum carro registrado ainda.")
             return
 
-        print("\nRegistered Cars:")
-        for i, car in enumerate(self.cars, start=1):
-            print(f"Car {i}:")
-            print(f"Make: {car['Cars Make']}")
-            print(f"Type: {car['Type']}")
-            print(f"Insurance: {car['Insurance']}")
-            
-            
-class Motorcycle(Vehicles):
-    def __init__(self):
-        self.motorcycles = []
-        
-    def register(self):
-        num_motorcycle = int(input("How many motorcycles would you like to add?: "))
-        for i in range(num_motorcycle):
-            motorcycle_make = input(f"What make is the motorcycle {i+1}°:").capitalize()
-            motorcycle_type = input("Is the motorcycle automatic or manual?").capitalize()
-            motorcycle_insurance = input("Have auto insurance(Y/N)?").lower()
-            has_insurance = True if motorcycle_insurance == 'y' else False
-            
-            motorcycle_data = {
-                "Motorcycle Make": motorcycle_make,
-                "Type": motorcycle_type,
-                "Insurance": has_insurance
-                }
-            self.motorcycles.append(motorcycle_data)
-        print("\nMotorcycles registered successfully!")
+        print("\nCarros Registrados:")
+        for i, carro in enumerate(self.carros, start=1):
+            print(f"Carro {i}:")
+            print(f"  Marca: {carro['Marca do Carro']}")
+            print(f"  Tipo: {carro['Tipo']}")
+            print(f"  Seguro: {carro['Seguro']}")
 
-    def consult_vehicle(self):
-        if not self.motorcycles:
-            print("No motorcycles registered yet.")
+
+class Caminhao(Veiculos):
+    def __init__(self):
+        self.caminhoes = []
+        
+    def registrar(self):
+        num_caminhoes = int(input("Quantos caminhões você gostaria de adicionar?: "))
+        for i in range(num_caminhoes):
+            marca_caminhao = input(f"Qual a marca do caminhão {i+1}°: ").capitalize()
+            try:
+                n_eixos = int(input("Quantidade de eixos: "))
+            except ValueError:
+                print("Por favor, certifique-se de inserir o número de eixos corretamente")
+            seguro_caminhao = input("Possui seguro automotivo (S/N)?: ").lower()
+            possui_seguro = True if seguro_caminhao == 's' else False
+
+            dados_caminhao = {
+                "Marca do Caminhão": marca_caminhao,
+                "Quantidade de Eixos": n_eixos,
+                "Seguro": possui_seguro
+            }
+            self.caminhoes.append(dados_caminhao)
+        print("\nCaminhões registrados com sucesso!")
+
+    def consultar_veiculo(self):
+        if not self.caminhoes:
+            print("Nenhum caminhão registrado ainda.")
             return
 
-        print("\nRegistered Motorcycle:")
-        for i, motorcycle in enumerate(self.motorcycles, start=1):
-            print(f"Motorcycle {i}:")
-            print(f"  Make: {motorcycle['Motorcycle Make']}")
-            print(f"  Type: {motorcycle['Type']}")
-            print(f"  Insurance: {motorcycle['Insurance']}")
-        
-        
-class Truck(Vehicles):
-    def __init__(self):
-        self.trucks = []
-    def register(self):
-        num_truck = int(input("How many trucks would you like to add?: "))
-        for i in range(num_truck):
-            trucks_make = input(f"What make is the truck {i+1}°:").capitalize()
-            trucks_type = input("Is the truck automatic or manual?").capitalize()
-            trucks_insurance = input("Have auto insurance(Y/N)?").lower()
-            has_insurance = True if trucks_insurance == 'y' else False
-
-            truck_data = {
-                "Trucks Make": trucks_make,
-                "Type": trucks_type,
-                "Insurance": has_insurance
-                }
-            self.trucks.append(truck_data)
-
-    def consult_vehicle(self):
-        if not self.trucks:
-            print("No trucks registered yet.")
-            return
-
-        print("\nRegistered Trucks:")
-        for i, truck in enumerate(self.trucks, start=1):
-            print(f"Truck {i}:")
-            print(f"  Make: {truck['Trucks Make']}")
-            print(f"  Type: {truck['Type']}")
-            print(f"  Insurance: {truck['Insurance']}")
+        print("\nCaminhões Registrados:")
+        for i, caminhao in enumerate(self.caminhoes, start=1):
+            print(f"Caminhão {i}:")
+            print(f"  Marca: {caminhao['Marca do Caminhão']}")
+            print(f"  Tipo: {caminhao['Tipo']}")
+            print(f"  Seguro: {caminhao['Seguro']}")
