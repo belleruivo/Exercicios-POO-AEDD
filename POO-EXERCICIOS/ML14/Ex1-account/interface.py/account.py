@@ -17,13 +17,11 @@ class Account(ABC):
     def extrato(self):
         pass
 
-# Interface para contas com rendimento
 class Rendimento(ABC):
     @abstractmethod
     def aplicar_rendimento(self):
         pass
 
-# Implementações concretas
 class ContaCorrente(Account):
     def __init__(self, titular, saldo, limite):
         self.titular = titular
@@ -94,4 +92,3 @@ class ContaInvestimento(Account, Rendimento):
         return f"Rendimento aplicado: R${rendimento:.2f}"
 
 
-# Função principal de criação de contas

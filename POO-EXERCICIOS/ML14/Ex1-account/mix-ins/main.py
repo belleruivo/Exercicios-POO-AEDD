@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-# Classe base abstrata
 class Account(ABC):
     def __init__(self, titular, saldo):
         self.titular = titular
@@ -17,7 +16,6 @@ class Account(ABC):
     def extrato(self):
         return f"Titular: {self.titular}, Saldo: R${self.saldo:.2f}"
 
-# Mix-ins para funcionalidades adicionais
 class JurosMixin:
     def aplicar_juros(self):
         juros = self.saldo * self.taxa_juros / 100
@@ -35,8 +33,6 @@ class InvestimentoMixin:
 
         self.saldo += rendimento
         return f"Rendimento de {self.tipo_investimento} aplicado: R${rendimento:.2f}"
-
-# Classes de contas com herança múltipla e mix-ins
 
 class ContaCorrente(Account):
     def __init__(self, titular, saldo, limite):
@@ -86,7 +82,6 @@ class ContaInvestimento(Account, InvestimentoMixin):
         self.saldo += valor
         return f"Depósito de R${valor:.2f} realizado com sucesso!"
 
-# Função para criar uma conta
 def criar_conta():
     print("Escolha o tipo de conta:")
     print("1 - Corrente")
@@ -199,7 +194,6 @@ def operar_conta(conta):
         else:
             print("Opção inválida! Tente novamente.\n")
 
-# Função principal
 def main():
     conta = criar_conta()
     if conta:

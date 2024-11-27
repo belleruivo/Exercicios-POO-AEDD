@@ -1,3 +1,5 @@
+from account import *
+
 def criar_conta():
     print("Escolha o tipo de conta:")
     print("1 - Corrente")
