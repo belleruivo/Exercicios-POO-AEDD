@@ -20,7 +20,7 @@ def criar_acervo():
         
         while True:
             try:
-                ano = int(input("Ano (apenas números): ").strip())
+                ano = int(input("Ano: ").strip())
                 break
             except ValueError:
                 print("Entrada inválida! O ano deve ser um número. Tente novamente.\n")
