@@ -1,26 +1,32 @@
-from collection import *
+from collection import Livro, Revista, DVD, CD
+
+def exibir_menu():
+    print("\nSelecione o tipo de acervo:")
+    print("1. Livro")
+    print("2. Revista")
+    print("3. DVD")
+    print("4. CD")
+
+def obter_dados_comuns():
+    titulo = input("Título: ").strip()
+    while True:
+        try:
+            ano = int(input("Ano: ").strip())
+            break
+        except ValueError:
+            print("Entrada inválida! O ano deve ser um número. Tente novamente.\n")
+    return titulo, ano
 
 def criar_acervo():
     while True:
-        print("\nSelecione o tipo de acervo:")
-        print("1. Livro")
-        print("2. Revista")
-        print("3. DVD")
-        print("4. CD")
+        exibir_menu()
         tipo = input("Digite o número correspondente: ").strip()
 
         if tipo not in {"1", "2", "3", "4"}:
             print("Opção inválida! Por favor, tente novamente.\n")
             continue
 
-        titulo = input("Título: ").strip()
-
-        while True:
-            try:
-                ano = int(input("Ano: ").strip())
-                break
-            except ValueError:
-                print("Entrada inválida! O ano deve ser um número. Tente novamente.\n")
+        titulo, ano = obter_dados_comuns()
 
         if tipo == "1":  
             autor = input("Autor: ").strip()
@@ -53,11 +59,10 @@ def main():
         item = criar_acervo()
         if item:
             acervo.append(item)
-            print("Item adicionado com sucesso!\n")
+            print(f"Item '{item.titulo}' adicionado com sucesso!\n")
         
         while True:
             continuar = input("Deseja adicionar outro item? (s/n): ").strip().lower()
-            print()
             if continuar in {"s", "n"}:
                 break
             print("Entrada inválida! Digite 's' para sim ou 'n' para não.\n")
@@ -65,8 +70,13 @@ def main():
         if continuar == "n":
             break
     
-    print("Acervo da Biblioteca:")
-    for item in acervo:
-        print(item.descricao())
+    if acervo:
+        print("\nAcervo da Biblioteca:")
+        for item in acervo:
+            print(item.descricao())
+    else:
+        print("Nenhum item foi adicionado ao acervo.")
 
-main()
+if __name__ == "__main__":
+    main()
+
