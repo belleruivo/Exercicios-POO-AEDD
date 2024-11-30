@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from veiculos import Carro, Caminhao
 
 def main():
@@ -44,3 +45,23 @@ def main():
             break
 
 main()
+=======
+from veiculos import Car, Airplane
+
+def main():
+    car = Car()
+    airplane = Airplane()
+
+    car.start_engine()
+    car.move()
+    car.get_location()
+    car.get_altitude()
+
+    print()
+    airplane.start_engine()
+    airplane.move()
+    airplane.get_location()
+    airplane.get_altitude()
+
+main()
+>>>>>>> 8d4c7a5a5e476c0d2f16b37e02f1281d78c4562b
