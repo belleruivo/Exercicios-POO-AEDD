@@ -1,9 +1,10 @@
-from interface import InterfaceVeiculos
+from interface import InterfaceVeiculos, InterfaceManutencao
 
-class Carro(InterfaceVeiculos):
+class Carro(InterfaceVeiculos, InterfaceManutencao):
     def __init__(self):
         self.carros = []
-        
+        self.manutencoes = [] 
+
     def registrar(self):
         while True: 
             try:
@@ -51,10 +52,34 @@ class Carro(InterfaceVeiculos):
             print(f"  Tipo: {carro['Tipo']}")
             print(f"  Seguro: {carro['Seguro']}")
 
-        
-class Caminhao(InterfaceVeiculos):
+    def agendar_manutencao(self):
+        veiculo_id = int(input("\nDigite o número do carro para agendar manutenção: ")) - 1
+        if 0 <= veiculo_id < len(self.carros):
+            descricao = input("Descrição da manutenção: ")
+            data = input("Data da manutenção (dd/mm/aaaa): ")
+            manutencao = {"Carro": self.carros[veiculo_id], "Descrição": descricao, "Data": data}
+            self.manutencoes.append(manutencao)
+            print("\nManutenção agendada com sucesso!")
+        else:
+            print("Carro inválido!")
+
+    def consultar_manutencoes(self):
+        if not self.manutencoes:
+            print("\nNenhuma manutenção agendada ainda.")
+            return
+
+        print("\nManutenções Agendadas:")
+        for i, manutencao in enumerate(self.manutencoes, start=1):
+            print(f"\nManutenção {i}:")
+            print(f"  Carro: {manutencao['Carro']['Marca']}")
+            print(f"  Descrição: {manutencao['Descrição']}")
+            print(f"  Data: {manutencao['Data']}")
+
+
+class Caminhao(InterfaceVeiculos, InterfaceManutencao):
     def __init__(self):
         self.caminhoes = []
+        self.manutencoes = []  
         
     def registrar(self):
         while True: 
@@ -101,3 +126,27 @@ class Caminhao(InterfaceVeiculos):
             print(f"  Marca: {caminhao['Marca']}")
             print(f"  Quantidade de Eixos: {caminhao['Quantidade de Eixos']}")
             print(f"  Seguro: {caminhao['Seguro']}")
+
+    def agendar_manutencao(self):
+        veiculo_id = int(input("\nDigite o número do caminhão para agendar manutenção: ")) - 1
+        if 0 <= veiculo_id < len(self.caminhoes):
+            descricao = input("Descrição da manutenção: ")
+            data = input("Data da manutenção (dd/mm/aaaa): ")
+            manutencao = {"Caminhão": self.caminhoes[veiculo_id], "Descrição": descricao, "Data": data}
+            self.manutencoes.append(manutencao)
+            print("\nManutenção agendada com sucesso!")
+        else:
+            print("Caminhão inválido!")
+
+    def consultar_manutencoes(self):
+        if not self.manutencoes:
+            print("\nNenhuma manutenção agendada ainda.")
+            return
+
+        print("\nManutenções Agendadas:")
+        for i, manutencao in enumerate(self.manutencoes, start=1):
+            print(f"\nManutenção {i}:")
+            print(f"  Caminhão: {manutencao['Caminhão']['Marca']}")
+            print(f"  Descrição: {manutencao['Descrição']}")
+            print(f"  Data: {manutencao['Data']}")
+
