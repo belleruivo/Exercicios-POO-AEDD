@@ -1,26 +1,7 @@
 '''Implemente um sistema de Banco com seus 3 tipos de contas (corrente, poupança e
 investimento), evidenciando a classe Account como uma classe abstrata.'''
 
-from abc import ABC, abstractmethod
-
-# Interface Base
-class Account(ABC):
-    @abstractmethod
-    def saque(self, valor):
-        pass
-
-    @abstractmethod
-    def deposito(self, valor):
-        pass
-
-    @abstractmethod
-    def extrato(self):
-        pass
-
-class Rendimento(ABC):
-    @abstractmethod
-    def aplicar_rendimento(self):
-        pass
+from interface import Account, Rendimento
 
 class ContaCorrente(Account):
     def __init__(self, titular, saldo, limite):

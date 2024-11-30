@@ -1,4 +1,4 @@
-from account import *
+from contas import *
 
 def criar_conta():
     print("Escolha o tipo de conta:")
