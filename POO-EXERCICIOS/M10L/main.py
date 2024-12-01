@@ -1,4 +1,3 @@
-from person import Person
 from supplier import Supplier
 from employee import Employee
 from administrator import Administrator

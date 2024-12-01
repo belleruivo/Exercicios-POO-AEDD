@@ -9,8 +9,9 @@ os herdados da classe Person.
 '''
 
 from person import Person
+from abc import ABC, abstractmethod
 
-class Employee(Person):
+class Employee(Person, ABC):
     def __init__(self, nome, endereco, cpf, rg, telefone, sector_code=0, base_salary=0.0, tax=0.0):
         super().__init__(nome, endereco, cpf, rg, telefone)
         self.__sector_code = sector_code
@@ -44,5 +45,6 @@ class Employee(Person):
         else:
             raise ValueError("Taxa de imposto inválida (deve estar entre 0 e 100).")
 
+    @abstractmethod
     def calculate_salary(self):
-        return self.__base_salary * (1 - self.__tax / 100)
+        pass
