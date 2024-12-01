@@ -1,7 +1,3 @@
-'''
-Implemente um sistema de Concessionária com os tipos de veículos (automóvel,
-moto, caminhão, etc.), evidenciando a classe Vehicle como uma classe abstrata.'''
-
 from abc import ABC, abstractmethod
 
 class Vehicle(ABC):

@@ -1,11 +1,27 @@
 from classeAbstrata import Vehicle
 
-class Car(Vehicle):
-    def move(self):
-        print("O carro está se movendo sobre rodas.")
+class Carro(Vehicle):
+    def __init__(self, ano, marca, seguro, portas):
+        super().__init__(ano, marca, seguro)
+        self.portas = portas
 
-class Boat(Vehicle):
-    def move(self):
-        print("O barco está navegando na água.")
+    def registrar(self):
+        return f"Carro {self.marca} de {self.ano} registrado com {self.portas} portas."
+
+class Moto(Vehicle):
+    def __init__(self, ano, marca, seguro, cilindradas):
+        super().__init__(ano, marca, seguro)
+        self.cilindradas = cilindradas
+
+    def registrar(self):
+        return f"Moto {self.marca} de {self.ano} registrada com {self.cilindradas} cilindradas."
+
+class Caminhao(Vehicle):
+    def __init__(self, ano, marca, seguro, capacidade_carga):
+        super().__init__(ano, marca, seguro)
+        self.capacidade_carga = capacidade_carga
+
+    def registrar(self):
+        return f"Caminhão {self.marca} de {self.ano} registrado com capacidade de {self.capacidade_carga} toneladas."
 
 
