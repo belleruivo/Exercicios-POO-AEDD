@@ -1,5 +1,5 @@
 from contas import *
-
+from interfaces import InterfaceContaManager
 
 class ContaManager(InterfaceContaManager):
     def criar_conta(self):
