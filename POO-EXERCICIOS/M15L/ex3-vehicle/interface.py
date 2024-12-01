@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Registravel(ABC):
     @abstractmethod
     def registrar(self):
@@ -28,6 +29,11 @@ class Vehicle(Registravel, ABC):
         return f"{self.__class__.__name__} {self.marca} de {self.ano} vendido!"
 
 
+# Registrando as classes em suas respectivas interfaces (Financiavel e AvaliacaoSeguro)
+Financiavel.register(Vehicle)
+AvaliacaoSeguro.register(Vehicle)
+
+
 class Carro(Vehicle):
     def __init__(self, ano, marca, seguro, portas):
         super().__init__(ano, marca, seguro)
@@ -35,6 +41,17 @@ class Carro(Vehicle):
 
     def registrar(self):
         return f"Carro {self.marca} de {self.ano} registrado com {self.portas} portas."
+
+    def calcular_financiamento(self, meses):
+        return f"Financiamento do carro por {meses} meses."
+
+    def avaliar_seguro(self):
+        return "Seguro do carro avaliado."
+
+
+# Registrando a classe Carro em Financiavel e AvaliacaoSeguro
+Financiavel.register(Carro)
+AvaliacaoSeguro.register(Carro)
 
 
 class Moto(Vehicle):
@@ -45,6 +62,17 @@ class Moto(Vehicle):
     def registrar(self):
         return f"Moto {self.marca} de {self.ano} registrada com {self.cilindradas} cilindradas."
 
+    def calcular_financiamento(self, meses):
+        return f"Financiamento da moto por {meses} meses."
+
+    def avaliar_seguro(self):
+        return "Seguro da moto avaliado."
+
+
+# Registrando a classe Moto em Financiavel e AvaliacaoSeguro
+Financiavel.register(Moto)
+AvaliacaoSeguro.register(Moto)
+
 
 class Caminhao(Vehicle):
     def __init__(self, ano, marca, seguro, capacidade_carga):
@@ -54,10 +82,15 @@ class Caminhao(Vehicle):
     def registrar(self):
         return f"Caminhão {self.marca} de {self.ano} registrado com capacidade de {self.capacidade_carga} toneladas."
 
+    def calcular_financiamento(self, meses):
+        return f"Financiamento do caminhão por {meses} meses."
 
-Financiavel.register(Carro)
-Financiavel.register(Moto)
-AvaliacaoSeguro.register(Carro)
+    def avaliar_seguro(self):
+        return "Seguro do caminhão avaliado."
+
+
+# Registrando a classe Caminhao em Financiavel e AvaliacaoSeguro
+Financiavel.register(Caminhao)
 AvaliacaoSeguro.register(Caminhao)
 
 
