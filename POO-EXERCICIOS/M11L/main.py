@@ -1,20 +1,8 @@
-# Crie um sistema chamado Sistema de Gestão de Pessoas (SGP). Nele, haverá um script
-# principal chamado main.py com um menu para gerenciar dados de colaboradores
-# relacionados com a empresa. Escreva todo o programa documentando e testando restrições
-# de entradas de dados e exceções (pesquise como funciona o try-except no Python).
-
-'''Para ajudar a gente a entender, dps a gente apaga -> Sim, o código atende ao Princípio da Substituição de 
-Liskov (Liskov Substitution Principle - LSP) do SOLID. O LSP afirma que uma subclasse deve ser substituível
-por sua superclasse sem alterar o comportamento esperado do sistema. Em outras palavras, 
-qualquer instância da subclasse Supplier pode ser usada em um contexto onde 
-uma instância de Person é esperada, sem causar problemas no programa.'''
-
-from person import Person
-from supplier import Supplier
 from employee import Employee
-from administrator import Administrator
-from factory_worker import FactoryWorker
 from seller import Seller
+from supplier import Supplier
+from factory_worker import FactoryWorker
+from administrator import Administrator
 
 def display_menu():
     print("\nSistema de Gestão de Pessoas (SGP)")
@@ -33,10 +21,9 @@ def display_person_type_menu():
 
 def display_employee_type_menu():
     print("\nEscolha o tipo de funcionário:")
-    print("1. Funcionário Comum")
-    print("2. Administrador")
-    print("3. Operário de Fábrica")
-    print("4. Vendedor")
+    print("1. Administrador")
+    print("2. Operário de Fábrica")
+    print("3. Vendedor")
     return input("Digite o número correspondente ao tipo: ")
 
 def collect_common_data():
@@ -113,122 +100,99 @@ def add_person():
                 sector_code = int(input("Código do Setor: "))
                 base_salary = float(input("Salário Base: "))
                 tax = float(input("Imposto (%): "))
-                
-                if employee_type == "1":  # Funcionário Comum
-                    return Employee(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax)
-                elif employee_type == "2":  # Administrador
-                    subsistence_allowance = float(input("Ajuda de custo: "))
+
+                if employee_type == "1":  # Administrador
+                    subsistence_allowance = float(input("Subsídio de Subsistência: "))
                     return Administrator(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, subsistence_allowance)
-                elif employee_type == "3":  # Operário de Fábrica
-                    value_production = float(input("Valor da Produção: "))
+
+                if employee_type == "2":  # Operário de Fábrica
+                    value_production = float(input("Valor de Produção: "))
                     commission = float(input("Comissão (%): "))
                     return FactoryWorker(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production, commission)
-                elif employee_type == "4":  # Vendedor
-                    value_sales = float(input("Valor das Vendas: "))
+
+                if employee_type == "3":  # Vendedor
+                    value_sales = float(input("Valor de Vendas: "))
                     commission = float(input("Comissão (%): "))
                     return Seller(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_sales, commission)
-                else:
-                    print("Tipo de funcionário inválido. Tente novamente.")
-                    return None
-                
+
             except ValueError:
-                print("Entrada inválida. Certifique-se de inserir valores numéricos válidos.\n")
-    
-    else:
-        print("Tipo inválido. Pessoa não adicionada.")
-        return None
+                print("Entrada inválida. Tente novamente.\n")
 
-def consult_supplier(supplier):
-    display_common_data(supplier)
-    print(f"Crédito: {supplier.get_value_credit()}")
-    print(f"Dívida: {supplier.get_value_debt()}")
-    print(f"Saldo: {supplier.get_balance()}")
-
-def consult_employee(employee):
-    display_common_data(employee)
-    print(f"Código do Setor: {employee.get_sector_code()}")
-    print(f"Salário Base: {employee.get_base_salary()}")
-    print(f"Imposto: {employee.get_tax()}%")
-
-    if isinstance(employee, Administrator):
-        print(f"Ajuda de Custo: {employee.get_subsistence_allowance()}")
-        print("Tipo: Administrador")
-    elif isinstance(employee, FactoryWorker):
-        print(f"Valor da Produção: {employee.get_value_production()}")
-        print(f"Comissão: {employee.get_commission()}%")
-        print("Tipo: Operário de Fábrica")
-    elif isinstance(employee, Seller):
-        print(f"Valor das Vendas: {employee.get_value_sales()}")
-        print(f"Comissão: {employee.get_commission()}%")
-        print("Tipo: Vendedor")
-    else:
-        print("Tipo: Funcionário Comum")
-
-def calculate_employee_salary(employee):
-    print(f"\nSalário final de {employee.get_nome()}: {employee.calculate_salary()}")
-
-def consult_all_employees(employees):
-    print("\nFuncionários cadastrados:")
-    for i, employee in enumerate(employees, start=1):
-        if isinstance(employee, Administrator):
-            type_employee = "Administrador"
-        elif isinstance(employee, FactoryWorker):
-            type_employee = "Operário de Fábrica"
-        elif isinstance(employee, Seller):
-            type_employee = "Vendedor"
-        else:
-            type_employee = "Funcionário Comum"
-        
-        print(f"{i}. {employee.get_nome()} ({type_employee})")
-    
-    while True:
-        try:
-            choice = int(input("Digite o número do funcionário que deseja consultar: "))
-            if 1 <= choice <= len(employees):
-                consult_employee(employees[choice - 1])
-                break
-            else:
-                print("Número inválido. Tente novamente.")
-        except ValueError:
-            print("Entrada inválida. Por favor, insira um número.")
 
 def main():
-    print("-="*30)
-    suppliers = []
-    employees = []
+    people = []
 
     while True:
         option = display_menu()
+
         if option == "1":
             person = add_person()
-            if person:
-                if isinstance(person, Supplier):
-                    suppliers.append(person)
-                    print("Fornecedor adicionado com sucesso.")
-                elif isinstance(person, Employee):
-                    employees.append(person)
-                    print("Funcionário adicionado com sucesso.")
+            people.append(person)
+            print(f"\nPessoa adicionada com sucesso!\n")
+
         elif option == "2":
-            if suppliers:
-                for supplier in suppliers:
-                    consult_supplier(supplier)
-            else:
-                print("Nenhum fornecedor cadastrado.")
+            cpf = input("Digite o CPF do fornecedor: ")
+            found = False
+            for person in people:
+                if isinstance(person, Supplier) and person.get_cpf() == cpf:
+                    display_common_data(person)
+                    found = True
+                    break
+            if not found:
+                print("Fornecedor não encontrado.")
+
         elif option == "3":
-            if employees:
-                consult_all_employees(employees)
-            else:
-                print("Nenhum funcionário cadastrado.")
+            cpf = input("Digite o CPF do funcionário: ")
+            found = False
+            for person in people:
+                if isinstance(person, Employee) and person.get_cpf() == cpf:
+                    display_common_data(person)
+                    found = True
+                    break
+            if not found:
+                print("Funcionário não encontrado.")
+
         elif option == "4":
-            if employees:
-                for employee in employees:
-                    calculate_employee_salary(employee)
-            else:
-                print("Nenhum funcionário cadastrado.")
+            cpf = input("Digite o CPF do funcionário para calcular o salário: ")
+            found = False
+            for person in people:
+                if isinstance(person, Employee) and person.get_cpf() == cpf:
+                    print(f"\nSalário Calculado: {person.calculate_salary():.2f}")
+                    found = True
+                    break
+            if not found:
+                print("Funcionário não encontrado.")
+
         elif option == "5":
             print("Saindo do sistema...")
             break
         else:
-            print("Opção inválida. Tente novamente.")
+            print("Opção inválida! Tente novamente.")
 
-main()
+if __name__ == "__main__":
+    main()
+
+'''Substituição sem Quebra de Comportamento:
+
+O método display_salary() foi criado para aceitar qualquer objeto da classe Employee, 
+e podemos passar um objeto de Administrator, FactoryWorker ou Seller sem problemas. 
+O cálculo do salário será feito de forma apropriada para cada tipo de funcionário.
+Isso demonstra que podemos substituir uma instância de Employee por qualquer uma de suas subclasses 
+(semelhante a como substituímos um Employee genérico por um Administrator, FactoryWorker ou Seller) 
+e o sistema continua funcionando corretamente, sem comportamentos inesperados.
+
+Exemplo Prático:
+
+No código, substituímos o Employee por suas subclasses e o método calculate_salary() 
+se adapta automaticamente ao tipo de funcionário.
+Ou seja, a função display_salary() aceita qualquer Employee ou suas subclasses e calcula 
+o salário de maneira correta de acordo com a implementação de cada subclasse.
+
+Conclusão: No meu código, a estrutura de herança e o uso do método polimórfico calculate_salary() 
+em cada subclasse garantem que as instâncias das subclasses de Employee podem ser usadas 
+de forma transparente no lugar da classe base, sem alterar o comportamento esperado. 
+Isso é um exemplo claro do Princípio de Substituição de Liskov, onde a substituição de 
+uma classe base por suas subclasses não altera a funcionalidade do sistema, mantendo 
+a consistência e previsibilidade.
+
+'''

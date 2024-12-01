@@ -19,20 +19,20 @@ class Supplier(Person):
     def get_value_credit(self):
         return self.__value_credit
 
-    def set_value_credit(self, value_credit):
-        if value_credit >= 0:
-            self.__value_credit = value_credit
-        else:
-            raise ValueError("Crédito não pode ser negativo")
-
     def get_value_debt(self):
         return self.__value_debt
 
+    def set_value_credit(self, value_credit):
+        if isinstance(value_credit, (int, float)) and value_credit >= 0:
+            self.__value_credit = value_credit
+        else:
+            raise ValueError("Valor de crédito inválido")
+
     def set_value_debt(self, value_debt):
-        if value_debt >= 0:
+        if isinstance(value_debt, (int, float)) and value_debt >= 0:
             self.__value_debt = value_debt
         else:
-            raise ValueError("Dívida não pode ser negativa")
+            raise ValueError("Valor de dívida inválido")
 
     def get_balance(self):
         return self.__value_credit - self.__value_debt
