@@ -1,19 +1,23 @@
 from abc import ABC, abstractmethod
 
-class Account(ABC):
+class LimiteCreditoInterface(ABC):
     @abstractmethod
-    def saque(self, valor):
+    def set_limite(self, limite):
+        pass
+    
+    @abstractmethod
+    def get_limite(self):
         pass
 
+class JurosInterface(ABC):
     @abstractmethod
-    def deposito(self, valor):
+    def aplicar_juros(self):
         pass
 
-    @abstractmethod
-    def extrato(self):
-        pass
-
-class Rendimento(ABC):
+class RendimentoInterface(ABC):
     @abstractmethod
     def aplicar_rendimento(self):
         pass
+
+
+

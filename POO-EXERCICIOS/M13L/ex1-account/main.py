@@ -3,6 +3,7 @@ investimento), evidenciando a classe Account como uma classe abstrata.'''
 
 from contas import *
 
+
 def criar_conta():
     print("Escolha o tipo de conta:")
     print("1-Corrente")
@@ -19,7 +20,7 @@ def criar_conta():
         except ValueError:
             print("Certifique-se de esolher uma opção válida!\n")
 
-    titular = input("Informe o nome do titular: ")
+    titular = input("\nInforme o nome do titular: ")
 
     while True:
         try:
@@ -44,24 +45,10 @@ def criar_conta():
         return ContaCorrente(titular, saldo_inicial, limite)
     
     elif opcao == 2:
-        while True:
-            try:
-                taxa_juros = float(input("Informe a taxa de juros anual da conta poupança (%): "))
-                if taxa_juros < 0:
-                    print("A taxa de juros não pode ser negativa!\n")
-                else:
-                    break
-            except ValueError:
-                print("Por favor, insira um valor numérico válido para a taxa de juros.\n")
-        return ContaPoupança(titular, saldo_inicial, taxa_juros)
+        return ContaPoupanca(titular, saldo_inicial)
+    
     elif opcao == 3:
-        while True:
-            tipo_investimento = input("Informe o tipo de investimento (1-alto_rendimento ou 2-baixo_rendimento): ").lower()
-            if tipo_investimento in ["1", "2"]:
-                break
-            else:
-                print("Opção inválida! Informe 'alto_rendimento' ou 'baixo_rendimento'.\n")
-        return ContaInvestimento(titular, saldo_inicial, tipo_investimento)
+        return ContaInvestimento(titular, saldo_inicial)
 
 def operar_conta(conta):
     while True:
@@ -69,10 +56,6 @@ def operar_conta(conta):
         print("1 - Depósito")
         print("2 - Saque")
         print("3 - Extrato")
-        if isinstance(conta, ContaPoupança):
-            print("4 - Aplicar Juros")
-        if isinstance(conta, ContaInvestimento):
-            print("4 - Aplicar Investimento")
         print("0 - Sair")
 
         opcao = input("Escolha uma operação: ")
@@ -103,11 +86,6 @@ def operar_conta(conta):
             print(conta.saque(valor))
         elif opcao == "3":
             print(conta.extrato())
-        elif opcao == "4":
-            if isinstance(conta, ContaPoupança):
-                print(conta.aplicar_juros())
-            elif isinstance(conta, ContaInvestimento):
-                print(conta.aplicar_investimento())
         elif opcao == "0":
             break
         else:

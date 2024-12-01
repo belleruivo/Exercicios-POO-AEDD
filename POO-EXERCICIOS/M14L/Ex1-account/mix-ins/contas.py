@@ -1,8 +1,5 @@
-'''Implemente um sistema de Banco com seus 3 tipos de contas (corrente, poupança e
-investimento), evidenciando a classe Account como uma classe abstrata.'''
-
 from abc import ABC, abstractmethod
-from interface import *
+from mixins import *
 
 class Conta(ABC):
     def __init__(self, titular, saldo=0):
@@ -20,10 +17,10 @@ class Conta(ABC):
     def extrato(self):
         return f"Extrato de {self.titular}: R${self.saldo:.2f}"
 
-class ContaCorrente(Conta, LimiteCreditoInterface):
+class ContaCorrente(Conta, LimiteCreditoMixIn):
     def __init__(self, titular, saldo=0, limite=1000):
-        super().__init__(titular, saldo)
-        self.limite = limite
+        Conta.__init__(self, titular, saldo)
+        LimiteCreditoMixIn.__init__(self, limite)
     
     def sacar(self, valor):
         if self.saldo + self.limite >= valor:
@@ -35,16 +32,10 @@ class ContaCorrente(Conta, LimiteCreditoInterface):
         self.saldo += valor
         return f"Depósito de R${valor:.2f} realizado com sucesso."
 
-    def set_limite(self, limite):
-        self.limite = limite
-
-    def get_limite(self):
-        return self.limite
-
-class ContaPoupanca(Conta, JurosInterface):
+class ContaPoupanca(Conta, JurosMixIn):
     def __init__(self, titular, saldo=0, taxa_juros=0.01):
-        super().__init__(titular, saldo)
-        self.taxa_juros = taxa_juros
+        Conta.__init__(self, titular, saldo)
+        JurosMixIn.__init__(self, taxa_juros)
     
     def sacar(self, valor):
         if self.saldo >= valor:
@@ -56,27 +47,20 @@ class ContaPoupanca(Conta, JurosInterface):
         self.saldo += valor
         return f"Depósito de R${valor:.2f} realizado com sucesso."
 
-    def aplicar_juros(self):
-        self.saldo += self.saldo * self.taxa_juros
-        return f"Juros aplicados. Novo saldo: R${self.saldo:.2f}"
-
-class ContaInvestimento(Conta, RendimentoInterface):
+class ContaInvestimento(Conta, InvestimentoMixIn):
     def __init__(self, titular, saldo=0, rendimento=0.05):
-        super().__init__(titular, saldo)
-        self.rendimento = rendimento
-    
+        Conta.__init__(self, titular, saldo)
+        InvestimentoMixIn.__init__(self, rendimento)
+
     def sacar(self, valor):
         if self.saldo >= valor:
             self.saldo -= valor
             return f"Saque de R${valor:.2f} realizado com sucesso!"
         return "Saldo insuficiente para saque."
-
+    
     def depositar(self, valor):
         self.saldo += valor
         return f"Depósito de R${valor:.2f} realizado com sucesso."
-    
+
     def aplicar_rendimento(self):
-        self.saldo += self.saldo * self.rendimento
-        return f"Rendimento aplicado. Novo saldo: R${self.saldo:.2f}"
-
-
+        return InvestimentoMixIn.aplicar_rendimento(self)
