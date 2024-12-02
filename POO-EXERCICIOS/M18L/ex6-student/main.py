@@ -6,14 +6,14 @@ from curso import Curso
 from endereco import Endereco
 
 def adicionar_estudante(estudantes):
-    nome = input("Digite o nome do estudante: ")
+    nome = input("Digite o nome do estudante: ").capitalize()
     idade = int(input("Digite a idade do estudante: "))
     curso_nome = input("Digite o nome do curso: ")
     curso = Curso(curso_nome)
-    rua = input("Digite o nome da rua: ")
+    rua = input("Digite o nome da rua: ").title()
     numero = input("Digite o número: ")
-    cidade = input("Digite a cidade: ")
-    estado = input("Digite o estado: ")
+    cidade = input("Digite a cidade: ").capitalize()
+    estado = input("Digite o estado: ").capitalize()
     cep = input("Digite o CEP: ")
     endereco = Endereco(rua, numero, cidade, estado, cep)
     
