@@ -25,9 +25,5 @@ if __name__ == "__main__":
     main()
 
 '''
-Composição de Classes: Criamos classes componentes (Curso, Historico, Endereco) que são usadas dentro de Student para compor suas funcionalidades.
-
-Classes Concretas: As classes de estudantes (Graduacao, Especializacao, Mestrado, Doutorado) usam essas classes componentes.
-
-Sistema Interativo: O main.py foi atualizado para incluir a entrada de curso, endereço, e histórico ao adicionar um novo estudante e exibir essas informações ao listar os estudantes.
+Composição: A composição é uma relação de "todo-parte" onde o objeto "todo" (Student) é composto por objetos "parte" (Curso, Endereco, Historico).
 '''
