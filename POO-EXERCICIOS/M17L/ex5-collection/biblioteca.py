@@ -8,6 +8,8 @@ class Biblioteca:
         print("Item adicionado com sucesso!\n")
 
     def listar_acervo(self):
-        print(f"Acervo da Biblioteca {self.nome}:")
+        print("-"*35)
+        print(f"   Acervo da Biblioteca {self.nome}:")
+        print("-"*35)
         for item in self.acervo:
             print(item.descricao())

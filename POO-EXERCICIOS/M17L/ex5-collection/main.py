@@ -1,8 +1,14 @@
+# Implemente um sistema de Biblioteca com os tipos de acervo (livro, revista, DVD, CD,
+# etc.), evidenciando a classe Collection como uma classe abstrata.
+
 from itens import *
 from biblioteca import Biblioteca
 
 def criar_acervo():
     while True:
+        print("-"*35)
+        print("            ACERVO")
+        print("-"*35)
         print("\nSelecione o tipo de acervo:")
         print("1. Livro")
         print("2. Revista")
