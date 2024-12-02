@@ -1,198 +1,98 @@
 from employee import Employee
-from seller import Seller
-from supplier import Supplier
-from factory_worker import FactoryWorker
 from administrator import Administrator
+from factory_worker import FactoryWorker
+from seller import Seller
 
-def display_menu():
-    print("\nSistema de Gestão de Pessoas (SGP)")
-    print("1. Adicionar Pessoa")
-    print("2. Consultar Fornecedor")
-    print("3. Consultar Funcionário")
-    print("4. Calcular Salário de Funcionário")
-    print("5. Sair")
-    return input("Escolha uma opção: ")
-
-def display_person_type_menu():
-    print("\nEscolha o tipo de pessoa:")
-    print("1. Fornecedor")
-    print("2. Funcionário")
-    return input("Digite o número correspondente ao tipo: ")
-
-def display_employee_type_menu():
-    print("\nEscolha o tipo de funcionário:")
-    print("1. Administrador")
-    print("2. Operário de Fábrica")
-    print("3. Vendedor")
-    return input("Digite o número correspondente ao tipo: ")
-
-def collect_common_data():
-    while True:
-        nome = input("Nome: ")
-        if all(char.isalpha() or char.isspace() for char in nome):
-            break
-        else:
-            print("O nome deve conter apenas letras e espaços. Tente novamente.\n")
-
-    endereco = input("Endereço: ")
+def adicionar_funcionario(tipo):
+    nome = input("Digite o nome do funcionário: ")
+    endereco = input("Digite o endereço do funcionário: ")
+    cpf = input("Digite o CPF do funcionário: ")
+    rg = input("Digite o RG do funcionário: ")
+    telefone = input("Digite o telefone do funcionário: ")
+    sector_code = int(input("Digite o código do setor: "))
+    base_salary = float(input("Digite o salário base: "))
 
     while True:
-        cpf = input("CPF (Somente números): ")
-        if len(cpf) == 11 and cpf.isdigit():
+        tax = float(input("Digite a porcentagem de imposto (decimal): "))
+        if 0 <= tax <= 1:
             break
         else:
-            print("CPF deve ter 11 dígitos e conter apenas números.")
-
-    while True:
-        rg = input("RG (Somente números): ")
-        if rg.isdigit():
-            break
-        else:
-            print("RG deve conter apenas números.")
-
-    while True:
-        telefone = input("Telefone (Somente números): ")
-        if telefone.isdigit():
-            break
-        else:
-            print("Telefone deve conter apenas números.")
+            print("Taxa inválida. Digite um valor entre 0 e 1.")
     
-    return nome, endereco, cpf, rg, telefone
+    if tipo == "Administrator":
+        subsistence_allowance = float(input("Digite a ajuda de custo: "))
+        return Administrator(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, subsistence_allowance)
+    elif tipo == "FactoryWorker":
+        value_production = float(input("Digite o valor da produção: "))
+        commission = float(input("Digite a comissão (decimal): "))
+        return FactoryWorker(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production, commission)
+    elif tipo == "Seller":
+        value_sales = float(input("Digite o valor das vendas: "))
+        commission = float(input("Digite a comissão (decimal): "))
+        return Seller(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_sales, commission)
+    else:
+        return Employee(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax)
 
-def display_common_data(person):
-    print(f"\nNome: {person.get_nome()}")
-    print(f"Endereço: {person.get_endereco()}")
-    print(f"CPF: {person.get_cpf()}")
-    print(f"RG: {person.get_rg()}")
-    print(f"Telefone: {person.get_telefone()}")
-
-def add_person():
-    nome, endereco, cpf, rg, telefone = collect_common_data()
-    person_type = display_person_type_menu()
-
-    if person_type == "1":  # Fornecedor
-        while True:
-            try:
-                value_credit = float(input("Crédito máximo: "))
-                if value_credit < 0:
-                    print("O crédito não pode ser negativo.")
-                else:
-                    break
-            except ValueError:
-                print("Entrada inválida. Certifique-se de inserir um número válido\n")
-
-        while True:
-            try:
-                value_debt = float(input("Dívida: "))
-                if value_debt < 0:
-                    print("A dívida não pode ser negativa.")
-                else:
-                    break
-            except ValueError:
-                print("Entrada inválida. Certifique-se de inserir um número válido\n")
-
-        return Supplier(nome, endereco, cpf, rg, telefone, value_credit, value_debt)
-
-    elif person_type == "2":  # Funcionário
-        employee_type = display_employee_type_menu()
-        while True:
-            try:
-                sector_code = int(input("Código do Setor: "))
-                base_salary = float(input("Salário Base: "))
-                tax = float(input("Imposto (%): "))
-
-                if employee_type == "1":  # Administrador
-                    subsistence_allowance = float(input("Subsídio de Subsistência: "))
-                    return Administrator(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, subsistence_allowance)
-
-                if employee_type == "2":  # Operário de Fábrica
-                    value_production = float(input("Valor de Produção: "))
-                    commission = float(input("Comissão (%): "))
-                    return FactoryWorker(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production, commission)
-
-                if employee_type == "3":  # Vendedor
-                    value_sales = float(input("Valor de Vendas: "))
-                    commission = float(input("Comissão (%): "))
-                    return Seller(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_sales, commission)
-
-            except ValueError:
-                print("Entrada inválida. Tente novamente.\n")
-
+def listar_funcionarios(funcionarios):
+    if not funcionarios:
+        print("Nenhum funcionário cadastrado.")
+        return
+    
+    for func in funcionarios:
+        print(f'Nome: {func.get_nome()}, Salário: {func.calculate_salary()}')
 
 def main():
-    people = []
-
+    funcionarios = []
+    
     while True:
-        option = display_menu()
-
-        if option == "1":
-            person = add_person()
-            people.append(person)
-            print(f"\nPessoa adicionada com sucesso!\n")
-
-        elif option == "2":
-            cpf = input("Digite o CPF do fornecedor: ")
-            found = False
-            for person in people:
-                if isinstance(person, Supplier) and person.get_cpf() == cpf:
-                    display_common_data(person)
-                    found = True
-                    break
-            if not found:
-                print("Fornecedor não encontrado.")
-
-        elif option == "3":
-            cpf = input("Digite o CPF do funcionário: ")
-            found = False
-            for person in people:
-                if isinstance(person, Employee) and person.get_cpf() == cpf:
-                    display_common_data(person)
-                    found = True
-                    break
-            if not found:
-                print("Funcionário não encontrado.")
-
-        elif option == "4":
-            cpf = input("Digite o CPF do funcionário para calcular o salário: ")
-            found = False
-            for person in people:
-                if isinstance(person, Employee) and person.get_cpf() == cpf:
-                    print(f"\nSalário Calculado: {person.calculate_salary():.2f}")
-                    found = True
-                    break
-            if not found:
-                print("Funcionário não encontrado.")
-
-        elif option == "5":
-            print("Saindo do sistema...")
+        print("\nSistema de Gestão de Funcionários")
+        print("1. Adicionar Empregado")
+        print("2. Adicionar Administrador")
+        print("3. Adicionar Operário")
+        print("4. Adicionar Vendedor")
+        print("5. Listar Funcionários")
+        print("6. Sair")
+        
+        opcao = int(input("Selecione uma opção (1-6): "))
+        
+        if opcao == 1:
+            funcionario = adicionar_funcionario("Employee")
+            funcionarios.append(funcionario)
+            print("Empregado adicionado com sucesso!")
+        elif opcao == 2:
+            funcionario = adicionar_funcionario("Administrator")
+            funcionarios.append(funcionario)
+            print("Administrador adicionado com sucesso!")
+        elif opcao == 3:
+            funcionario = adicionar_funcionario("FactoryWorker")
+            funcionarios.append(funcionario)
+            print("Operário adicionado com sucesso!")
+        elif opcao == 4:
+            funcionario = adicionar_funcionario("Seller")
+            funcionarios.append(funcionario)
+            print("Vendedor adicionado com sucesso!")
+        elif opcao == 5:
+            listar_funcionarios(funcionarios)
+        elif opcao == 6:
+            print("Saindo do sistema.")
             break
         else:
-            print("Opção inválida! Tente novamente.")
+            print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
     main()
 
-'''Substituição sem Quebra de Comportamento:
+'''
+Explicação das Diferenças Antes e Depois da Aplicação do LSP
+Antes:
+Cada tipo de funcionário (Employee, Administrator, FactoryWorker, Seller) tinha métodos específicos para adicionar e listar informações.
 
-O método display_salary() foi criado para aceitar qualquer objeto da classe Employee, 
-e podemos passar um objeto de Administrator, FactoryWorker ou Seller sem problemas. 
-O cálculo do salário será feito de forma apropriada para cada tipo de funcionário.
-Isso demonstra que podemos substituir uma instância de Employee por qualquer uma de suas subclasses 
-(semelhante a como substituímos um Employee genérico por um Administrator, FactoryWorker ou Seller) 
-e o sistema continua funcionando corretamente, sem comportamentos inesperados.
+A interação com diferentes tipos de funcionários era feita de maneira individualizada, o que poderia levar a redundância no código e dificuldades de manutenção.
 
-Exemplo Prático:
+Depois:
+Unificamos a adição de funcionários em uma função adicionar_funcionario(tipo) que aceita o tipo de funcionário como parâmetro.
 
-No código, substituímos o Employee por suas subclasses e o método calculate_salary() 
-se adapta automaticamente ao tipo de funcionário.
-Ou seja, a função display_salary() aceita qualquer Employee ou suas subclasses e calcula 
-o salário de maneira correta de acordo com a implementação de cada subclasse.
+Agora, a função listar_funcionarios trata os funcionários de maneira genérica, respeitando o princípio de Liskov, onde qualquer instância de Employee ou suas subclasses pode ser usada de maneira intercambiável.
 
-Conclusão: No meu código, a estrutura de herança e o uso do método polimórfico calculate_salary() 
-em cada subclasse garantem que as instâncias das subclasses de Employee podem ser usadas 
-de forma transparente no lugar da classe base, sem alterar o comportamento esperado. 
-Isso é um exemplo claro do Princípio de Substituição de Liskov, onde a substituição de 
-uma classe base por suas subclasses não altera a funcionalidade do sistema, mantendo 
-a consistência e previsibilidade.
-
+O sistema ficou mais simples, mais fácil de manter e estende novas funcionalidades sem modificar o comportamento esperado das superclasses.
 '''

@@ -12,12 +12,29 @@ from employee import Employee'''
 from employee import Employee
 
 class FactoryWorker(Employee):
-    def __init__(self, nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production, commission):
+    def __init__(self, nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_production=0.0, commission=0.0):
         super().__init__(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax)
-        self.value_production = value_production
-        self.commission = commission
+        self.set_value_production(value_production)
+        self.set_commission(commission)
+
+    def get_value_production(self):
+        return self.__value_production
+
+    def get_commission(self):
+        return self.__commission
+
+    def set_value_production(self, value_production):
+        if isinstance(value_production, (int, float)) and value_production >= 0:
+            self.__value_production = value_production
+        else:
+            raise ValueError("Valor de produção inválido")
+
+    def set_commission(self, commission):
+        if isinstance(commission, (int, float)) and 0 <= commission <= 1:
+            self.__commission = commission
+        else:
+            raise ValueError("Comissão inválida")
 
     def calculate_salary(self):
-        base_salary = super().get_base_salary() * (1 - super().get_tax() / 100)
-        commission_amount = (self.value_production * self.commission) / 100
-        return base_salary + commission_amount
+        return super().calculate_salary() + (self.__value_production * self.__commission)
+

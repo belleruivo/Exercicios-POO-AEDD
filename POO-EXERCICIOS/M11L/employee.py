@@ -9,14 +9,13 @@ os herdados da classe Person.
 '''
 
 from person import Person
-from abc import ABC, abstractmethod
 
-class Employee(Person, ABC):
+class Employee(Person):
     def __init__(self, nome, endereco, cpf, rg, telefone, sector_code=0, base_salary=0.0, tax=0.0):
         super().__init__(nome, endereco, cpf, rg, telefone)
-        self.__sector_code = sector_code
-        self.__base_salary = base_salary
-        self.__tax = tax
+        self.set_sector_code(sector_code)
+        self.set_base_salary(base_salary)
+        self.set_tax(tax)
 
     def get_sector_code(self):
         return self.__sector_code
@@ -28,23 +27,22 @@ class Employee(Person, ABC):
         return self.__tax
 
     def set_sector_code(self, sector_code):
-        if isinstance(sector_code, int) and sector_code >= 0:
+        if isinstance(sector_code, int):
             self.__sector_code = sector_code
         else:
-            raise ValueError("Código de setor inválido.")
+            raise ValueError("Código de setor inválido")
 
     def set_base_salary(self, base_salary):
         if isinstance(base_salary, (int, float)) and base_salary >= 0:
             self.__base_salary = base_salary
         else:
-            raise ValueError("Salário base inválido.")
+            raise ValueError("Salário base inválido")
 
     def set_tax(self, tax):
-        if isinstance(tax, (int, float)) and 0 <= tax <= 100:
+        if isinstance(tax, (int, float)) and 0 <= tax <= 1:
             self.__tax = tax
         else:
-            raise ValueError("Taxa de imposto inválida (deve estar entre 0 e 100).")
+            raise ValueError("Taxa inválida")
 
-    @abstractmethod
     def calculate_salary(self):
-        pass
+        return self.__base_salary * (1 - self.__tax)

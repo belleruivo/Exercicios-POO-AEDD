@@ -11,12 +11,28 @@ herdados.'''
 from employee import Employee
 
 class Seller(Employee):
-    def __init__(self, nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_sales, commission):
+    def __init__(self, nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax, value_sales=0.0, commission=0.0):
         super().__init__(nome, endereco, cpf, rg, telefone, sector_code, base_salary, tax)
-        self.value_sales = value_sales
-        self.commission = commission
+        self.set_value_sales(value_sales)
+        self.set_commission(commission)
+
+    def get_value_sales(self):
+        return self.__value_sales
+
+    def get_commission(self):
+        return self.__commission
+
+    def set_value_sales(self, value_sales):
+        if isinstance(value_sales, (int, float)) and value_sales >= 0:
+            self.__value_sales = value_sales
+        else:
+            raise ValueError("Valor de vendas inválido")
+
+    def set_commission(self, commission):
+        if isinstance(commission, (int, float)) and 0 <= commission <= 1:
+            self.__commission = commission
+        else:
+            raise ValueError("Comissão inválida")
 
     def calculate_salary(self):
-        base_salary = super().get_base_salary() * (1 - super().get_tax() / 100)
-        commission_amount = (self.value_sales * self.commission) / 100
-        return base_salary + commission_amount
+        return super().calculate_salary() + (self.__value_sales * self.__commission)

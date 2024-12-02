@@ -2,8 +2,6 @@
 # seletores (getters) e modificadores (setters), e ainda o construtor padrão. Atributos:
 # nome, endereço, CPF, RG e telefone.
 
-from abc import ABC, abstractmethod
-
 class Person:
     def __init__(self, nome="", endereco="", cpf="", rg="", telefone=""):
         self.__nome = nome

@@ -8,9 +8,10 @@ valores dos atributos valueCredit e valueDebt. Depois de implementada a classe
 Supplier, altere o main para que você possa verificar o funcionamento dos métodos
 implementados na classe Supplier e os herdados da classe Person.
 '''
+
 from person import Person
 
-class Supplier(Person):
+class Supplier(Person):  # Supplier herda todos os atributos de Person
     def __init__(self, nome, endereco, cpf, rg, telefone, value_credit=0.0, value_debt=0.0):
         super().__init__(nome, endereco, cpf, rg, telefone)
         self.__value_credit = value_credit
