@@ -5,6 +5,6 @@ class Collection(ABC):
         self.titulo = titulo
         self.ano = ano
 
-    @abstractmethod
+    @abstractmethod # precisa ser implementado pelas subclasses
     def descricao(self):
         pass

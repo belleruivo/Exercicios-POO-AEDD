@@ -8,9 +8,9 @@ class Student(ABC):
     def __init__(self, nome, idade, curso, endereco, historico=None):
         self.nome = nome
         self.idade = idade
-        self.curso = curso
-        self.endereco = endereco
-        self.historico = historico if historico else Historico()
+        self.curso = curso # composição
+        self.endereco = endereco # composição
+        self.historico = historico if historico else Historico() # composição
     
     @abstractmethod
     def get_student_type(self):

@@ -6,7 +6,7 @@ class Livro(Collection):
         self.autor = autor
         self.genero = genero
 
-    def descricao(self):
+    def descricao(self): # são obrigadas a implementar o metodo descrição 
         return f"Livro: {self.titulo}, Autor: {self.autor}, Gênero: {self.genero}, Ano: {self.ano}"
 
 class Revista(Collection):
