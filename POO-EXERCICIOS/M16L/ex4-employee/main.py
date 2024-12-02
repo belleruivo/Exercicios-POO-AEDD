@@ -4,36 +4,7 @@ from receptionist import Receptionist
 from secretary import Secretary
 from in_memory_employee_repository import InMemoryEmployeeRepository
 
-# O Princípio da Inversão da Dependência (DIP) é o "D" nos princípios SOLID. Ele afirma que:
-
-# Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações.
-# Abstrações não devem depender de detalhes. Detalhes devem depender de abstrações.
-# Aplicação do DIP no Código
-# Criação da Interface EmployeeRepository:
-
-# Arquivo: employee_repository.py
-# Descrição: Definimos uma interface abstrata EmployeeRepository com métodos add_employee e list_employees. Isso cria uma abstração para a persistência de dados.
-# Implementação Concreta InMemoryEmployeeRepository:
-
-# Arquivo: in_memory_employee_repository.py
-# Descrição: Implementamos a interface EmployeeRepository em InMemoryEmployeeRepository, que usa uma lista para armazenar os funcionários. Esta implementação concreta depende da abstração EmployeeRepository.
-# Modificação do main.py:
-
-# Arquivo: main.py
-# Descrição:
-# Importamos a implementação concreta InMemoryEmployeeRepository.
-# Substituímos a lista de funcionários por uma instância de InMemoryEmployeeRepository.
-# Usamos os métodos add_employee e list_employees da interface para adicionar e listar funcionários.
-# Como o DIP é Atendido
-# Módulo de Alto Nível (main.py):
-
-# Depende da abstração EmployeeRepository em vez de uma implementação concreta.
-# Isso permite que main.py funcione com qualquer implementação de EmployeeRepository, promovendo flexibilidade e desacoplamento.
-# Módulo de Baixo Nível (InMemoryEmployeeRepository):
-
-# Implementa a abstração EmployeeRepository.
-# Detalhes da implementação concreta dependem da abstração, não o contrário.
-# Ao seguir o DIP, o código se torna mais modular, flexível e fácil de manter, pois as dependências são invertidas para depender de abstrações em vez de implementações concretas.
+# "Módulos de alto nível não devem depender de módulos de baixo nível. Ambos devem depender de abstrações. Abstrações não devem depender de detalhes. Detalhes devem depender de abstrações."
 
 def create_employee():
     print("\nSelecione o tipo de funcionário:")
@@ -61,8 +32,8 @@ def create_employee():
         return None
 
 def main():
-    repository = InMemoryEmployeeRepository()
-
+    repository = InMemoryEmployeeRepository() # poderia trocar por outro, alterando a concreta
+ 
     while True:
         print("\nMenu:")
         print("1. Adicionar Funcionário")
@@ -70,14 +41,15 @@ def main():
         print("3. Sair")
 
         option = input("Escolha uma opção: ")
-
+    
         if option == "1":
             employee = create_employee()
             if employee:
-                repository.add_employee(employee)
+                # usando add_employee da abstração EmployeeRepository
+                repository.add_employee(employee) # !
                 print(f"{employee.name} foi adicionado com sucesso!")
         elif option == "2":
-            employees = repository.list_employees()
+            employees = repository.list_employees() # !
             if employees:
                 print("\nLista de Funcionários:")
                 for i, employee in enumerate(employees, start=1):
