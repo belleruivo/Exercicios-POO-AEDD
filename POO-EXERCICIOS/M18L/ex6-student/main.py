@@ -32,6 +32,14 @@ def adicionar_estudante(estudantes):
         print("Tipo inválido. Estudante não adicionado.")
         return
     
+    while True:
+        opcao_nota = input("Deseja adicionar uma nota ao histórico do estudante? (s/n): ")
+        if opcao_nota.lower() == 's':
+            nota = float(input("Digite a nota: "))
+            estudante.historico.adicionar_nota(nota)
+        else:
+            break
+
     estudantes.append(estudante)
     print(f'Estudante {nome} adicionado com sucesso!')
 
@@ -41,7 +49,7 @@ def listar_estudantes(estudantes):
         return
     
     for aluno in estudantes:
-        print(f'Nome: {aluno.nome}, Idade: {aluno.idade}, Tipo: {aluno.get_student_type()}, Curso: {aluno.get_curso()}, Endereço: {aluno.get_endereco()}, Média do Histórico: {aluno.get_historico()}')
+        print(f'Nome: {aluno.nome}, Idade: {aluno.idade}, Tipo: {aluno.get_student_type()}, Curso: {aluno.get_curso()}, Endereço: {aluno.get_endereco()}, Média do Histórico: {aluno.get_historico():.2f}')
 
 def main():
     estudantes = []
