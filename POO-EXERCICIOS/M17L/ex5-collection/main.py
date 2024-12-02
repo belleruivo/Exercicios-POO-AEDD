@@ -1,5 +1,6 @@
+# Agregação de Classes 
 # Implemente um sistema de Biblioteca com os tipos de acervo (livro, revista, DVD, CD,
-# etc.), evidenciando a classe Collection como uma classe abstrata.
+# etc.), evidenciando a classe Collection como uma classe abstrata. 
 
 from itens import *
 from biblioteca import Biblioteca
