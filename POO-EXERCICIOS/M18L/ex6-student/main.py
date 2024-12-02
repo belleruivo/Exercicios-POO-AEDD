@@ -35,8 +35,13 @@ def adicionar_estudante(estudantes):
     while True:
         opcao_nota = input("Deseja adicionar uma nota ao histórico do estudante? (s/n): ")
         if opcao_nota.lower() == 's':
-            nota = float(input("Digite a nota: "))
-            estudante.historico.adicionar_nota(nota)
+            while True:
+                nota = float(input("Digite a nota (0-10): "))
+                if 0 <= nota <= 10:
+                    estudante.historico.adicionar_nota(nota)
+                    break
+                else:
+                    print("Nota inválida. Digite uma nota entre 0 e 10.")
         else:
             break
 
