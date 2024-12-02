@@ -1,18 +1,26 @@
 from abc import ABC, abstractmethod
 from curso import Curso
-from perfil_academico import PerfilAcademico
+from historico import Historico
+from endereco import Endereco
 
 class Student(ABC):
     
-    def __init__(self, nome, idade, curso: Curso, perfil: PerfilAcademico):
+    def __init__(self, nome, idade, curso, endereco, historico=None):
         self.nome = nome
         self.idade = idade
         self.curso = curso
-        self.perfil = perfil
-    
-    def get_student_type(self):
-        return self.perfil.get_tipo()
+        self.endereco = endereco
+        self.historico = historico if historico else Historico()
     
     @abstractmethod
-    def obter_papeis(self):
+    def get_student_type(self):
         pass
+
+    def get_curso(self):
+        return self.curso.get_nome()
+
+    def get_endereco(self):
+        return self.endereco.get_endereco_completo()
+
+    def get_historico(self):
+        return self.historico.calcular_media()
