@@ -1,14 +1,24 @@
+# Classe base Animal
 class Animal:
-    def __init__(self, name, breed):
-        self.name = name
-        self.breed = breed
-        
-    def animal(self, name=None):
-        pass
-    
-    def walk(self):
-        pass
-        
+    def _init_(self, nome: str, raca: str):
+        self.nome = nome
+        self.raca = raca
+
+    def andar(self) -> str:
+        return f"{self.nome} está andando."
+
+# Classe Dog (Cachorro) herda de Animal
 class Dog(Animal):
-    def __init__(self, name, breed):
-        super().__init__(name, breed)
+    def _init_(self, nome: str, raca: str):
+        super()._init_(nome, raca)
+
+    def latir(self) -> str:
+        return f"{self.nome} diz: Au au!"
+
+# Classe Cat (Gato) herda de Animal
+class Cat(Animal):
+    def _init_(self, nome: str, raca: str):
+        super()._init_(nome, raca)
+
+    def miar(self) -> str:
+        return f"{self.nome}diz: Miau!"
