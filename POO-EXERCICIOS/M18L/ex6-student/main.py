@@ -1,17 +1,36 @@
-from student_factory import StudentFactory
+from graduacao import Graduacao
+from especializacao import Especializacao
+from mestrado import Mestrado
+from doutorado import Doutorado
+from curso import Curso
+from endereco import Endereco
 
 def adicionar_estudante(estudantes):
     nome = input("Digite o nome do estudante: ")
     idade = int(input("Digite a idade do estudante: "))
     curso_nome = input("Digite o nome do curso: ")
+    curso = Curso(curso_nome)
+    rua = input("Digite o nome da rua: ")
+    numero = input("Digite o número: ")
+    cidade = input("Digite a cidade: ")
+    estado = input("Digite o estado: ")
+    cep = input("Digite o CEP: ")
+    endereco = Endereco(rua, numero, cidade, estado, cep)
+    
     print("Tipos de estudante: 1. Graduação 2. Especialização 3. Mestrado 4. Doutorado")
     tipo = int(input("Selecione o tipo de estudante (1-4): "))
     
     if tipo == 1:
-        clube = input("Digite o clube do estudante: ")
-        estudante = StudentFactory.create_student(tipo, nome, idade, curso_nome, clube)
+        estudante = Graduacao(nome, idade, curso, endereco)
+    elif tipo == 2:
+        estudante = Especializacao(nome, idade, curso, endereco)
+    elif tipo == 3:
+        estudante = Mestrado(nome, idade, curso, endereco)
+    elif tipo == 4:
+        estudante = Doutorado(nome, idade, curso, endereco)
     else:
-        estudante = StudentFactory.create_student(tipo, nome, idade, curso_nome)
+        print("Tipo inválido. Estudante não adicionado.")
+        return
     
     estudantes.append(estudante)
     print(f'Estudante {nome} adicionado com sucesso!')
@@ -22,12 +41,7 @@ def listar_estudantes(estudantes):
         return
     
     for aluno in estudantes:
-        print(f'Nome: {aluno.nome}, Idade: {aluno.idade}, Curso: {aluno.curso.nome}, Tipo: {aluno.get_student_type()}')
-        papeis = aluno.obter_papeis()
-        if "lider" in papeis:
-            print(f'Líder: {papeis["lider"]}')
-        if "clube" in papeis:
-            print(f'Clube: {papeis["clube"]}')
+        print(f'Nome: {aluno.nome}, Idade: {aluno.idade}, Tipo: {aluno.get_student_type()}, Curso: {aluno.get_curso()}, Endereço: {aluno.get_endereco()}, Média do Histórico: {aluno.get_historico()}')
 
 def main():
     estudantes = []
@@ -54,15 +68,9 @@ if __name__ == "__main__":
     main()
 
 '''
-Composição de Classes: Criamos classes componentes (PerfilAcademico, PapelLider, ParticipacaoClube) que são usadas dentro de Student para compor suas funcionalidades.
+Composição de Classes: Criamos classes componentes (Curso, Historico, Endereco) que são usadas dentro de Student para compor suas funcionalidades.
 
-Classes Concretas: As classes de estudantes (Graduacao, Especializacao, etc.) usam essas classes componentes.
+Classes Concretas: As classes de estudantes (Graduacao, Especializacao, Mestrado, Doutorado) usam essas classes componentes.
 
-Segregação de Interface: Criamos interfaces específicas para funcionalidades adicionais (LiderInterface e ClubeInterface).
-
-Subclasse Virtual: Registramos Graduacao como subclasse virtual das interfaces.
-
-Princípio da Inversão da Dependência: Usamos uma fábrica (StudentFactory) para instanciar estudantes, desacoplando a lógica de criação da lógica de uso.
-
-Sistema Interativo: Sistema para adicionar e listar estudantes com seus cursos e papéis extras foi mantido.
+Sistema Interativo: O main.py foi atualizado para incluir a entrada de curso, endereço, e histórico ao adicionar um novo estudante e exibir essas informações ao listar os estudantes.
 '''
