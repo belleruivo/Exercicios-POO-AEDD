@@ -1,5 +1,4 @@
 # Faça um programa que apresente o menu de opções abaixo:
-# MENU
 # 1- Cadastrar tipo
 # 2- Cadastrar produto
 # 3- Consultar o preço de um produto
