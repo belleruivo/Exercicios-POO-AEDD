@@ -3,60 +3,59 @@ calcule:
 a. O número de caminhos de determinado comprimento existentes entre eles.
 b. O número total de caminhos existentes entre eles.'''
 
-import numpy as np
+def multiplica_matrizes(matriz_a, matriz_b):
+    """
+    Multiplica duas matrizes quadradas.
+    """
+    n = len(matriz_a)
+    resultado = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                resultado[i][j] += matriz_a[i][k] * matriz_b[k][j]
+    return resultado
+
+def eleva_matriz(matriz, k):
+    """
+    Eleva uma matriz quadrada à potência k.
+    """
+    n = len(matriz)
+    resultado = [[1 if i == j else 0 for j in range(n)] for i in range(n)]  # Matriz identidade
+    matriz_base = matriz
+    for _ in range(k):
+        resultado = multiplica_matrizes(resultado, matriz_base)
+    return resultado
+
 
 def caminhos_comprimento_k(matriz_adj, origem, destino, k):
     """
     Calcula o número de caminhos de comprimento k entre dois nós.
-
-    Args:
-        matriz_adj (numpy.ndarray): Matriz de adjacência do grafo.
-        origem (int): Nó de origem.
-        destino (int): Nó de destino.
-        k (int): Comprimento do caminho.
-
-    Returns:
-        int: Número de caminhos de comprimento k entre origem e destino.
     """
-    matriz_potencia = np.linalg.matrix_power(matriz_adj, k)
-    return matriz_potencia[origem, destino]
+    matriz_potencia = eleva_matriz(matriz_adj, k)
+    return matriz_potencia[origem][destino]
+
 
 def total_caminhos(matriz_adj, origem, destino, max_comprimento=None):
     """
     Calcula o número total de caminhos entre dois nós.
-
-    Args:
-        matriz_adj (numpy.ndarray): Matriz de adjacência do grafo.
-        origem (int): Nó de origem.
-        destino (int): Nó de destino.
-        max_comprimento (int, opcional): Limite superior para o comprimento dos caminhos.
-                                        Se None, calcula infinitamente.
-
-    Returns:
-        int: Número total de caminhos entre origem e destino.
     """
+    n = len(matriz_adj)
     if max_comprimento is not None:
         total = 0
         for k in range(1, max_comprimento + 1):
             total += caminhos_comprimento_k(matriz_adj, origem, destino, k)
         return total
     else:
-        # Para caminhos infinitos, usamos a fórmula da soma geométrica
-        identidade = np.eye(len(matriz_adj))
-        try:
-            inversa = np.linalg.inv(identidade - matriz_adj)
-            soma_infinita = inversa - identidade
-            return int(soma_infinita[origem, destino])
-        except np.linalg.LinAlgError:
-            raise ValueError("A matriz não converge para caminhos infinitos.")
+        raise NotImplementedError("Caminhos infinitos não estão implementados sem bibliotecas.")
+
 
 # Exemplo de uso
-matriz_adjacencia = np.array([
+matriz_adjacencia = [
     [0, 1, 0, 0],
     [1, 0, 1, 1],
     [0, 1, 0, 1],
     [0, 1, 1, 0]
-])
+]
 
 origem = 0
 destino = 2
