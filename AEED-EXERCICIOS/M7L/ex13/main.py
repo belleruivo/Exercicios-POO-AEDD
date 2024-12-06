@@ -34,7 +34,7 @@ Neste código:
 
 Graph.py: contém a classe Graph com a implementação do algoritmo de Dijkstra e a função para imprimir o menor caminho.
 
-main.py: cria o grafo, adiciona as arestas com seus pesos, mapeia os vértices para índices, e calcula o menor caminho entre 𝑥 e 𝑡 usando o algoritmo de Dijkstra.
-Ao executar o código, ele imprimirá o custo do menor caminho e o caminho entre os vértices 𝑥 e 𝑡
+main.py: cria o grafo, adiciona as arestas com seus pesos, mapeia os vértices para índices, e calcula o menor caminho entre x e t usando o algoritmo de Dijkstra.
+Ao executar o código, ele imprimirá o custo do menor caminho e o caminho entre os vértices x e t
 .
 '''
