@@ -49,13 +49,13 @@ class BinarySearchTreeDictionary:
         def _remove_recursive(node, word): 
             if node is None:  
                 return None
-            if word < node.word:  # Se a palavra for menor que o nó, vai para a esquerda - banana < cherry
+            if word < node.word:  # palavra < que o nó, vai para a esquerda (banana < cherry)
                 node.left = _remove_recursive(node.left, word)  # procura a esquerda
             elif word > node.word: 
-                node.right = _remove_recursive(node.right, word) # Se a palavra for maior que o nó, vai para a direita - banana > apple
+                node.right = _remove_recursive(node.right, word) # palavra > que o nó, para a direita (banana > apple)
             else:  # encontrou
                 if node.left is None: # nó sem filho à esquerda
-                    return node.right
+                    return node.right # no caso de banana, é none, por isso remove
                 elif node.right is None:
                     return node.left    
 
