@@ -5,45 +5,38 @@ b. O número total de caminhos existentes entre eles.'''
 
 import numpy as np
 
-def count_paths(adjacency_matrix, start_node, end_node, path_length=None):
+def caminhos_por_comprimento(matriz, no_inicio, no_fim, comprimento):
     """
-    Calcula o número de caminhos entre dois nós em um grafo.
+    Calcula o número de caminhos de determinado comprimento entre dois nós.
     """
-    # Transforma a matriz de adjacência em numpy array, se não for
-    adjacency_matrix = np.array(adjacency_matrix)
-    
-    # Número de nós no grafo
-    n = len(adjacency_matrix)
-    
-    if path_length is not None:
-        # Eleva a matriz de adjacência à potência do comprimento do caminho
-        power_matrix = np.linalg.matrix_power(adjacency_matrix, path_length)
-        # Retorna o número de caminhos de comprimento específico
-        return power_matrix[start_node, end_node]
-    else:
-        # Soma todas as potências da matriz de adjacência até n-1
-        total_paths_matrix = np.zeros((n, n), dtype=int)
-        for k in range(1, n):  # Caminhos de comprimento 1 até n-1
-            total_paths_matrix += np.linalg.matrix_power(adjacency_matrix, k)
-        # Retorna o número total de caminhos
-        return total_paths_matrix[start_node, end_node]
+    matriz_potencia = np.linalg.matrix_power(matriz, comprimento)
+    return matriz_potencia[no_inicio][no_fim]
 
-# Exemplo de uso
-if __name__ == "__main__":
-    # Matriz de adjacência do grafo
-    adjacency_matrix = [
-    [0, 1],
-    [1, 0],
-    ]
-    
-    start_node = 0  # Nó inicial
-    end_node = 1    # Nó final
-    
-    # Número de caminhos de comprimento específico (exemplo: 2)
-    path_length = 2
-    specific_paths = count_paths(adjacency_matrix, start_node, end_node, path_length)
-    print(f"Number of paths of length {path_length} from node {start_node} to node {end_node}: {specific_paths}")
-    
-    # Número total de caminhos entre os nós
-    total_paths = count_paths(adjacency_matrix, start_node, end_node)
-    print(f"Total number of paths from node {start_node} to node {end_node}: {total_paths}")
+def todos_os_caminhos(matriz, no_inicio, no_fim, max_comprimento=3):
+    """
+    Calcula o número total de caminhos entre dois nós até um comprimento máximo.
+    """
+    total_caminhos = 0
+    for comprimento in range(1, max_comprimento + 1):
+        total_caminhos += caminhos_por_comprimento(matriz, no_inicio, no_fim, comprimento)
+    return total_caminhos
+
+# Exemplo simples de grafo
+matriz_adjacencia = np.array([
+    [0, 1, 0],  # Nó 0 -> Nó 1
+    [1, 0, 1],  # Nó 1 -> Nó 0 e Nó 2
+    [0, 1, 0]   # Nó 2 -> Nó 1
+])
+
+no_inicio = 0
+no_fim = 2
+comprimento = 2
+
+# Apresentação rápida
+print(f"Número de caminhos de comprimento {comprimento} entre os nós {no_inicio} e {no_fim}:",
+      caminhos_por_comprimento(matriz_adjacencia, no_inicio, no_fim, comprimento))
+
+print(f"Número total de caminhos entre os nós {no_inicio} e {no_fim}:",
+      todos_os_caminhos(matriz_adjacencia, no_inicio, no_fim))
+
+

@@ -92,11 +92,12 @@ dictionary = BinarySearchTreeDictionary()
 dictionary.insert("apple", "A sweet fruit")
 dictionary.insert("banana", "A yellow fruit")
 dictionary.insert("cherry", "A small red fruit")
-
+print()
 dictionary.print_dictionary()
-
+print()
 dictionary.search("banana")
+print()
 dictionary.search("grape")
-
+print()
 dictionary.remove("banana")
 dictionary.print_dictionary()

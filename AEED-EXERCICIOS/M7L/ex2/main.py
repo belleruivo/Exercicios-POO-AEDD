@@ -13,7 +13,6 @@ class Grafo:
     def adicionar_vertice(self, vertice):
         if vertice not in self.vertices:
             self.vertices.append(vertice)
-            # Adiciona uma nova linha e coluna na matriz de adjacência
             for linha in self.matriz_adjacencia:
                 linha.append(0)
             self.matriz_adjacencia.append([0] * len(self.vertices))
