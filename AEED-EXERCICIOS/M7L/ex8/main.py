@@ -1,17 +1,20 @@
 # Crie um programa que ache a Arvore Geradora Mínima do grafo abaixo utilizando o
 # Algoritmo de Prim começando do vértice A.
+# A árvore geradora mínima é uma árvore que conecta todos os vértices do grafo com o menor custo total possível, ou seja, 
+# o total das arestas que a compõem deve ser minimizado.
+
 
 import heapq
 
 def algoritmo_prim(grafo, inicio):
-    num_vertices = len(grafo)
-    visitado = [False] * num_vertices  # Para rastrear vértices visitados
+    num_vertices = len(grafo) #A
+    visitado = [False] * num_vertices  
     heap_minimo = [(0, inicio)]  # (peso, vértice)
     agm = []  # Armazenamento da Árvore Geradora Mínima
     custo_total = 0
 
     while heap_minimo:
-        peso, vertice_atual = heapq.heappop(heap_minimo)
+        peso, vertice_atual = heapq.heappop(heap_minimo) #remove e retorna o elemento
 
         if visitado[vertice_atual]:
             continue
@@ -26,7 +29,6 @@ def algoritmo_prim(grafo, inicio):
 
     return agm, custo_total
 
-# Grafo representado por uma matriz de adjacências
 grafo = [
     [0, 15, 10, 19, 0, 0, 0, 0, 0, 0],  # A
     [15, 0, 0, 7, 17, 0, 0, 0, 0, 0],   # B
@@ -40,10 +42,7 @@ grafo = [
     [0, 0, 0, 0, 0, 0, 11, 2, 18, 0]   # J
 ]
 
-# Índice inicial (A = 0)
 vertice_inicial = 0
-# A árvore geradora mínima é uma árvore que conecta todos os vértices do grafo com o menor custo total possível, ou seja, 
-# o total das arestas que a compõem deve ser minimizado.
 
 def agm_prim(grafo, inicio):
     n = len(grafo)
@@ -68,11 +67,10 @@ def agm_prim(grafo, inicio):
             if aresta[0] < min_peso:  # Aresta com menor peso
                 min_peso = aresta[0]
                 min_aresta = aresta
-        
-        # Remove a aresta selecionada manualmente
+    
         arestas.remove(min_aresta)
 
-        # Passo 2: Processa a aresta de menor peso
+        # Processa a aresta de menor peso
         peso, u, v = min_aresta
         if not visitado[v]:
             visitado[v] = True
