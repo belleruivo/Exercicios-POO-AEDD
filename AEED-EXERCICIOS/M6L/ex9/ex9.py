@@ -9,7 +9,6 @@ class Node:
         self.left = None
         self.right = None
 
-
 class BinarySearchTreeDictionary:
     def __init__(self):
         self.root = None
@@ -46,35 +45,34 @@ class BinarySearchTreeDictionary:
             print(f"A palavra '{word}' não foi encontrada no dicionário.")
         return result
 
-    def remove(self, word):
-        def _remove_recursive(node, word):
-            if node is None:
+    def remove(self, word): 
+        def _remove_recursive(node, word): 
+            if node is None:  
                 return None
-            if word < node.word:
-                node.left = _remove_recursive(node.left, word)
-            elif word > node.word:
-                node.right = _remove_recursive(node.right, word)
-            else:
-                # Nó com um único filho ou nenhum
-                if node.left is None:
+            if word < node.word:  # Se a palavra for menor que o nó, vai para a esquerda - banana < cherry
+                node.left = _remove_recursive(node.left, word)  # procura a esquerda
+            elif word > node.word: 
+                node.right = _remove_recursive(node.right, word) # Se a palavra for maior que o nó, vai para a direita - banana > apple
+            else:  # encontrou
+                if node.left is None: # nó sem filho à esquerda
                     return node.right
                 elif node.right is None:
-                    return node.left
+                    return node.left    
 
                 # Nó com dois filhos: encontre o sucessor (menor na subárvore direita)
-                temp = self._find_min(node.right)
-                node.word, node.meaning = temp.word, temp.meaning
-                node.right = _remove_recursive(node.right, temp.word)
+                temp = self._find_min(node.right) # encontra o menor nó na subárvore direita
+                node.word, node.meaning = temp.word, temp.meaning # copia o sucessor para o nó atual
+                node.right = _remove_recursive(node.right, temp.word) # remove o sucessor
 
             return node
 
-        self.root = _remove_recursive(self.root, word)
+        self.root = _remove_recursive(self.root, word) # inicia a remocao a partir da raiz
 
-    def _find_min(self, node):
+    def _find_min(self, node): # encontra o menor nó na subárvore
         current = node
-        while current.left is not None:
-            current = current.left
-        return current
+        while current.left is not None: # enquanto houver um nó à esquerda
+            current = current.left # atualiza o nó atual para esquerda
+        return current # retorna o menor nó encontrado
 
     def print_dictionary(self):
         def _in_order_traversal(node):
@@ -87,10 +85,9 @@ class BinarySearchTreeDictionary:
         _in_order_traversal(self.root)
 
 
-# Exemplo de uso
 dictionary = BinarySearchTreeDictionary()
-dictionary.insert("apple", "A sweet fruit")
-dictionary.insert("banana", "A yellow fruit")
+dictionary.insert("apple", "A sweet fruit") # apple é a raiz
+dictionary.insert("banana", "A yellow fruit") # filho a direita
 dictionary.insert("cherry", "A small red fruit")
 print()
 dictionary.print_dictionary()
