@@ -9,7 +9,7 @@ import heapq
 def algoritmo_prim(grafo, inicio):
     num_vertices = len(grafo) #A
     visitado = [False] * num_vertices  
-    heap_minimo = [(0, inicio)]  # (peso, vértice)
+    heap_minimo = [(0, inicio)]  # armazenamento das arestas 
     agm = []  # Armazenamento da Árvore Geradora Mínima
     custo_total = 0
 
