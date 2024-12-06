@@ -86,8 +86,8 @@ class BinarySearchTreeDictionary:
 
 
 dictionary = BinarySearchTreeDictionary()
-dictionary.insert("apple", "A sweet fruit") # apple é a raiz
-dictionary.insert("banana", "A yellow fruit") # filho a direita
+dictionary.insert("apple", "A sweet fruit") 
+dictionary.insert("banana", "A yellow fruit")
 dictionary.insert("cherry", "A small red fruit")
 print()
 dictionary.print_dictionary()
