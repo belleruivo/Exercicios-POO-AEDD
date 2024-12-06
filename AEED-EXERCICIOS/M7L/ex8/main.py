@@ -20,9 +20,19 @@ def prim_agm(grafo, inicio):
     arestas.sort()  # Ordena as arestas por peso
 
     while arestas:
-        # Seleciona a aresta de menor peso
-        peso, u, v = arestas.pop(0)
+        min_peso = float('inf')
+        min_aresta = None
+        
+        for aresta in arestas:
+            if aresta[0] < min_peso:  # Aresta com menor peso
+                min_peso = aresta[0]
+                min_aresta = aresta
+        
+        # Remove a aresta selecionada manualmente
+        arestas.remove(min_aresta)
 
+        # Passo 2: Processa a aresta de menor peso
+        peso, u, v = min_aresta
         if not visitado[v]:
             visitado[v] = True
             agm.append((u, v, peso))
