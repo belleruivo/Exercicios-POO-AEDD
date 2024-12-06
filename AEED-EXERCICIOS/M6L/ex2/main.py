@@ -1,5 +1,18 @@
 from binary_tree import BinaryTree
 
+# Nós Folha:
+
+# Na árvore genealógica, os nós folha são as pessoas que não têm filhos. Eles estão no "fim" das ramificações da árvore. Por exemplo, se você é uma pessoa sem filhos, você seria um nó folha.
+# Ancestrais:
+
+# Os ancestrais de uma pessoa são todos os seus antecessores na árvore genealógica. Isso inclui seus pais, avós, bisavós, e assim por diante. Em uma árvore binária, os ancestrais de um nó são todos os nós que estão no caminho da raiz até aquele nó.
+# Descendentes:
+
+# Os descendentes de uma pessoa são todos os seus filhos, netos, bisnetos, e assim por diante. Em uma árvore binária, os descendentes de um nó são todos os nós que estão abaixo dele na árvore.
+# Pai e Filhos:
+
+# O pai de uma pessoa é o nó diretamente acima dela na árvore genealógica. Os filhos de uma pessoa são os nós diretamente abaixo dela. Em uma árvore binária, cada nó pode ter no máximo dois filhos: um à esquerda e outro à direita.
+
 def main():
     # cria a árvore binária
     tree = BinaryTree()

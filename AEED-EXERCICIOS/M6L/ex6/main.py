@@ -8,6 +8,19 @@
 
 from binary_tree import BinaryTree
 
+# Inserir número (livro):
+
+# Quando você insere um livro (número) na estante (árvore), você precisa encontrar a posição correta para ele. Se a prateleira (nó) está vazia, você coloca o livro lá. Se não, você compara o número do livro com o número do livro já presente na prateleira e decide se deve colocá-lo na sub-prateleira da esquerda (se for menor) ou na sub-prateleira da direita (se for maior).
+# Mostrar se a árvore é estritamente binária:
+
+# Uma estante é estritamente binária se cada prateleira (nó) tem exatamente duas sub-prateleiras (filhos) ou nenhuma. Em outras palavras, cada prateleira deve estar completamente cheia ou completamente vazia.
+# Mostrar se a árvore é completa:
+
+# Uma estante é completa se todas as prateleiras estão preenchidas de maneira que não haja lacunas. Isso significa que todas as prateleiras são preenchidas da esquerda para a direita, sem deixar espaços vazios.
+# Mostrar se a árvore é cheia:
+
+# Uma estante é cheia se todas as prateleiras têm exatamente duas sub-prateleiras ou nenhuma. Isso é semelhante à estante estritamente binária, mas com a condição adicional de que todas as prateleiras devem estar completamente preenchidas.
+
 def main():
     tree = BinaryTree()
 
