@@ -1,0 +1,18 @@
+O que é uma Árvore Geradora Mínima (MST)?
+Uma árvore geradora mínima (MST) de um grafo não direcionado é uma árvore que conecta todos os vértices do grafo com o menor peso total possível. Em outras palavras, a MST inclui todos os vértices do grafo e uma seleção de arestas que conectam esses vértices sem formar ciclos, e a soma dos pesos das arestas na MST é a mínima possível.
+
+Estrutura da MST:
+Conecta todos os vértices: Deve incluir todos os vértices do grafo.
+
+Sem ciclos: Não pode ter ciclos, ou seja, é uma árvore.
+
+Menor soma de pesos: Entre todas as árvores possíveis que conectam todos os vértices, a MST é aquela cuja soma dos pesos das arestas é mínima.
+
+Resumo dos Resultados:
+Busca em Largura (BFS) a partir do vértice 'I':
+
+O BFS explora os vértices em camadas, ou seja, todos os vizinhos de um vértice são visitados antes de passar para o próximo nível de vértices. A árvore geradora mínima formada é composta pelas arestas visitadas nessa ordem de camadas.
+
+Busca em Profundidade (DFS) a partir do vértice 'A':
+
+O DFS explora o máximo possível ao longo de cada ramificação antes de retroceder. Isso significa que a busca irá percorrer completamente um caminho até um vértice folha antes de voltar e explorar outros caminhos. A árvore geradora mínima formada é composta pelas arestas visitadas em profundidade.
